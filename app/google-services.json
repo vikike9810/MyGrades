@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "214923129413",
+    "firebase_url": "https://mygrades-5ef51.firebaseio.com",
+    "project_id": "mygrades-5ef51",
+    "storage_bucket": "mygrades-5ef51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214923129413:android:19bb59a24ce99f36fb292c",
+        "android_client_info": {
+          "package_name": "com.szakdolgozat.mygrades"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214923129413-f4ndgq41qnjdduc4onjmffg623qo1l8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5QjZz7jllUqSVNGjSJvVCkEy4OnAUj_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214923129413-f4ndgq41qnjdduc4onjmffg623qo1l8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,10 +10,18 @@ class MainPresenter(private var view: MainView) {
     var user : User? = null
     var events = ArrayList<WeekViewEvent>()
 
-        fun getUser(){
-            user=User("Tesz Elek", "valami@teszt.hu")
+    fun getUser(){
+            user=User.getUser()
             view.setUserOnDrawer(user!!)
-        }
+    }
+    fun UserLogIn(){
+        user?.LogIn()
+        view.setUserOnDrawer(user!!)
+    }
+    fun UserLogOut(){
+        user?.LogOut()
+        view.setUserOnDrawer(user!!)
+    }
 
     fun getEvents(newYear: Int, newMonth: Int): List<WeekViewEvent> {
         var tempEvents = ArrayList<WeekViewEvent>()

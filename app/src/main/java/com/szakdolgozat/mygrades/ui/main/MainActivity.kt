@@ -2,15 +2,16 @@ package com.szakdolgozat.mygrades.ui.main
 
 import android.graphics.RectF
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
-import android.support.v4.widget.DrawerLayout
-import android.support.design.widget.NavigationView
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.alamkanak.weekview.WeekView
@@ -32,19 +33,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var navEmail: TextView
     lateinit var navHeader: View
     lateinit var  mWeekView: WeekView
+    lateinit var LoggedInLayout: LinearLayout
+    lateinit var NotLoggedInLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_NoActionBar)
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
+        drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
+        navView = findViewById(R.id.nav_view) as NavigationView
         navHeader= navView.getHeaderView(0)
         navName=navHeader.findViewById(R.id.nav_Name)
         navEmail=navHeader.findViewById(R.id.nav_Email)
+        LoggedInLayout=navHeader.findViewById(R.id.layout_LoggedIn)
+        NotLoggedInLayout=navHeader.findViewById(R.id.layout_NotLoggedIn)
         initCalender()
 
 
@@ -60,11 +65,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         presenter = MainPresenter(this)
         presenter?.getUser()
-        presenter?.newEvent(2019,9)
+        presenter?.newEvent(2019,10)
     }
 
     fun initCalender(){
-        mWeekView= findViewById(R.id.weekView)
+        mWeekView= findViewById(R.id.weekView) as WeekView
         mWeekView.setOnEventClickListener(this);
         mWeekView.setMonthChangeListener(this);
         mWeekView.setEventLongPressListener(this);
@@ -130,8 +135,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return presenter!!.getEvents(newYear, newMonth)
     }
 
+    fun OnclickLogIn(v: View){
+        presenter?.UserLogIn()
+    }
+
+    fun OnclickLogOut(v: View){
+        presenter?.UserLogOut()
+    }
+
     override fun setUserOnDrawer(user: User) {
-        navName.text = user.Name
-        navEmail.text = user.email
+        if(user.loggedIn) {
+            LoggedInLayout.visibility=View.VISIBLE
+            NotLoggedInLayout.visibility=View.GONE
+            navName.text = user.Name
+            navEmail.text = user.email
+        }
+        else{
+            LoggedInLayout.visibility=View.GONE
+            NotLoggedInLayout.visibility=View.VISIBLE
+        }
     }
 }
