@@ -8,18 +8,21 @@ import android.widget.EditText
 import android.widget.Toast
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.ui.main.MainActivity
+import com.szakdolgozat.mygrades.ui.signup.SignUpFragment
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginView {
     lateinit var logInPresenter: LoginPresenter
     lateinit var TextEmail: EditText
     lateinit var TextPassword: EditText
+    lateinit var signUpFragment: SignUpFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setTheme(R.style.AppTheme_NoActionBar)
         logInPresenter= LoginPresenter(this)
+        signUpFragment= SignUpFragment()
     }
 
     fun onClickLogin(v :View){
@@ -36,8 +39,12 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
     }
 
-    fun onClickSignUp(v :View){
+    override fun returnFromSignup(){
+        supportFragmentManager.beginTransaction().remove(signUpFragment).commit()
+    }
 
+    fun onClickSignUp(v :View){
+        supportFragmentManager.beginTransaction().add(R.id.Login_Container,signUpFragment,"SignUp").commit()
     }
 
     override fun logInFailed(message: String?) {

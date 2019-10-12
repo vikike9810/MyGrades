@@ -9,14 +9,13 @@ import com.szakdolgozat.mygrades.model.User
 import java.lang.reflect.Constructor
 
 class LoginPresenter(view: LoginView) {
-    private lateinit var auth: FirebaseAuth
+    companion object{ var auth = FirebaseAuth.getInstance()}
     private lateinit var view: LoginView
     private lateinit var user: User
     private var userId : FirebaseUser?=null
 
     init {
         this.view=view
-        auth = FirebaseAuth.getInstance()
         user = User.getUser()
     }
 
