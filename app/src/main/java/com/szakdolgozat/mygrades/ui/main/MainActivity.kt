@@ -1,5 +1,6 @@
 package com.szakdolgozat.mygrades.ui.main
 
+import android.content.Intent
 import android.graphics.RectF
 import android.os.Bundle
 import androidx.core.view.GravityCompat
@@ -19,6 +20,8 @@ import com.szakdolgozat.mygrades.model.User
 import com.alamkanak.weekview.WeekViewEvent
 import com.alamkanak.weekview.MonthLoader
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.ui.login.LoginActivity
+import com.szakdolgozat.mygrades.ui.profil.ProfilActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -103,7 +106,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_Profile -> {
-
+                startActivity(Intent(this,ProfilActivity::class.java))
             }
             R.id.nav_Timetable -> {
 
@@ -136,7 +139,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun OnclickLogIn(v: View){
-        presenter?.UserLogIn()
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     fun OnclickLogOut(v: View){
