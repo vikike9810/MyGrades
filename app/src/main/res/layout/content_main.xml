@@ -7,7 +7,8 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_main"
-        tools:context=".ui.main.MainActivity">
+        tools:context=".ui.main.MainActivity"
+        android:id="@+id/main_fragment">
 
     <com.alamkanak.weekview.WeekView
             android:id="@+id/weekView"

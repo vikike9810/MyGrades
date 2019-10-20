@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profil.ProfilActivity">
+        tools:context=".ui.profil.ProfileFragment"
+        android:background="@android:color/white">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/Profil_profilCard"
@@ -33,13 +34,25 @@
                       android:textSize="20dp"
                       android:textStyle="bold"/>
 
+            <EditText android:id="@+id/Profil_EditName"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      app:layout_constraintTop_toTopOf="@id/Profil_Name"
+                      app:layout_constraintEnd_toEndOf="@id/Profil_Name"
+                      app:layout_constraintBottom_toBottomOf="@id/Profil_Name"
+                      app:layout_constraintStart_toStartOf="@id/Profil_Name"
+                      android:text="Pelda Ember"
+                      android:textSize="20dp"
+                      android:textStyle="bold"
+                     android:visibility="invisible"/>
+
             <TextView android:id="@+id/Profil_Bday"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      app:layout_constraintTop_toBottomOf="@+id/Profil_Name"
+                      app:layout_constraintTop_toBottomOf="@id/Profil_Name"
                       app:layout_constraintEnd_toEndOf="parent"
                       android:layout_marginEnd="30dp"
-                      android:layout_marginTop="5dp"
+                      android:layout_marginTop="10dp"
                       android:text="1998.25.26"
                       android:textSize="15dp"
             />
@@ -47,12 +60,24 @@
             <TextView android:id="@+id/Profil_Email"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      app:layout_constraintTop_toBottomOf="@+id/Profil_Bday"
+                      app:layout_constraintTop_toBottomOf="@id/Profil_Bday"
                       app:layout_constraintEnd_toEndOf="parent"
                       android:layout_marginEnd="30dp"
-                      android:layout_marginTop="5dp"
+                      android:layout_marginTop="10dp"
                       android:text="pelda@faszom.ku"
                       android:textSize="15dp"/>
+
+            <EditText android:id="@+id/Profil_EditEmail"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      app:layout_constraintTop_toTopOf="@id/Profil_Email"
+                      app:layout_constraintEnd_toEndOf="@id/Profil_Email"
+                      app:layout_constraintBottom_toBottomOf="@id/Profil_Email"
+                      app:layout_constraintStart_toStartOf="@id/Profil_Email"
+                      android:text="pelda@faszom.ku"
+                      android:textSize="15dp"
+                      android:visibility="invisible"
+                      android:inputType="textEmailAddress"/>
 
             <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -76,7 +101,127 @@
                                        android:layout_height="wrap_content"
                                        app:layout_constraintTop_toBottomOf="@id/Profil_profilCard"
                                        android:layout_margin="10dp"
-                                       app:cardCornerRadius="10dp" android:id="@+id/cardView">
+                                       app:cardCornerRadius="10dp"
+                                       android:id="@+id/cardView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="wrap_content"
+                                                           android:paddingBottom="10dp"
+                                                           android:paddingTop="5dp"
+                                                           android:paddingStart="10dp">
+
+            <TextView
+                    android:id="@+id/Login_Adrr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address:"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+          />
+
+
+            <TextView
+                    android:id="@+id/Profil_city"
+                    app:layout_constraintStart_toStartOf="@id/Login_Adrr"
+                    app:layout_constraintTop_toBottomOf="@id/Login_Adrr"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bikinifenék"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+            <EditText
+                    android:id="@+id/Profil_Editcity"
+                    app:layout_constraintTop_toTopOf="@id/Profil_city"
+                    app:layout_constraintEnd_toEndOf="@id/Profil_city"
+                    app:layout_constraintBottom_toBottomOf="@id/Profil_city"
+                    app:layout_constraintStart_toStartOf="@id/Profil_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bikinifenék"
+                    android:textSize="15dp"
+                    android:visibility="invisible"/>
+
+            <TextView
+                    android:id="@+id/Profil_Zip"
+                    app:layout_constraintStart_toStartOf="@id/Profil_city"
+                    app:layout_constraintTop_toBottomOf="@id/Profil_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1117"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+            <EditText
+                    android:id="@+id/Profil_EditZip"
+                    app:layout_constraintTop_toTopOf="@id/Profil_Zip"
+                    app:layout_constraintEnd_toEndOf="@id/Profil_Zip"
+                    app:layout_constraintBottom_toBottomOf="@id/Profil_Zip"
+                    app:layout_constraintStart_toStartOf="@id/Profil_Zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1117"
+                    android:textSize="15dp"
+                    android:visibility="invisible"/>
+
+            <TextView
+                    android:id="@+id/Profil_Street"
+                    app:layout_constraintStart_toStartOf="@id/Profil_Zip"
+                    app:layout_constraintTop_toBottomOf="@id/Profil_Zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rosdásrákolló köz"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+            <EditText
+                    android:id="@+id/Profil_EditStreet"
+                    app:layout_constraintTop_toTopOf="@id/Profil_Street"
+                    app:layout_constraintEnd_toEndOf="@id/Profil_Street"
+                    app:layout_constraintBottom_toBottomOf="@id/Profil_Street"
+                    app:layout_constraintStart_toStartOf="@id/Profil_Street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rosdásrákolló köz"
+                    android:textSize="15dp"
+                    android:visibility="invisible"/>
+
+
+            <TextView
+                    android:id="@+id/Profil_number"
+                    app:layout_constraintStart_toStartOf="@id/Profil_Street"
+                    app:layout_constraintTop_toBottomOf="@id/Profil_Street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15/a"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"/>
+
+            <EditText
+                    android:id="@+id/Profil_Editnumber"
+                    app:layout_constraintTop_toTopOf="@id/Profil_number"
+                    app:layout_constraintEnd_toEndOf="@id/Profil_number"
+                    app:layout_constraintBottom_toBottomOf="@id/Profil_number"
+                    app:layout_constraintStart_toStartOf="@id/Profil_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15/a"
+                    android:textSize="15dp"
+                    android:visibility="invisible"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       app:layout_constraintTop_toBottomOf="@id/cardView2"
+                                       android:layout_margin="10dp"
+                                       app:cardCornerRadius="10dp"
+                                       android:id="@+id/cardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                            android:layout_height="wrap_content"
@@ -123,6 +268,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="10dp" app:backgroundTint="#0E58C5"
-            android:src="@android:drawable/ic_menu_edit" android:id="@+id/floatingActionButton"/>
+            android:src="@android:drawable/ic_menu_save"
+            android:id="@+id/floatingActionButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

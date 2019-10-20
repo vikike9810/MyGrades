@@ -1,7 +1,11 @@
 package com.szakdolgozat.mygrades.ui.main
 
+import android.app.Activity
+import android.content.Intent
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.model.User
+import com.szakdolgozat.mygrades.ui.login.LoginActivity
+import com.szakdolgozat.mygrades.ui.login.LoginPresenter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -11,7 +15,7 @@ class MainPresenter(private var view: MainView) {
     var events = ArrayList<WeekViewEvent>()
 
     fun getUser(){
-            user=User.getUser()
+            user=User
             view.setUserOnDrawer(user!!)
     }
     fun UserLogIn(){
@@ -19,8 +23,9 @@ class MainPresenter(private var view: MainView) {
         view.setUserOnDrawer(user!!)
     }
     fun UserLogOut(){
+        LoginPresenter.auth.signOut()
         user?.LogOut()
-        view.setUserOnDrawer(user!!)
+        view.userLoggedOut()
     }
 
     fun getEvents(newYear: Int, newMonth: Int): List<WeekViewEvent> {

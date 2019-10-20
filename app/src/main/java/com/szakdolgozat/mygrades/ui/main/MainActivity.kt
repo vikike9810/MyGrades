@@ -15,15 +15,14 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.alamkanak.weekview.WeekView
 import com.szakdolgozat.mygrades.model.User
 import com.alamkanak.weekview.WeekViewEvent
 import com.alamkanak.weekview.MonthLoader
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.ui.login.LoginActivity
-import com.szakdolgozat.mygrades.ui.profil.ProfilActivity
-import java.util.*
-import kotlin.collections.ArrayList
+import com.szakdolgozat.mygrades.ui.profil.ProfileFragment
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView, MonthLoader.MonthChangeListener, WeekView.EventClickListener, WeekView.EventLongPressListener {
@@ -38,6 +37,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var  mWeekView: WeekView
     lateinit var LoggedInLayout: LinearLayout
     lateinit var NotLoggedInLayout: LinearLayout
+    lateinit var profileFragment :ProfileFragment
+    var actualFragment: Fragment?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navEmail=navHeader.findViewById(R.id.nav_Email)
         LoggedInLayout=navHeader.findViewById(R.id.layout_LoggedIn)
         NotLoggedInLayout=navHeader.findViewById(R.id.layout_NotLoggedIn)
+        profileFragment= ProfileFragment()
         initCalender()
 
 
@@ -93,20 +95,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
+         when (item.itemId) {
+            R.id.action_logout -> {presenter?.UserLogOut()
+             return true}
             else -> super.onOptionsItemSelected(item)
         }
+        return false
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_Profile -> {
-                startActivity(Intent(this,ProfilActivity::class.java))
+                supportFragmentManager.beginTransaction().add(R.id.main_fragment,profileFragment).addToBackStack("Profile").commit()
             }
             R.id.nav_Timetable -> {
 
@@ -144,6 +145,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun OnclickLogOut(v: View){
         presenter?.UserLogOut()
+    }
+
+    override fun userLoggedOut() {
+       startActivity(Intent(this,LoginActivity::class.java))
     }
 
     override fun setUserOnDrawer(user: User) {

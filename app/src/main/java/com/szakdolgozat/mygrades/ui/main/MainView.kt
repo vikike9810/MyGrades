@@ -6,4 +6,6 @@ interface MainView {
 
     fun setUserOnDrawer(user: User)
 
+    fun userLoggedOut()
+
 }
