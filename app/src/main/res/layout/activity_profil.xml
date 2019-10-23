@@ -80,8 +80,10 @@
                       android:inputType="textEmailAddress"/>
 
             <androidx.cardview.widget.CardView
+                    android:id="@+id/Avatar_card"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:translationZ="-10dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="5dp"
@@ -89,9 +91,19 @@
 
                 <ImageView android:id="@+id/Profil_Avatar"
                            android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           app:srcCompat="@drawable/profil"/>
+                           android:layout_height="match_parent"/>
+                         <!--  app:srcCompat="@drawable/profil"-->
             </androidx.cardview.widget.CardView>
+
+            <ImageView
+                    android:id="@+id/Profil_Avatar_Upload"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="@id/Avatar_card"
+                    app:layout_constraintEnd_toEndOf="@id/Avatar_card"
+                    app:srcCompat="@android:drawable/stat_sys_upload"
+                    android:background="#bbb"
+                    android:visibility="invisible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

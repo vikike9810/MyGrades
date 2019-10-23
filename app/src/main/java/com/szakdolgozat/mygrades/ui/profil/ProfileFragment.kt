@@ -1,15 +1,14 @@
 package com.szakdolgozat.mygrades.ui.profil
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.szakdolgozat.mygrades.R
@@ -34,6 +33,8 @@ class ProfileFragment : Fragment(), ProfileView {
     var Profil_EditStreet: EditText?=null
     var Profil_number: TextView?=null
     var Profil_Editnumber: EditText?=null
+    var Profil_Avatar: ImageView?=null
+    var Profil_Avatar_Upload: ImageView?=null
 
     lateinit var profilePresenter: ProfilePresenter
     lateinit var mainActivity: MainActivity
@@ -54,7 +55,21 @@ class ProfileFragment : Fragment(), ProfileView {
         return view
     }
 
+    override fun getFragmentActivity():Activity{
+       return activity as Activity
+    }
+
     fun bindListeners(v: View){
+        Profil_Avatar=v?.findViewById<ImageView>(R.id.Profil_Avatar)
+        Profil_Avatar?.setOnClickListener{
+            onClickAvatar(it)
+        }
+
+        Profil_Avatar_Upload=v?.findViewById<ImageView>(R.id.Profil_Avatar_Upload)
+        Profil_Avatar_Upload?.setOnClickListener{
+            onClickAvatar_Upload(it)
+        }
+
         Profil_Name=v?.findViewById<TextView>(R.id.Profil_Name)
         Profil_EditName=v?.findViewById<EditText>(R.id.Profil_EditName)
         Profil_Name?.setOnClickListener{
@@ -95,49 +110,66 @@ class ProfileFragment : Fragment(), ProfileView {
         }
     }
 
+    fun onClickAvatar(v: View){
+        if(Profil_Avatar_Upload?.visibility==View.VISIBLE){
+            Profil_Avatar_Upload?.visibility=View.INVISIBLE
+        }
+        else {
+            setTextesDefault()
+            Profil_Avatar_Upload?.visibility = View.VISIBLE
+        }
+    }
+
+    fun onClickAvatar_Upload(v: View){
+        profilePresenter.changeProfilePicture()
+        setTextesDefault()
+    }
+
     fun onClickName(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_EditName?.visibility=View.VISIBLE
     }
 
     fun onClickEmail(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_EditEmail?.visibility=View.VISIBLE
         Profil_EditEmail?.setSelection(Profil_EditEmail?.length()?:0)
     }
 
     fun onClickcity(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_Editcity?.visibility=View.VISIBLE
         Profil_Editcity?.setSelection(Profil_Editcity?.length()?:0)
     }
 
     fun onClickStreet(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_EditStreet?.visibility=View.VISIBLE
         Profil_EditStreet?.setSelection(Profil_EditStreet?.length()?:0)
     }
 
     fun onClickZip(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_EditZip?.visibility=View.VISIBLE
         Profil_EditZip?.setSelection(Profil_EditZip?.length()?:0)
     }
 
     fun onClicknumber(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_Editnumber?.visibility=View.VISIBLE
         Profil_Editnumber?.setSelection(Profil_Editnumber?.length()?:0)
     }
 
 
-    fun setTextesToVisible(){
+    fun setTextesDefault(){
+        Profil_Avatar_Upload?.visibility=View.INVISIBLE
+
         Profil_Name?.visibility=View.VISIBLE
         Profil_Name?.text=Profil_EditName?.text
 
@@ -178,9 +210,13 @@ class ProfileFragment : Fragment(), ProfileView {
     }
 
     fun saveProfile(v: View){
-        setTextesToVisible()
+        setTextesDefault()
         setProfile()
         profilePresenter.SaveProfile()
+    }
+
+    override fun refreshAvatar() {
+        Profil_Avatar?.setImageBitmap(User.avatar)
     }
 
 
@@ -192,18 +228,29 @@ class ProfileFragment : Fragment(), ProfileView {
         User.address.street=Profil_Street?.text.toString()
         User.address.zip=Integer.parseInt(Profil_Zip?.text.toString())
         User.address.number=Profil_number?.text.toString()
+
     }
 
     fun loadProfile(){
+        Profil_Avatar?.setImageBitmap(User.avatar?: (BitmapFactory.decodeResource(resources, R.drawable.profil)))
         Profil_Name?.text=User.Name
         Profil_Bday?.text=User.birthday
         Profil_Email?.text=User.email
         Profil_city?.text=User.address.city
         Profil_Street?.text=User.address.street
         Profil_number?.text=User.address.number
+
+        Profil_EditName?.setText(User.Name)
+        Profil_EditBday?.setText(User.birthday)
+        Profil_EditEmail?.setText(User.email)
+        Profil_Editcity?.setText(User.address.city)
+        Profil_EditStreet?.setText(User.address.street)
+        Profil_Editnumber?.setText(User.address.number)
     }
 
     override fun dataSaveOK(){
+        val parentActivity= activity as MainActivity
+        parentActivity.setUserOnDrawer()
         Toast.makeText(mainActivity, "Saved",Toast.LENGTH_SHORT).show()
     }
     override fun  dataSaveError(message :String){

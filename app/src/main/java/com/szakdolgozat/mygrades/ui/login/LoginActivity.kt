@@ -34,6 +34,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
                 Login_Passw.setError("Password is required!")
             }
             else {
+                Login_progress.visibility=View.VISIBLE
+                Butt_Login.isClickable=false
                 logInPresenter.userLogin(Login_Email.text.toString(), Login_Passw.text.toString())
             }
         }
@@ -48,11 +50,13 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun logInFailed(message: String?) {
+        Login_progress.visibility=View.INVISIBLE
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Butt_Login.isClickable=true
     }
 
     override fun logInOK() {
-        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show()
+        Login_progress.visibility=View.INVISIBLE
         startActivity(Intent(this,MainActivity::class.java))
     }
 }

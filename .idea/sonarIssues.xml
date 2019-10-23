@@ -8,6 +8,11 @@
             <set />
           </value>
         </entry>
+        <entry key="/fragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/build.gradle">
           <value>
             <set />
@@ -19,6 +24,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/LoginActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/events/ImagePickedEvent.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/firebase/FirebaseStorage.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/firebase/FirebaseStorageProvider.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Address.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Subject.kt">
           <value>
             <set />
           </value>
@@ -113,7 +143,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/BitmapTransformations.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/FirebaseFunctionHelper.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/ImageProvider.kt">
           <value>
             <set />
           </value>

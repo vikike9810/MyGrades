@@ -1,9 +1,8 @@
 package com.szakdolgozat.mygrades.ui.signup
 
 import android.app.Activity
-import androidx.fragment.app.Fragment
 import com.szakdolgozat.mygrades.ui.login.LoginPresenter
-import com.szakdolgozat.mygrades.util.FirebaseFunctionHelper
+import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 
 class SignUpPresenter(val view: SignUpView) {
 

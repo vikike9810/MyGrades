@@ -2,7 +2,14 @@ package com.szakdolgozat.mygrades.ui.splash
 
 import com.google.firebase.auth.FirebaseAuth
 import com.szakdolgozat.mygrades.model.User
-import com.szakdolgozat.mygrades.util.FirebaseFunctionHelper
+import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
+import com.szakdolgozat.mygrades.firebase.FirebaseStorageProvider
+import java.io.File
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import com.szakdolgozat.mygrades.util.BitmapTransformations
+import com.szakdolgozat.mygrades.util.ImageProvider
+
 
 class SplashPresenter(var view: SplashView) {
 
@@ -32,11 +39,19 @@ class SplashPresenter(var view: SplashView) {
                     User.address.zip=Integer.parseInt(result.result?.get("zip"))
                     User.address.street=result.result?.get("street")
                     User.address.number=result.result?.get("number")
-                    view.splashDone()
+                    User.type=result.result?.get("type")
+                    FirebaseStorageProvider.downloadImage({
+                        imageDownloaded(it)
+                    },{ view.splashDone()})
                 } else {
-                    view.splashDone()
+                    view.downloadError("error in downloading")
                 }
             }
+    }
+
+    fun imageDownloaded(image: File){
+        ImageProvider.formatImage(image)
+        view.splashDone()
     }
 
 }

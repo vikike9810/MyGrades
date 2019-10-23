@@ -9,7 +9,8 @@
         tools:context=".ui.login.LoginActivity"
         android:background="@drawable/logbook2">
 
-    <TextView android:layout_width="wrap_content"
+    <TextView android:id="@+id/TextEmail"
+            android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintStart_toStartOf="@id/Login_Email"
               app:layout_constraintBottom_toTopOf="@id/Login_Email"
@@ -83,6 +84,17 @@
               android:textStyle="bold"
               android:onClick="onClickSignUp"
               android:textSize="15dp"/>
+
+    <ProgressBar
+            android:id="@+id/Login_progress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintBottom_toTopOf="@id/TextEmail"
+                 android:layout_marginBottom="5dp"
+                style="?android:attr/progressBarStyle"
+                android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,12 +16,9 @@ class MainPresenter(private var view: MainView) {
 
     fun getUser(){
             user=User
-            view.setUserOnDrawer(user!!)
+            view.setUserOnDrawer()
     }
-    fun UserLogIn(){
-        user?.LogIn()
-        view.setUserOnDrawer(user!!)
-    }
+
     fun UserLogOut(){
         LoginPresenter.auth.signOut()
         user?.LogOut()

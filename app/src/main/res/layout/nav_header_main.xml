@@ -12,63 +12,46 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:orientation="vertical">
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:id="@+id/layout_NotLoggedIn"
-                  android:gravity="bottom">
-
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/you_are_not_logged_in"
-                  android:textColor="@android:color/white"
-                  android:layout_marginBottom="10dp"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login"
-                android:onClick="OnclickLogIn"
-                android:textColor="@android:color/white"
-                android:background="@android:color/holo_green_dark"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_LoggedIn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp">
 
-        <ImageButton
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_gravity="right"
-                android:onClick="OnclickLogOut"
-                android:background="@drawable/logout"/>
 
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher_round"
-                android:id="@+id/imageView"/>
+        <androidx.cardview.widget.CardView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="10dp">
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@mipmap/ic_launcher_round"
+                    android:id="@+id/imageView"/>
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
-                android:layout_width="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="3dp"
                 android:text="@string/nav_header_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:id="@+id/nav_Name"/>
 
         <TextView
+                app:layout_constraintEnd_toEndOf="@id/nav_Name"
+                app:layout_constraintTop_toBottomOf="@id/nav_Name"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_header_subtitle"
                 android:id="@+id/nav_Email"/>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

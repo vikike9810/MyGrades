@@ -1,9 +1,8 @@
-package com.szakdolgozat.mygrades.util
+package com.szakdolgozat.mygrades.firebase
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
 import com.szakdolgozat.mygrades.model.User
-import java.util.*
 import kotlin.collections.HashMap
 
 object FirebaseFunctionHelper {

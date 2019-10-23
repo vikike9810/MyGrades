@@ -6,4 +6,6 @@ interface SplashView {
 
     fun loginUser()
 
+    fun downloadError(message: String)
+
 }
