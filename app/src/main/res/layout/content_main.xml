@@ -8,7 +8,8 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_main"
         tools:context=".ui.main.MainActivity"
-        android:id="@+id/main_fragment">
+        android:id="@+id/main_fragment"
+        android:background="@android:color/white">
 
     <com.alamkanak.weekview.WeekView
             android:id="@+id/weekView"
@@ -18,13 +19,14 @@
             app:textSize="12sp"
             app:hourHeight="60dp"
             app:headerColumnPadding="8dp"
-            app:headerColumnTextColor="#8f000000"
+            app:headerColumnTextColor="@color/primaryColor"
             app:headerRowPadding="12dp"
             app:columnGap="8dp"
             app:noOfVisibleDays="3"
-            app:headerRowBackgroundColor="#ffefefef"
-            app:dayBackgroundColor="#05000000"
-            app:todayBackgroundColor="#1848adff"
+            app:headerRowBackgroundColor="@color/primaryLightColor"
+            app:todayHeaderTextColor="@color/primaryBackgroundYellow"
+            app:dayBackgroundColor="@android:color/white"
+            app:todayBackgroundColor="@color/primaryBackgroundYellow"
             app:headerColumnBackground="#ffffffff"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

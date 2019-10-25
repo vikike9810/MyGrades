@@ -8,6 +8,11 @@
             <set />
           </value>
         </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="/fragment.kt">
           <value>
             <set />
@@ -24,6 +29,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/LoginActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/database/DatabaseHandler.kt">
           <value>
             <set />
           </value>
@@ -48,12 +58,97 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/CurrentDate.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Diary.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Grade.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Person.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Student.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Subject.kt">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Teacher.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/User.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/recyclerview/SubjectsRecyclerViewAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/recyclerview/adapter/SubjectsRecyclerViewAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/recyclerviewadapter/SubjectsRecyclerViewAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/Subjects/SubjectsFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/Subjects/SubjectsPresenter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/Subjects/SubjectsView.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addSubjectFragment/Add_Subject_Fragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/add_subject/Add_Subject_Fragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addsubjectfragment/Add_Subject_Fragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addsubjectfragment/addSubjectPresenter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addsubjectfragment/addSubjectView.kt">
           <value>
             <set />
           </value>
@@ -84,6 +179,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/main/MainView.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/newsubject/NewSubjectFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/newsubject/NewSubjectPresenter.kt">
           <value>
             <set />
           </value>
@@ -143,6 +248,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/subjects/SubjectsFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/BitmapTransformations.kt">
           <value>
             <set />
@@ -163,12 +273,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/save_button_bg.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/side_nav_bar.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/splash_background.xml">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/splash_background.xml.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/yellow_circle.xml">
           <value>
             <set />
           </value>
@@ -188,6 +313,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/add_new_subject_fragment.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
           <value>
             <set />
@@ -198,12 +328,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/create_new_subject_fragment.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_sign_up.xml">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_subjects.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/new_lesson_row.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/subjects_row.xml">
           <value>
             <set />
           </value>
@@ -218,7 +368,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/values/splash_background.xml.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <value>
             <set />
           </value>

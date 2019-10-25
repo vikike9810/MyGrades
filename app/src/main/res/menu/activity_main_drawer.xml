@@ -21,22 +21,18 @@
                 android:icon="@mipmap/test"
                 android:title="@string/grades"/>
         <item
-                android:id="@+id/nav_Settings"
-                android:icon="@mipmap/settings"
-                android:title="@string/action_settings"/>
+                android:id="@+id/nav_Messages"
+                android:icon="@mipmap/envelope"
+                android:title="@string/messages"/>
     </group>
 
-   <!-- <item android:title="Communicate">
-        <menu>
-            <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="@string/menu_share"/>
-            <item
-                    android:id="@+id/nav_send"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="@string/menu_send"/>
-        </menu>
-    </item>-->
+   <group android:checkableBehavior="single">
+       <item
+               android:id="@+id/nav_Settings"
+               android:icon="@mipmap/settings"
+               android:title="@string/action_settings">
+
+       </item>
+   </group>
 
 </menu>

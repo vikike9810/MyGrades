@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.model.CurrentDate
 import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_profil.*
@@ -203,9 +204,9 @@ class ProfileFragment : Fragment(), ProfileView {
                 val real_month=month+1
                 Profil_Bday?.text= "$year.$real_month.$dayOfMonth"
             },
-            Calendar.YEAR,
-            Calendar.MONTH,
-            Calendar.DATE
+            CurrentDate.getYear(),
+            (CurrentDate.getMonth()-1),
+            CurrentDate.getDay()
         ).show()
     }
 
@@ -226,7 +227,7 @@ class ProfileFragment : Fragment(), ProfileView {
         User.email=Profil_Email?.text.toString()
         User.address.city=Profil_city?.text.toString()
         User.address.street=Profil_Street?.text.toString()
-        User.address.zip=Integer.parseInt(Profil_Zip?.text.toString())
+        User.address.zip=Profil_Zip?.text.toString()
         User.address.number=Profil_number?.text.toString()
 
     }

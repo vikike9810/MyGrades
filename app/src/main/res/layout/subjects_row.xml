@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   app:cardCornerRadius="10dp"
+                                   android:layout_margin="5dp"
+                                   android:background="@color/cardview_light_background">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="0dp"
+                                                           android:layout_height="wrap_content"
+                                                           android:layout_margin="5dp"
+                                                           android:layout_weight="1"
+                                                           android:layout_gravity="center">
+
+            <ImageView android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       android:id="@+id/Subject_icon"
+                       android:layout_marginTop="5dp"
+                       android:layout_marginStart="10dp"
+                       app:srcCompat="@mipmap/subject"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/Subject_Name"
+                      android:layout_marginStart="10dp"
+                      app:layout_constraintTop_toTopOf="@id/Subject_icon"
+                      app:layout_constraintBottom_toBottomOf="@+id/Subject_icon"
+                      app:layout_constraintStart_toEndOf="@+id/Subject_icon"
+                      android:text="Peldatargy"
+                      android:textSize="17sp"
+                      android:textStyle="bold"/>
+
+            <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                       app:layout_constraintTop_toBottomOf="@id/Subject_icon"
+                       app:layout_constraintStart_toStartOf="parent"
+                       android:id="@+id/Teacher_icon"
+                       android:layout_marginTop="10dp"
+                       android:layout_marginStart="10dp"
+                       app:srcCompat="@mipmap/professor"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/Subject_teacher"
+                      android:layout_marginStart="10dp"
+                      app:layout_constraintTop_toTopOf="@id/Teacher_icon"
+                      app:layout_constraintBottom_toBottomOf="@+id/Teacher_icon"
+                      app:layout_constraintStart_toEndOf="@id/Teacher_icon"
+                      android:text="Jipsz Jakab"
+                      android:textSize="15sp"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/Subject_id"
+                      android:layout_marginTop="10dp"
+                      app:layout_constraintTop_toBottomOf="@id/Subject_teacher"
+                      app:layout_constraintStart_toStartOf="@id/Subject_teacher"
+                      android:text="Sub23"
+                      android:textSize="15sp"
+                      android:textStyle="italic"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                               android:layout_height="wrap_content"
+                                               android:layout_margin="5dp"
+                                               app:cardCornerRadius="10dp"
+                                               android:background="@color/primaryBackgroundYellow"
+                                               android:id="@+id/Sub_cardview"
+                                               android:visibility="gone">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:orientation="vertical">
+
+                    <TextView
+                            android:id="@+id/Lessons"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lessons"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+
+                    />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                                  android:orientation="horizontal" android:weightSum="3">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent"
+                                      android:layout_weight="1" android:orientation="vertical">
+
+                            <TextView android:id="@+id/day1"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginStart="5dp"
+                                      android:text="Mon:"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/day2"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginStart="5dp"
+                                      android:text="Tue:"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/day3"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginStart="5dp"
+                                      android:text="Wed:"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/day4"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginStart="5dp"
+                                      android:text="Thur:"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/day5"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginStart="5dp"
+                                      android:text="Fri:"
+                                      android:visibility="gone"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent"
+                                      android:layout_weight="2" android:orientation="vertical"
+                                      android:gravity="end">
+
+                            <TextView android:id="@+id/date1"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginEnd="5dp"
+                                      android:text="8:00-10:00"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/date2"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginEnd="5dp"
+                                      android:text="8pm-10pm"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/date3"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginEnd="5dp"
+                                      android:text="8pm-10pm"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/date4"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginEnd="5dp"
+                                      android:text="8pm-10pm"
+                                      android:visibility="gone"/>
+
+                            <TextView android:id="@+id/date5"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginEnd="5dp"
+                                      android:text="8pm-10pm"
+                                      android:visibility="gone"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button android:id="@+id/take_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Take"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/primaryLightColor"
+                    android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

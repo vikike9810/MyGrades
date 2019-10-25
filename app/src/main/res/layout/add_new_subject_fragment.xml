@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/primaryBackgroundYellow">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+        <EditText
+                android:id="@+id/new_sub_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="50dp"/>
+
+        <ProgressBar android:layout_width="50dp"
+                     android:layout_height="0dp"
+                     android:layout_marginBottom="10dp"
+                     android:layout_marginTop="2dp"
+                     app:layout_constraintEnd_toEndOf="@id/new_sub_search"
+                     app:layout_constraintTop_toTopOf="@+id/new_sub_search"
+                     app:layout_constraintBottom_toBottomOf="@+id/new_sub_search"
+                     android:indeterminateTint="@color/primaryLightColor"/>
+
+        <ImageButton android:id="@+id/button_search"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toEndOf="@id/new_sub_search"
+                app:layout_constraintTop_toTopOf="@id/new_sub_search"
+                app:layout_constraintBottom_toBottomOf="@id/new_sub_search"
+                android:backgroundTint="@color/primaryBackgroundYellow"
+                android:src="@android:drawable/ic_search_category_default"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+            android:id="@+id/add_subject_recycler"
+            android:layout_margin="5dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+    </ScrollView>
+
+</LinearLayout>

@@ -20,8 +20,8 @@
 
 
         <androidx.cardview.widget.CardView
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:cardCornerRadius="10dp">
@@ -36,22 +36,25 @@
 
 
         <TextView
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_header_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:id="@+id/nav_Name"/>
+                android:id="@+id/nav_Name"
+                android:textSize="20sp"/>
 
         <TextView
-                app:layout_constraintEnd_toEndOf="@id/nav_Name"
+                app:layout_constraintStart_toStartOf="@id/nav_Name"
                 app:layout_constraintTop_toBottomOf="@id/nav_Name"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_header_subtitle"
-                android:id="@+id/nav_Email"/>
+                android:id="@+id/nav_Email"
+                android:textSize="15sp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

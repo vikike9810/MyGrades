@@ -8,4 +8,8 @@ interface MainView {
 
     fun userLoggedOut()
 
+    fun showCreateNewSubjectFragment()
+
+    fun showAddNewSubjectFragment()
+
 }

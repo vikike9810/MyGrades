@@ -52,7 +52,7 @@ class SignUpFragment : Fragment(), SignUpView {
     fun onClickOK(v: View) {
         if(checkFieldIsOk(SignUp_EditName) && checkFieldIsOk(SignUp_EditEmail) && checkFieldIsOk(SignUp_EditPassw)){
             val selectedRadio= SignUp_Group.findViewById<RadioButton>(SignUp_Group.checkedRadioButtonId)
-            signUpPresenter.Registration(SignUp_EditEmail.text.toString(), SignUp_EditPassw.text.toString(), SignUp_EditName.text.toString(), selectedRadio.text.toString() )
+            signUpPresenter.Registration(SignUp_EditEmail.text.toString(), SignUp_EditPassw.text.toString(), SignUp_EditName.text.toString(), selectedRadio.text.toString())
         }
     }
 

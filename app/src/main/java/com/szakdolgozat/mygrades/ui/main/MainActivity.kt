@@ -15,20 +15,21 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.alamkanak.weekview.WeekView
 import com.szakdolgozat.mygrades.model.User
 import com.alamkanak.weekview.WeekViewEvent
 import com.alamkanak.weekview.MonthLoader
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.ui.addsubject.addSubjectFragment
+import com.szakdolgozat.mygrades.ui.subjects.SubjectsFragment
 import com.szakdolgozat.mygrades.ui.login.LoginActivity
+import com.szakdolgozat.mygrades.ui.newsubject.NewSubjectFragment
 import com.szakdolgozat.mygrades.ui.profil.ProfileFragment
-import com.szakdolgozat.mygrades.util.BitmapTransformations
 import com.szakdolgozat.mygrades.util.ImageProvider
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView, MonthLoader.MonthChangeListener, WeekView.EventClickListener, WeekView.EventLongPressListener {
@@ -42,9 +43,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var navEmail: TextView
     lateinit var navHeader: View
     lateinit var  mWeekView: WeekView
-    lateinit var LoggedInLayout: ConstraintLayout
-    lateinit var profileFragment :ProfileFragment
+    var subjectsFragment: SubjectsFragment?=null
     var actualFragment: Fragment?=null
+    var selectedmenuItem: Int=R.id.nav_Timetable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navAvatar=navHeader.findViewById(R.id.imageView)
         navName=navHeader.findViewById(R.id.nav_Name)
         navEmail=navHeader.findViewById(R.id.nav_Email)
-        LoggedInLayout=navHeader.findViewById(R.id.layout_LoggedIn)
-        profileFragment= ProfileFragment()
         initCalender()
 
 
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         presenter = MainPresenter(this)
         presenter?.getUser()
-        presenter?.newEvent(2019,10)
+        presenter?.newEvent()
     }
 
     fun initCalender(){
@@ -110,25 +109,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_Profile -> {
-                navView.getMenu().getItem(0).isChecked = true
-                actualFragment=profileFragment
-                supportFragmentManager.beginTransaction().add(R.id.main_fragment,profileFragment).addToBackStack("Profile").commit()
-            }
-            R.id.nav_Timetable -> {
-                navView.getMenu().getItem(0).isChecked = true
-                actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
-                actualFragment=null
-            }
-            R.id.nav_Subjects -> {
+        if(item.itemId!=selectedmenuItem) {
+            when (item.itemId) {
+                R.id.nav_Profile -> {
+                    navView.getMenu().getItem(0).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    val profileFragment = ProfileFragment()
+                    actualFragment = profileFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, profileFragment)
+                        .addToBackStack("Profile").commit()
+                    selectedmenuItem=R.id.nav_Profile
+                }
+                R.id.nav_Timetable -> {
+                    navView.getMenu().getItem(1).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    actualFragment = null
+                    selectedmenuItem=R.id.nav_Timetable
+                }
+                R.id.nav_Subjects -> {
+                    navView.getMenu().getItem(2).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    subjectsFragment = SubjectsFragment()
+                    actualFragment = subjectsFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, subjectsFragment!!)
+                        .addToBackStack("Subjects").commit()
+                    selectedmenuItem=R.id.nav_Subjects
+                }
+                R.id.nav_Grades -> {
+                    selectedmenuItem=R.id.nav_Grades
 
-            }
-            R.id.nav_Grades -> {
-
-            }
-            R.id.nav_Settings -> {
-
+                }
+                R.id.nav_Settings -> {
+                    selectedmenuItem=R.id.nav_Settings
+                }
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -144,7 +157,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onMonthChange(newYear: Int, newMonth: Int): List<WeekViewEvent> {
-        mWeekView.goToHour(7.0)
+        mWeekView.goToHour( Calendar.getInstance()[Calendar.HOUR].toDouble() )
         return presenter!!.getEvents(newYear, newMonth)
     }
 
@@ -167,4 +180,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
              ImageProvider.imageSelected(data, this)
          }
      }
+
+    override fun showAddNewSubjectFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val addSubjectsFragment= addSubjectFragment()
+        actualFragment=addSubjectsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,addSubjectsFragment).addToBackStack("Add subject").commit()
+    }
+
+    override fun showCreateNewSubjectFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val newSubjectsFragment= NewSubjectFragment()
+        actualFragment=newSubjectsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,newSubjectsFragment).addToBackStack("create subject").commit()
+    }
+
+    fun showNewSubjectFragment(){
+        presenter?.addSubjectbyUserType()
+    }
+
+    fun returnFromSubjectFragment(){
+        navView.getMenu().getItem(2).isChecked = true
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        actualFragment=subjectsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, subjectsFragment!!).addToBackStack("Subjects").commit()
+    }
+
+    fun refreshCalendar(){
+        presenter?.refreshEvent()
+        onMonthChange(2019,10)
+        mWeekView.notifyDatasetChanged()
+    }
 }

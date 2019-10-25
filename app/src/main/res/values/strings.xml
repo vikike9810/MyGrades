@@ -22,4 +22,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout">Logout</string>
+    <string name="messages">Messages</string>
+
+    <string-array name="array_less_type">
+        <item>Occasional</item>
+        <item>Weekly</item>
+        <item>Fortnightly</item>
+    </string-array>
 </resources>
