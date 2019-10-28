@@ -2,6 +2,7 @@ package com.szakdolgozat.mygrades.database
 
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.model.*
+import com.szakdolgozat.mygrades.util.CurrentDate
 
 object DatabaseHandler {
 

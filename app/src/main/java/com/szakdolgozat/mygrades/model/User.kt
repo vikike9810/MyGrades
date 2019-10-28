@@ -31,4 +31,17 @@ object User{
         loggedIn=false
     }
 
+    fun clearUser(){
+        Name=""
+        email=""
+        avatar=null
+        avatarPath=null
+        loggedIn=false
+        userId=""
+        address.clearAddres()
+        type=""
+        birthday=""
+        person=null
+    }
+
 }

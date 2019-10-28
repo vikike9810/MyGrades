@@ -3,7 +3,6 @@ package com.szakdolgozat.mygrades.ui.profil
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.szakdolgozat.mygrades.R
-import com.szakdolgozat.mygrades.model.CurrentDate
+import com.szakdolgozat.mygrades.util.CurrentDate
 import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_profil.*
-import java.util.*
 
 class ProfileFragment : Fragment(), ProfileView {
 

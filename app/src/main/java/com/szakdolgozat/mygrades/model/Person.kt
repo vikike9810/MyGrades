@@ -1,19 +1,10 @@
 package com.szakdolgozat.mygrades.model
 
-abstract class Person {
+abstract class Person(name: String, id: String) {
 
-    private var Name : String?=null
-    private var UserId: String?=null
-    var Subjects: ArrayList<Subject>? =null
-
-    constructor(name: String, id: String){
-        this.Name=name
-        this.UserId=id
-        Subjects=ArrayList<Subject>()
-    }
-    constructor(){
-        Subjects= ArrayList<Subject>()
-    }
+    private var Name : String?= name
+    private var UserId: String?= id
+    var Subjects= ArrayList<Subject>()
 
     fun getName(): String{
         return this.Name?: ""
@@ -29,5 +20,11 @@ abstract class Person {
 
     fun setUserId(uId: String){
         this.UserId=uId
+    }
+
+    fun clearPerson(){
+        Name=""
+        UserId=""
+        Subjects.clear()
     }
 }

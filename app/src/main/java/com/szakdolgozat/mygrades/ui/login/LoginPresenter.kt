@@ -14,6 +14,7 @@ class LoginPresenter(private var view: LoginView) {
 
 
     fun userLogin(email:String, passw:String){
+        User.clearUser()
         auth.signInWithEmailAndPassword(email, passw)
             .addOnCompleteListener(view as Activity) { task ->
             if (task.isSuccessful) {

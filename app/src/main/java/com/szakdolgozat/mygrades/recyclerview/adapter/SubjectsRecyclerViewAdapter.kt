@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.R
-import com.szakdolgozat.mygrades.model.CurrentDate
+import com.szakdolgozat.mygrades.util.CurrentDate
 import com.szakdolgozat.mygrades.model.Subject
 import java.util.*
 import kotlin.collections.ArrayList

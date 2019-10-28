@@ -199,9 +199,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         presenter?.addSubjectbyUserType()
     }
 
-    fun returnFromSubjectFragment(){
+    fun returnFromNewSubjectFragment(){
         navView.getMenu().getItem(2).isChecked = true
         actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        subjectsFragment=SubjectsFragment()
         actualFragment=subjectsFragment
         supportFragmentManager.beginTransaction().add(R.id.main_fragment, subjectsFragment!!).addToBackStack("Subjects").commit()
     }
