@@ -23,11 +23,16 @@ import com.szakdolgozat.mygrades.model.User
 import com.alamkanak.weekview.WeekViewEvent
 import com.alamkanak.weekview.MonthLoader
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.model.Talking
+import com.szakdolgozat.mygrades.ui.addgrade.AddGradeFragment
 import com.szakdolgozat.mygrades.ui.addsubject.addSubjectFragment
+import com.szakdolgozat.mygrades.ui.chat.ChatFragment
+import com.szakdolgozat.mygrades.ui.grades.GradesFragment
 import com.szakdolgozat.mygrades.ui.subjects.SubjectsFragment
 import com.szakdolgozat.mygrades.ui.login.LoginActivity
 import com.szakdolgozat.mygrades.ui.newsubject.NewSubjectFragment
 import com.szakdolgozat.mygrades.ui.profil.ProfileFragment
+import com.szakdolgozat.mygrades.ui.talking.TalkingFragment
 import com.szakdolgozat.mygrades.util.ImageProvider
 import java.util.*
 
@@ -136,11 +141,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     selectedmenuItem=R.id.nav_Subjects
                 }
                 R.id.nav_Grades -> {
+                    navView.getMenu().getItem(3).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    var gradeFragment = GradesFragment()
+                    actualFragment = gradeFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, gradeFragment!!)
+                        .addToBackStack("Grades").commit()
                     selectedmenuItem=R.id.nav_Grades
 
                 }
                 R.id.nav_Settings -> {
                     selectedmenuItem=R.id.nav_Settings
+                }
+
+                R.id.nav_Messages -> {
+                    navView.getMenu().getItem(4).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    var chatFragment = ChatFragment()
+                    actualFragment =chatFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment,chatFragment!!)
+                        .addToBackStack("Chat").commit()
+                    selectedmenuItem=R.id.nav_Messages
                 }
             }
         }
@@ -199,12 +220,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         presenter?.addSubjectbyUserType()
     }
 
+  fun showAddGradeFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val addGradeFragment= AddGradeFragment()
+        actualFragment=addGradeFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,addGradeFragment).addToBackStack("add grade").commit()
+    }
+
+    fun returnFromAddGradeFragment(){
+        navView.getMenu().getItem(3).isChecked = true
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        var gradeFragment=GradesFragment()
+        actualFragment=gradeFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, gradeFragment).addToBackStack("Grades").commit()
+    }
+
     fun returnFromNewSubjectFragment(){
         navView.getMenu().getItem(2).isChecked = true
         actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
         subjectsFragment=SubjectsFragment()
         actualFragment=subjectsFragment
         supportFragmentManager.beginTransaction().add(R.id.main_fragment, subjectsFragment!!).addToBackStack("Subjects").commit()
+    }
+
+    fun showTalkingFragment(talking: Talking){
+        //actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val talkingFragment= TalkingFragment(talking)
+        //actualFragment=talkingFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,talkingFragment).addToBackStack("Talking").commit()
     }
 
     fun refreshCalendar(){

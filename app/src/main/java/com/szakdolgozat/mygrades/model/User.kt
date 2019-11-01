@@ -44,4 +44,15 @@ object User{
         person=null
     }
 
+    fun getSubjectList():ArrayList<String> {
+        var subjects = ArrayList<String>()
+        subjects.add("")
+        if (person?.Subjects != null) {
+            for (subject: Subject in person!!.Subjects) {
+                subjects.add(subject.Name)
+            }
+        }
+        return subjects
+    }
+
 }

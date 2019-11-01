@@ -7,8 +7,8 @@ class Grade(
     var subject: Subject,
     var student: Student,
     var date: Calendar= Calendar.getInstance(),
-    var  comment :String=""
-)
+    var teacher: Teacher,
+    var comment :String="")
 {
    init{
        Diary.grades.add(this)

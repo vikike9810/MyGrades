@@ -1,7 +1,9 @@
 package com.szakdolgozat.mygrades.model
 
+import androidx.room.*
 import com.alamkanak.weekview.WeekViewEvent
 
+@Entity(tableName = "subject")
 class Subject {
     companion object{
         var num=0
@@ -13,14 +15,30 @@ class Subject {
         }
     }
 
+    @PrimaryKey(autoGenerate = true)
+    var id: Long=0
+
+
+    @ColumnInfo(name = "Name")
     var Name: String=""
-    var Lessons: ArrayList<WeekViewEvent>? = null
-    var Id: String? =null
-    var Teacher: Teacher? =null
+
+    @Ignore
+    var Lessons =ArrayList<WeekViewEvent>()
+
+    @ColumnInfo(name = "subjectId")
+    var subjectId: String=generateId()
+
+    @Ignore
+    lateinit var Teacher: Teacher
+
+    @ColumnInfo(name = "Description")
     var Description=""
 
+    constructor(id: Long){
+        this.id=id
+    }
+
     constructor(name:String, teacher: Teacher){
-        Id= generateId()
         num++
         Name=name
         Teacher=teacher
@@ -29,7 +47,6 @@ class Subject {
     }
 
     constructor(name:String, teacher: Teacher, lessons: ArrayList<WeekViewEvent>){
-        Id= generateId()
         Name=name
         Teacher=teacher
         Lessons=ArrayList<WeekViewEvent>()

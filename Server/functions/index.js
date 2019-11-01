@@ -88,3 +88,62 @@ exports.getProfile = functions.https.onCall((data) => {
         }
     });
 });
+
+
+exports.saveSubject= functions.https.onCall((data) =>{
+
+    var name =data.name;
+    var subjectId = data.subjectId;
+    var Description = data.Description;
+    var teacherid= data.teacherId
+    var db = admin.database();
+
+try{
+    var ref = db.ref("Subjects").child(subjectId).child("Name").set(name);
+    var ref = db.ref("Subjects").child(subjectId).child("Description").set(Description);
+    var ref = db.ref("Subjects").child(subjectId).child("Teacher").set(teacherid);
+    return 'OK';
+}
+catch(e){
+    return e.message.toString();
+}
+}
+);
+
+exports.saveLesson= functions.https.onCall((data) =>{
+
+    var subjectId = data.subjectId;
+    var begin = data.begin;
+    var end= data.end
+    var id = data.id
+    var db = admin.database();
+
+try{
+    var ref = db.ref("Subjects").child(subjectId).child("Lessons").child(id).child("Begin").set(begin);
+    var ref = db.ref("Subjects").child(subjectId).child("Lessons").child(id).child("End").set(end);
+    return 'OK';
+}
+catch(e){
+    return e.message.toString();
+}
+}
+);
+
+exports.savePersonSubject= functions.https.onCall((data) =>{
+
+    var subjectId = data.subjectId;
+    var userId = data.userId;
+    var type= data.type
+    var db = admin.database();
+
+try{
+    var ref = db.ref("users").child(type).child(userId).child("Subjects").child(subjectId).set(subjectId);
+    return 'OK';
+}
+catch(e){
+    return e.message.toString();
+}
+}
+);
+
+

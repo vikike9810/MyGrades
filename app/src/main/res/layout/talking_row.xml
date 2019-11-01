@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:orientation="vertical"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   app:cardCornerRadius="10dp"
+                                   android:layout_margin="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       android:layout_marginBottom="10dp">
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/talking_avatar_card"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp">
+
+            <ImageView android:id="@+id/talking_avatar"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView android:id="@+id/talking_name"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Kiss pista"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="@+id/talking_avatar_card"
+                  android:layout_margin="10dp"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+        />
+
+        <TextView android:id="@+id/talking_last_date_label" android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/talking_name"
+                  android:layout_margin="10dp"
+                  android:text="Last message date:"/>
+
+        <TextView
+                android:id="@+id/talking_last_date"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/talking_last_date_label"
+                android:layout_margin="10dp"
+                android:text="2010.10.10"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -8,6 +8,7 @@ import java.io.File
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import com.szakdolgozat.mygrades.database.DatabaseHandler
+import com.szakdolgozat.mygrades.events.DatabaseReadDoneEvent
 import com.szakdolgozat.mygrades.util.BitmapTransformations
 import com.szakdolgozat.mygrades.util.ImageProvider
 
@@ -15,6 +16,14 @@ import com.szakdolgozat.mygrades.util.ImageProvider
 class SplashPresenter(var view: SplashView) {
 
     private lateinit var auth: FirebaseAuth
+
+    init {
+
+        DatabaseReadDoneEvent.event+={
+            view.splashDone()
+        }
+
+    }
 
     fun loadUser(){
         auth = FirebaseAuth.getInstance()
@@ -43,21 +52,22 @@ class SplashPresenter(var view: SplashView) {
                     User.type=result.result?.get("type")
                     FirebaseStorageProvider.downloadImage({
                         imageDownloaded(it)
-                    },{ downloadingDone()})
+                    },{ getDatasFromDatabase()})
                 } else {
                     view.downloadError("error in downloading")
                 }
             }
     }
 
-    fun downloadingDone(){
+    fun getDatasFromDatabase(){
+        DatabaseHandler.getDataBase(view.getSplashActivity())
         DatabaseHandler.getDatas()
-        view.splashDone()
     }
+
 
     fun imageDownloaded(image: File){
         ImageProvider.formatImage(image)
-        downloadingDone()
+        getDatasFromDatabase()
     }
 
 }

@@ -23,12 +23,12 @@ class NewSubjectPresenter(var view: NewSubjectView) {
         lessons.addAll(getLessons())
         val newSubject=Subject(name, User.person as Teacher,lessons)
         newSubject.Description=desc
-        Diary.subjects.add(newSubject)
         User.person?.Subjects?.add(newSubject)
         view.SubjectAdded()
     }
 
     fun getLessons():ArrayList<WeekViewEvent>{
+
         var lessons=ArrayList<WeekViewEvent>()
 
         if(type.equals("Occasional")){
@@ -37,28 +37,48 @@ class NewSubjectPresenter(var view: NewSubjectView) {
                       CurrentDate.getCalenderFromString(OnceLesson!!.From!!) , CurrentDate.getCalenderFromString(OnceLesson!!.To!!)))
         }
         else if(type.equals("Weekly")){
+
             var firstLesson= CurrentDate.getCalederFromDateString(FirstLessonDate)
             var lastLesson= CurrentDate.getCalederFromDateString(LastLessonDate)
 
-            for(lessondate: LessonDate in LessonDates) {
+            lessons.addAll(getWeeklyLessons(1, firstLesson, lastLesson, LessonDates))
+        }
 
-                var currentEvent = CurrentDate.getNextDayEvent(firstLesson, lessondate, name, Subject.getLessonId())
+        else if(type.equals("Fortnightly")){
 
+            var firstLesson= CurrentDate.getCalederFromDateString(FirstLessonDate)
+            var lastLesson= CurrentDate.getCalederFromDateString(LastLessonDate)
 
-                while (currentEvent.startTime.timeInMillis < lastLesson.timeInMillis) {
-                    lessons.add(currentEvent)
-                    var newFrom =currentEvent.startTime.clone() as Calendar
-                    newFrom.add(Calendar.DAY_OF_YEAR, 7)
-                    var newTo = currentEvent.endTime.clone() as Calendar
-                    newTo.add(Calendar.DAY_OF_YEAR, 7)
-                    val newEvent = WeekViewEvent(Subject.getLessonId(), name, newFrom, newTo)
-                    currentEvent=newEvent
-                }
-            }
-
+            lessons.addAll(getWeeklyLessons(2, firstLesson, lastLesson, LessonDates))
         }
 
         return lessons
+    }
+
+    fun getWeeklyLessons(week: Int, firstLessonparam: Calendar, lastLessonparam: Calendar, LessonDates: ArrayList<LessonDate> ): ArrayList<WeekViewEvent>{
+
+        var weeklyLessons=ArrayList<WeekViewEvent>()
+
+        var firstLesson= firstLessonparam.clone() as Calendar
+        var lastLesson= lastLessonparam.clone() as Calendar
+
+        for(lessondate: LessonDate in LessonDates) {
+
+            var currentEvent = CurrentDate.getNextDayEvent(firstLesson, lessondate, name, Subject.getLessonId())
+
+
+            while (currentEvent.startTime.timeInMillis < lastLesson.timeInMillis) {
+                weeklyLessons.add(currentEvent)
+                var newFrom =currentEvent.startTime.clone() as Calendar
+                newFrom.add(Calendar.DAY_OF_YEAR, (week*7))
+                var newTo = currentEvent.endTime.clone() as Calendar
+                newTo.add(Calendar.DAY_OF_YEAR, (week*7))
+                val newEvent = WeekViewEvent(Subject.getLessonId(), name, newFrom, newTo)
+                currentEvent=newEvent
+            }
+        }
+
+        return weeklyLessons
     }
 
 }

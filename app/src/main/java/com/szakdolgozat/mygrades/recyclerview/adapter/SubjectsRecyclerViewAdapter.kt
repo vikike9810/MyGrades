@@ -34,7 +34,7 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
 
         holder.subName.text = subject.Name
         holder.subTeacher.text = subject.Teacher?.getName()?:""
-        holder.subId.text=subject.Id
+        holder.subId.text=subject.subjectId
         subject.Lessons?.let { holder.setDate(it) }
         if(subjectAddable){
             holder.take_subject.visibility=View.VISIBLE

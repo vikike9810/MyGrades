@@ -2,6 +2,9 @@ package com.szakdolgozat.mygrades.firebase
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
+import com.szakdolgozat.mygrades.model.LessonSubjectJoin
+import com.szakdolgozat.mygrades.model.Person
+import com.szakdolgozat.mygrades.model.Subject
 import com.szakdolgozat.mygrades.model.User
 import kotlin.collections.HashMap
 
@@ -60,6 +63,59 @@ object FirebaseFunctionHelper {
                     result
                 }
 
+    }
+
+    fun saveSubject(subject: Subject) : Task<String> {
+
+        val data = hashMapOf(
+            "subjectId" to subject.subjectId,
+            "name" to subject.Name,
+            "Description" to subject.Description,
+            "teacherId" to (subject.Teacher.getuserId()?:" ")
+        )
+
+        return functions.getHttpsCallable("saveSubject")
+            .call(data)
+            .continueWith { task ->
+
+                val result = task.result?.data as String
+                result
+            }
+    }
+
+    fun saveLesson(lesson: LessonSubjectJoin, subject :Subject) : Task<String> {
+
+        val data = hashMapOf(
+            "subjectId" to subject.subjectId,
+            "begin" to lesson.lessonBegin,
+            "end" to lesson.lessonEnd,
+            "id" to lesson.lessonId
+        )
+
+        return functions.getHttpsCallable("saveLesson")
+            .call(data)
+            .continueWith { task ->
+
+                val result = task.result?.data as String
+                result
+            }
+    }
+
+    fun savePersonSubject(type: String, person: Person, subject :Subject) : Task<String> {
+
+        val data = hashMapOf(
+            "subjectId" to subject.subjectId,
+            "userId" to person.getuserId(),
+            "type" to type
+        )
+
+        return functions.getHttpsCallable("savePersonSubject")
+            .call(data)
+            .continueWith { task ->
+
+                val result = task.result?.data as String
+                result
+            }
     }
 
 }

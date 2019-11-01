@@ -1,5 +1,6 @@
 package com.szakdolgozat.mygrades.ui.splash
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,6 +34,10 @@ class SplashActivity : AppCompatActivity(), SplashView {
 
     override fun downloadError(message: String) {
        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getSplashActivity(): Activity {
+        return this
     }
 
 

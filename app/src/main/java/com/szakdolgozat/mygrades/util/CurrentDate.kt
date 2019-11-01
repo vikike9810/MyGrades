@@ -3,6 +3,7 @@ package com.szakdolgozat.mygrades.util
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.model.LessonDate
 import java.text.SimpleDateFormat
+import java.time.Month
 import java.util.*
 
 object CurrentDate {
@@ -47,7 +48,11 @@ object CurrentDate {
         var calen= Calendar.getInstance()
         calen.time=sdf.parse(date)
         //calen.add(Calendar.MONTH,-1)
-        return calen
+        return calen.clone() as Calendar
+    }
+
+    fun getStringFromCalendar(calendar: Calendar): String{
+        return calendar[Calendar.YEAR].toString()+"."+ formatTime(calendar[Calendar.MONTH]+1)+"."+ formatTime(calendar[Calendar.DATE])
     }
 
     fun dayBetween(first: Calendar, last: Calendar):Long{
