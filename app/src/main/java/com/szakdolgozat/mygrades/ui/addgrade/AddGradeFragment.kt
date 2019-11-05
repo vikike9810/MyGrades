@@ -47,12 +47,22 @@ class AddGradeFragment: Fragment(), AddGradeView, AdapterView.OnItemSelectedList
             Toast.makeText(activity,"Subject, Student and Grade fields are required!", Toast.LENGTH_SHORT).show()
         }
         else{
+            add_grade_progress.visibility=View.VISIBLE
+            add_new_grade.isClickable=false
             addGradePresenter.addGrade(add_grade_subject_spinner.selectedItem.toString(), add_grade_student_spinner.selectedItem.toString(), add_grade_spinner.selectedItem.toString(), grade_comment.text.toString())
         }
     }
 
     override fun gradeAdded() {
+        add_grade_progress.visibility=View.INVISIBLE
+        add_new_grade.isClickable=true
        mainActivity.returnFromAddGradeFragment()
+    }
+
+    override fun errorInSave(message: String){
+        add_grade_progress.visibility=View.INVISIBLE
+        add_new_grade.isClickable=true
+        Toast.makeText(activity,message, Toast.LENGTH_LONG).show()
     }
 
 

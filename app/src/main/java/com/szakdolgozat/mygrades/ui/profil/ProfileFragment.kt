@@ -230,20 +230,35 @@ class ProfileFragment : Fragment(), ProfileView {
     }
 
     fun loadProfile(){
-        Profil_Avatar?.setImageBitmap(User.avatar?: (BitmapFactory.decodeResource(resources, R.drawable.profil)))
-        Profil_Name?.text=User.Name
-        Profil_Bday?.text=User.birthday
-        Profil_Email?.text=User.email
-        Profil_city?.text=User.address.city
-        Profil_Street?.text=User.address.street
-        Profil_number?.text=User.address.number
 
-        Profil_EditName?.setText(User.Name)
-        Profil_EditBday?.setText(User.birthday)
+        Profil_Avatar?.setImageBitmap(User.avatar?: (BitmapFactory.decodeResource(resources, R.drawable.profil)))
+        if(User.Name!=null){
+            Profil_Name?.text=User.Name
+            Profil_EditName?.setText(User.Name)
+        }
+
+        if(User.birthday!=null){
+            Profil_Bday?.text=User.birthday
+            Profil_EditBday?.setText(User.birthday)
+        }
+
+        if(User.address.city!=null){
+            Profil_city?.text=User.address.city
+            Profil_Editcity?.setText(User.address.city)
+        }
+
+        if(User.address.street!=null){
+            Profil_Street?.text=User.address.street
+            Profil_EditStreet?.setText(User.address.street)
+        }
+
+        if(User.address.number!=null){
+            Profil_number?.text=User.address.number
+            Profil_Editnumber?.setText(User.address.number)
+        }
+
+        Profil_Email?.text=User.email
         Profil_EditEmail?.setText(User.email)
-        Profil_Editcity?.setText(User.address.city)
-        Profil_EditStreet?.setText(User.address.street)
-        Profil_Editnumber?.setText(User.address.number)
     }
 
     override fun dataSaveOK(){

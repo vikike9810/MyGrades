@@ -38,8 +38,15 @@ class Subject {
         this.id=id
     }
 
+    constructor(id:String, name:String, teacher: Teacher){
+        subjectId=id
+        Name=name
+        Teacher=teacher
+        Lessons= ArrayList<WeekViewEvent>()
+        Diary.subjects.add(this)
+    }
+
     constructor(name:String, teacher: Teacher){
-        num++
         Name=name
         Teacher=teacher
         Lessons= ArrayList<WeekViewEvent>()

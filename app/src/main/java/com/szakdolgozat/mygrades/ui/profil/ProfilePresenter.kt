@@ -1,5 +1,6 @@
 package com.szakdolgozat.mygrades.ui.profil
 
+import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.events.ImagePickedEvent
 import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import com.szakdolgozat.mygrades.firebase.FirebaseStorageProvider
@@ -19,25 +20,26 @@ class ProfilePresenter(var view: ProfileView) {
 
 
 
- fun SaveProfile() {
-     FirebaseFunctionHelper.saveprofil()
-         .addOnCompleteListener { result ->
 
-             if (result.isSuccessful && result.result.equals("OK")) {
-                 if(imageChanged) {
-                     FirebaseStorageProvider.uploadImage(
-                         {view.dataSaveOK() }, { message -> view.dataSaveError(message ?: "error_picture") }
-                     )
-                     imageChanged=false
-                 }
-                 else{
-                     view.dataSaveOK()
-                    }
-             } else {
-                 view.dataSaveError(result.exception?.message ?: "error_datas")
-             }
-         }
+ fun SaveProfile() {
+   DatabaseHandler.saveProfil({saveProfilSucces()}, {message -> saveProfilError(message)})
      }
+
+    fun saveProfilSucces(){
+        if(imageChanged) {
+            FirebaseStorageProvider.uploadImage(
+                {view.dataSaveOK() }, { message -> view.dataSaveError(message ?: "error_picture") }
+            )
+            imageChanged=false
+        }
+        else{
+            view.dataSaveOK()
+        }
+    }
+
+    fun saveProfilError(message:String){
+        view.dataSaveError(message ?: "error_datas")
+    }
 
 
     fun changeProfilePicture(){

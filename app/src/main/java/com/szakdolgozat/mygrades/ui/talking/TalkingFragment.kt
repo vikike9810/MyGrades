@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,6 +59,10 @@ class TalkingFragment(var talking: Talking): Fragment(), TalkingView {
         talkingPresenter.newMessage(talking_editText.text.toString())
     }
 
+    override fun errorInSave(message: String) {
+        Toast.makeText(activity,message,Toast.LENGTH_LONG).show()
+    }
+
     private fun initRecyclerView(){
         talkingRecyclerView.layoutManager= LinearLayoutManager(this.mainActivity)
         messageRecyclerViewAdapter = MessageRecyclerViewAdapter()
@@ -66,10 +71,10 @@ class TalkingFragment(var talking: Talking): Fragment(), TalkingView {
     }
 
     override fun messageAdded(message: Message?) {
+
         if(message!=null){
             messageRecyclerViewAdapter.addMessage(message)
         }
         talking_editText.text.clear()
-
     }
 }

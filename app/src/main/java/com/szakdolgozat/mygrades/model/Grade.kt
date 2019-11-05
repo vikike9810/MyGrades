@@ -10,7 +10,15 @@ class Grade(
     var teacher: Teacher,
     var comment :String="")
 {
-   init{
+    companion object{
+        var num=0
+    }
+
+    var Id: Int
+
+    init{
        Diary.grades.add(this)
+        Id= num
+        num++
    }
 }

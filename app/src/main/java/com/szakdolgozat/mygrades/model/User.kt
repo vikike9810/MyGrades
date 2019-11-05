@@ -13,7 +13,7 @@ object User{
     var avatar : Bitmap? = null
     var avatarPath : Uri?= null
     var loggedIn : Boolean=false
-    var userId: String?=""
+    var userId: String=""
     var address:Address=Address
     var type: String? =""
     var birthday: String?=""

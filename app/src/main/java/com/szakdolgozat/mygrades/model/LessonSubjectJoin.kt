@@ -7,8 +7,6 @@ import java.util.*
 
 @Entity(tableName = "lessons")
 class LessonSubjectJoin (
-    @PrimaryKey(autoGenerate = true)
-    var id: Long=0,
 
     @ColumnInfo(name = "subjectId")
     var subjectId: String,
@@ -25,6 +23,9 @@ class LessonSubjectJoin (
 companion object{
     var num=0
     }
+
+    @PrimaryKey(autoGenerate = true)
+    var id: Long=0
 
     var lessonId :Int
 

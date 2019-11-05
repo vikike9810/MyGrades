@@ -55,6 +55,14 @@ object CurrentDate {
         return calendar[Calendar.YEAR].toString()+"."+ formatTime(calendar[Calendar.MONTH]+1)+"."+ formatTime(calendar[Calendar.DATE])
     }
 
+    fun getTimeStringFromCalendar(calendar: Calendar): String{
+        return calendar[Calendar.YEAR].toString()+"."+
+                formatTime(calendar[Calendar.MONTH]+1)+"."+
+                formatTime(calendar[Calendar.DATE]) + " " +
+                formatTime(calendar[Calendar.HOUR_OF_DAY])+":" +
+                formatTime(calendar[Calendar.MINUTE])
+    }
+
     fun dayBetween(first: Calendar, last: Calendar):Long{
       var between=last.timeInMillis-first.timeInMillis
       return between/86400

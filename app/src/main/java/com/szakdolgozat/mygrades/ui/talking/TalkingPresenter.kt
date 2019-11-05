@@ -1,5 +1,6 @@
 package com.szakdolgozat.mygrades.ui.talking
 
+import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.model.Chat
 import com.szakdolgozat.mygrades.model.Message
 import com.szakdolgozat.mygrades.model.Talking
@@ -12,9 +13,13 @@ class TalkingPresenter(var view: TalkingView, var talking: Talking) {
         var newMessage: Message?=null
 
         if(User.person!=null) {
+            var talking=Chat.talkings[index]
             newMessage=Message(message, User.person!!)
-            Chat.talkings[index].messages.add(newMessage)
+            talking.messages.add(newMessage)
+            DatabaseHandler.saveMessages(talking, newMessage, {newMessage ->  view.messageAdded(newMessage)},{message -> view.errorInSave(message)})
         }
-        view.messageAdded(newMessage)
+        else{
+            view.errorInSave("Error on save!")
+        }
     }
 }

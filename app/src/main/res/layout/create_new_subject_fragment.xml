@@ -354,24 +354,29 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="@+id/new_lesson_card"
-                        app:layout_constraintTop_toBottomOf="@+id/new_lesson_card"
-                        app:cardCornerRadius="10dp">
 
-                    <Button
+                <Button
                             android:id="@+id/subject_save"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="@+id/new_lesson_card"
+                            app:layout_constraintTop_toBottomOf="@+id/new_lesson_card"
                             android:backgroundTint="@color/primaryLightColor"
                             android:text="Save"
                             android:textColor="@android:color/white"
                     />
 
-                </androidx.cardview.widget.CardView>
+                <ProgressBar android:id="@+id/new_sub_progress"
+                             android:layout_width="wrap_content"
+                             android:layout_height="0dp"
+                             app:layout_constraintEnd_toStartOf="@id/subject_save"
+                             app:layout_constraintTop_toTopOf="@id/subject_save"
+                             app:layout_constraintBottom_toBottomOf="@id/subject_save"
+                             android:layout_marginEnd="10dp"
+                             android:background="@drawable/green_progressbar"
+                             android:visibility="invisible"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

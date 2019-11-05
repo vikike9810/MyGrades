@@ -6,6 +6,8 @@ import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import com.szakdolgozat.mygrades.firebase.FirebaseStorageProvider
+import com.szakdolgozat.mygrades.model.Student
+import com.szakdolgozat.mygrades.model.Teacher
 import com.szakdolgozat.mygrades.util.ImageProvider
 import java.io.File
 
@@ -40,6 +42,12 @@ class LoginPresenter(private var view: LoginView) {
                     User.address.street=result.result?.get("street")
                     User.address.number=result.result?.get("number")
                     User.type=result.result?.get("type")
+                    if(User.type.equals("Teacher")){
+                        User.person= Teacher(User.Name!!, User.userId)
+                    }
+                    else{
+                        User.person= Student(User.Name!!, User.userId)
+                    }
                     FirebaseStorageProvider.downloadImage({
                         imageDownloaded(it)
                     },{ loginOk()})

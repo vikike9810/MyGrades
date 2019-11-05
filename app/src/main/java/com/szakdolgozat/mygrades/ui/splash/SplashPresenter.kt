@@ -9,6 +9,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.events.DatabaseReadDoneEvent
+import com.szakdolgozat.mygrades.model.Person
+import com.szakdolgozat.mygrades.model.Student
+import com.szakdolgozat.mygrades.model.Teacher
 import com.szakdolgozat.mygrades.util.BitmapTransformations
 import com.szakdolgozat.mygrades.util.ImageProvider
 
@@ -50,6 +53,12 @@ class SplashPresenter(var view: SplashView) {
                     User.address.street=result.result?.get("street")
                     User.address.number=result.result?.get("number")
                     User.type=result.result?.get("type")
+                    if(User.type.equals("Teacher")){
+                        User.person=Teacher(User.Name!!, User.userId)
+                    }
+                    else{
+                        User.person= Student(User.Name!!, User.userId)
+                    }
                     FirebaseStorageProvider.downloadImage({
                         imageDownloaded(it)
                     },{ getDatasFromDatabase()})

@@ -4,7 +4,7 @@ abstract class Person(name: String, id: String) {
 
     private var Name : String?= name
 
-    private var UserId: String?= id
+    private var UserId: String= id
 
     var Subjects= ArrayList<Subject>()
 

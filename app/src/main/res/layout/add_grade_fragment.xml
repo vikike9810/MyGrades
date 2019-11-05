@@ -152,14 +152,33 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-            android:id="@+id/add_new_grade"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@color/primaryDarkColor"
-            android:text="Add"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:layout_margin="10dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content">
+
+        <ProgressBar android:id="@+id/add_grade_progress"
+                android:layout_width="wrap_content"
+                     android:layout_height="0dp"
+                     app:layout_constraintTop_toTopOf="@+id/add_new_grade"
+                     app:layout_constraintBottom_toBottomOf="@id/add_new_grade"
+                     app:layout_constraintEnd_toStartOf="@id/add_new_grade"
+                     android:layout_marginEnd="10dp"
+                     android:background="@drawable/green_progressbar"
+                     android:progressTint="@color/primaryDarkColor"
+                     android:visibility="invisible"/>
+
+        <Button
+                android:id="@+id/add_new_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/primaryDarkColor"
+                android:text="Add"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_margin="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </LinearLayout>

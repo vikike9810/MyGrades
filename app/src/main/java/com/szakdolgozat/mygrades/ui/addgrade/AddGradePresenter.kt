@@ -1,5 +1,7 @@
 package com.szakdolgozat.mygrades.ui.addgrade
 
+import com.szakdolgozat.mygrades.database.DatabaseHandler
+import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import com.szakdolgozat.mygrades.model.Diary
 import com.szakdolgozat.mygrades.model.Grade
 import com.szakdolgozat.mygrades.model.Teacher
@@ -18,12 +20,15 @@ class AddGradePresenter(var view: AddGradeView) {
     }
 
     fun addGrade(subject: String, student: String, grade: String, comment:String){
-        var student=Diary.getStudentByName(student)
-        var subject= Diary.getSubjectByName(subject)
-        if(student!=null && student!=null) {
-            Grade(Integer.parseInt(grade), subject!!, student, Calendar.getInstance().clone() as Calendar, User.person as Teacher, comment)
+        val student=Diary.getStudentByName(student)
+        val subject= Diary.getSubjectByName(subject)
+        if(student!=null && subject!=null) {
+            val grade=Grade(Integer.parseInt(grade), subject, student, Calendar.getInstance().clone() as Calendar, User.person as Teacher, comment)
+            DatabaseHandler.saveGrades(grade,{view.gradeAdded()},{message -> view.errorInSave(message)})
         }
-        view.gradeAdded()
+        else{
+            view.errorInSave("Error in Save")
+        }
     }
 
 }

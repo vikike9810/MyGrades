@@ -89,4 +89,39 @@ object Diary {
         return null
     }
 
+    fun getSubjectById(id :String):Subject?{
+        subjects.forEach {
+            if(it.subjectId.equals(id)){
+                return it
+            }
+        }
+        return null
+    }
+
+    fun getStudentById(id :String):Student?{
+        students.forEach {
+            if(it.getuserId().equals(id)){
+                return it
+            }
+        }
+        return null
+    }
+
+    fun getTeacherById(id : String): Teacher?{
+        teachers.forEach {
+            if(it.getuserId().equals(id)){
+                return it
+            }
+        }
+        return null
+    }
+
+    fun countLessons():Int{
+        var count=0
+        subjects.forEach {
+            count+=it.Lessons.size
+        }
+        return count
+    }
+
 }

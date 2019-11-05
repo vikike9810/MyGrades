@@ -90,6 +90,8 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
         if(!((new_sub_Name.text?.isEmpty())?:true)) {
             if( !((new_sub_desc.text?.isEmpty())?:true)) {
                 if (getDates()) {
+                    new_sub_progress.visibility=View.VISIBLE
+                    subject_save.isClickable=false
                     newSubjectPresenter.newSubject(new_sub_Name.text.toString(), new_sub_desc.text.toString())
                 }
             }
@@ -191,7 +193,7 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
                 newSubjectPresenter.OnceLesson= OnceLesson(begin, end)}
 
             else{
-                fieldRequiredToast()
+                makeToast( "Fields Begin and End are required!")
                 return false
             }
         }
@@ -212,14 +214,14 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
                         if (!(from.equals("from:")) && !(to.equals("to:"))) {
                             newSubjectPresenter.LessonDates.add(LessonDate(i + 1, from, to))
                         } else {
-                            fieldRequiredToast()
+                            makeToast( "Fields From and To are required!")
                             return false
                         }
                     }
                 }
             }
             else{
-                fieldRequiredToast()
+                makeToast("Fields First and Lastlesson are required!")
                 return false
             }
         }
@@ -227,8 +229,10 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
         return true
     }
 
-    fun fieldRequiredToast(){
-        Toast.makeText(mainActivity, "Time is required!", Toast.LENGTH_SHORT).show()
+    override fun makeToast(message: String){
+        new_sub_progress.visibility=View.INVISIBLE
+        subject_save.isClickable=true
+        Toast.makeText(mainActivity,message , Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -241,6 +245,7 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
     }
 
     override fun SubjectAdded() {
+        new_sub_progress.visibility=View.INVISIBLE
         mainActivity.refreshCalendar()
         mainActivity.returnFromNewSubjectFragment()
     }
