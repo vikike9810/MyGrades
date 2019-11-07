@@ -48,23 +48,23 @@ class LoginPresenter(private var view: LoginView) {
                     else{
                         User.person= Student(User.Name!!, User.userId)
                     }
-                    FirebaseStorageProvider.downloadImage({
-                        imageDownloaded(it)
-                    },{ loginOk()})
+                    FirebaseStorageProvider.downloadImage({it,userId ->
+                        imageDownloaded(it, userId)
+                    },{userId ->  loginOk(userId)}, User.userId)
                 } else {
                     view.logInFailed(result.exception?.message)
                 }
             }
     }
 
-    fun loginOk(){
+    fun loginOk(userId: String){
         DatabaseHandler.getDatas()
-        view.logInOK()
     }
 
-    fun imageDownloaded(image: File){
-        ImageProvider.formatImage(image)
-        loginOk()
+    fun imageDownloaded(image: File, userId: String){
+        var avatar=ImageProvider.formatImage(image)
+        User.avatar=avatar
+        loginOk(userId)
     }
 
 

@@ -53,10 +53,12 @@ class addSubjectFragment: Fragment(), addSubjectView, SubjectsRecyclerViewAdapte
     }
 
     fun onClickSearch(v: View){
+        add_sub_progress.visibility=View.VISIBLE
         addSubjectPresenter.getSubjectFromSearch(new_sub_search.text.toString())
     }
 
     override fun refreshSubjects(subjects: ArrayList<Subject>) {
+        add_sub_progress.visibility=View.INVISIBLE
         add_subject_Adapter.addNewItems(subjects)
     }
 
@@ -69,11 +71,20 @@ class addSubjectFragment: Fragment(), addSubjectView, SubjectsRecyclerViewAdapte
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onItemTaked(subject: Subject) {
-       User.person?.Subjects?.add(subject)
+    override fun subjectAdded(subject: Subject) {
+        add_sub_progress.visibility=View.INVISIBLE
         add_subject_Adapter.removeItem(subject)
-        addSubjectPresenter.removeSubject(subject)
         mainActivity.refreshCalendar()
+    }
+
+    override fun subjectAddedError(message: String) {
+        add_sub_progress.visibility=View.INVISIBLE
+        Toast.makeText(activity,message,Toast.LENGTH_LONG).show()
+    }
+
+    override fun onItemTaked(subject: Subject) {
+        add_sub_progress.visibility=View.VISIBLE
+        addSubjectPresenter.takeSubject(subject)
     }
 
 

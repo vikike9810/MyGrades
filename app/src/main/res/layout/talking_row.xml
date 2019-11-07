@@ -18,13 +18,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                android:translationZ="-10dp">
 
             <ImageView android:id="@+id/talking_avatar"
                        android:layout_width="match_parent"
-                       android:layout_height="match_parent"/>
+                       android:layout_height="match_parent"
+                       android:src="@drawable/profil"
+                       android:visibility="invisible"/>
 
         </androidx.cardview.widget.CardView>
+
+        <ProgressBar
+                android:id="@+id/talking_avatar_progressbar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintStart_toStartOf="@id/talking_avatar_card"
+                app:layout_constraintEnd_toEndOf="@+id/talking_avatar_card"
+                app:layout_constraintTop_toTopOf="@id/talking_avatar_card"
+                app:layout_constraintBottom_toBottomOf="@id/talking_avatar_card"
+                android:background="@drawable/green_progressbar"
+                android:visibility="visible"/>
 
         <TextView android:id="@+id/talking_name"
                   android:layout_width="wrap_content"

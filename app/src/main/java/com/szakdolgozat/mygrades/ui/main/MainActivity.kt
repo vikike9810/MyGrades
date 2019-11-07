@@ -31,6 +31,7 @@ import com.szakdolgozat.mygrades.ui.grades.GradesFragment
 import com.szakdolgozat.mygrades.ui.subjects.SubjectsFragment
 import com.szakdolgozat.mygrades.ui.login.LoginActivity
 import com.szakdolgozat.mygrades.ui.newsubject.NewSubjectFragment
+import com.szakdolgozat.mygrades.ui.newtalking.NewTalkingFragment
 import com.szakdolgozat.mygrades.ui.profil.ProfileFragment
 import com.szakdolgozat.mygrades.ui.talking.TalkingFragment
 import com.szakdolgozat.mygrades.util.ImageProvider
@@ -93,7 +94,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
+        }
+        else if(actualFragment!=null){
+            navView.getMenu().getItem(1).isChecked = true
+            actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+            actualFragment = null
+            selectedmenuItem=R.id.nav_Timetable
+        }
+
+        else {
             super.onBackPressed()
         }
     }
@@ -244,15 +253,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun showTalkingFragment(talking: Talking){
-        //actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
         val talkingFragment= TalkingFragment(talking)
-        //actualFragment=talkingFragment
+        actualFragment=talkingFragment
         supportFragmentManager.beginTransaction().add(R.id.main_fragment,talkingFragment).addToBackStack("Talking").commit()
     }
+
+    fun ShowNewTalkingFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        var talkingsFragment=NewTalkingFragment()
+        actualFragment=talkingsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, talkingsFragment!!).addToBackStack("NewTalking").commit()
+    }
+
+    fun returnFromNewTalkingFragment(){
+        navView.getMenu().getItem(4).isChecked = true
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val chatFragment = ChatFragment()
+        actualFragment =chatFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,chatFragment!!)
+            .addToBackStack("Chat").commit()
+        selectedmenuItem=R.id.nav_Messages
+    }
+
 
     fun refreshCalendar(){
         presenter?.refreshEvent()
         onMonthChange(2019,10)
         mWeekView.notifyDatasetChanged()
     }
+
+
 }

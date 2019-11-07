@@ -59,24 +59,25 @@ class SplashPresenter(var view: SplashView) {
                     else{
                         User.person= Student(User.Name!!, User.userId)
                     }
-                    FirebaseStorageProvider.downloadImage({
-                        imageDownloaded(it)
-                    },{ getDatasFromDatabase()})
+                    FirebaseStorageProvider.downloadImage({it, userId->
+                        imageDownloaded(it, userId)
+                    },{userId -> getDatasFromDatabase(userId)}, User.userId)
                 } else {
                     view.downloadError("error in downloading")
                 }
             }
     }
 
-    fun getDatasFromDatabase(){
-        DatabaseHandler.getDataBase(view.getSplashActivity())
+    fun getDatasFromDatabase(userId:String){
+        //DatabaseHandler.getDataBase(view.getSplashActivity())
         DatabaseHandler.getDatas()
     }
 
 
-    fun imageDownloaded(image: File){
-        ImageProvider.formatImage(image)
-        getDatasFromDatabase()
+    fun imageDownloaded(image: File, userId:String){
+        var avatar=ImageProvider.formatImage(image)
+        User.avatar=avatar
+        getDatasFromDatabase(userId)
     }
 
 }

@@ -21,35 +21,37 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginEnd="50dp"/>
 
-        <ProgressBar android:layout_width="50dp"
+        <ProgressBar android:id="@+id/add_sub_progress"
+                     android:layout_width="wrap_content"
                      android:layout_height="0dp"
-                     android:layout_marginBottom="10dp"
-                     android:layout_marginTop="2dp"
+                     android:layout_margin="5dp"
                      app:layout_constraintEnd_toEndOf="@id/new_sub_search"
                      app:layout_constraintTop_toTopOf="@+id/new_sub_search"
                      app:layout_constraintBottom_toBottomOf="@+id/new_sub_search"
-                     android:indeterminateTint="@color/primaryLightColor"/>
+                     android:background="@drawable/green_progressbar"
+                     android:visibility="invisible"/>
 
         <ImageButton android:id="@+id/button_search"
-                android:layout_width="50dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toEndOf="@id/new_sub_search"
-                app:layout_constraintTop_toTopOf="@id/new_sub_search"
-                app:layout_constraintBottom_toBottomOf="@id/new_sub_search"
-                android:backgroundTint="@color/primaryBackgroundYellow"
-                android:src="@android:drawable/ic_search_category_default"/>
+                     android:layout_width="50dp"
+                     android:layout_height="0dp"
+                     app:layout_constraintStart_toEndOf="@id/new_sub_search"
+                     app:layout_constraintTop_toTopOf="@id/new_sub_search"
+                     app:layout_constraintBottom_toBottomOf="@id/new_sub_search"
+                     android:backgroundTint="@color/primaryBackgroundYellow"
+                     android:src="@android:drawable/ic_search_category_default"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
-                                                       android:layout_height="wrap_content"
-            android:id="@+id/add_subject_recycler"
-            android:layout_margin="5dp">
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_subject_recycler"
+                android:layout_margin="5dp">
 
-            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
 
     </ScrollView>

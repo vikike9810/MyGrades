@@ -41,12 +41,12 @@ object ImageProvider{
     }
 
 
-    fun formatImage(image: File){
+    fun formatImage(image: File): Bitmap{
         var bitmap = BitmapFactory.decodeFile(image.absolutePath)
         bitmap = BitmapTransformations.cutFromBitmap(bitmap)
         val newWidth = 100F / bitmap.height.toFloat() * bitmap.width.toFloat()
         bitmap = BitmapTransformations.resizeBitmap(bitmap, newWidth, 100F)
-        User.avatar=bitmap
+        return bitmap
     }
 
 

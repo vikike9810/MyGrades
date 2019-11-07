@@ -82,7 +82,11 @@ class NewSubjectPresenter(var view: NewSubjectView) {
     }
 
     fun saveSubject(subject: Subject){
-        DatabaseHandler.saveSubject(subject,{view.SubjectAdded()},{message-> error(message)})
+        DatabaseHandler.saveSubject(subject,{subject -> subjectSaved(subject)},{message-> error(message)})
+    }
+
+    fun subjectSaved(subject:Subject){
+        DatabaseHandler.savePersonsSubjects(User.person!!,subject,{view.SubjectAdded()},{message-> error(message)})
     }
 
     fun error(message: String){

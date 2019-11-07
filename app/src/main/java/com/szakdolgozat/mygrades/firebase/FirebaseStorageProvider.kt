@@ -22,15 +22,19 @@ object FirebaseStorageProvider {
         }
     }
 
-    fun downloadImage(success:(file: File) -> Unit, error:() -> Unit){
-        val ref= storageReference.child("Avatars/"+ User.userId+"profil.png")
+    fun downloadImage(success:(file: File, userId: String) -> Unit, error:(userId: String) -> Unit, userId: String){
+        val ref= storageReference.child("Avatars/"+ userId+"profil.png")
         val localFile = File.createTempFile("images", "png")
         ref.getFile(localFile)
             .addOnSuccessListener {
-            success(localFile)
+                if(it.bytesTransferred>10){
+            success(localFile, userId)}
+                else{
+                    error(userId)
+                }
         }
             .addOnFailureListener{
-            error()
+            error(userId)
         }
     }
 

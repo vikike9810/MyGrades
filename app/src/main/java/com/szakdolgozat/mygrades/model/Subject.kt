@@ -40,6 +40,7 @@ class Subject {
 
     constructor(id:String, name:String, teacher: Teacher){
         subjectId=id
+        setNum(id)
         Name=name
         Teacher=teacher
         Lessons= ArrayList<WeekViewEvent>()
@@ -59,6 +60,14 @@ class Subject {
         Lessons=ArrayList<WeekViewEvent>()
         Lessons?.addAll(lessons)
         Diary.subjects.add(this)
+    }
+
+    private fun setNum(id: String){
+        val intId=Integer.parseInt(id.substring(3))
+        if(num<=intId){
+            num=intId
+            num++
+        }
     }
 
     private fun generateId():String{

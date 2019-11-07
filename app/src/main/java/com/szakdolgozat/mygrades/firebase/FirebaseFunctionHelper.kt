@@ -161,12 +161,11 @@ object FirebaseFunctionHelper {
             }
     }
 
-    fun savePersonSubject(type: String, person: Person, subject :Subject) : Task<String> {
+    fun savePersonSubject( person: Person, subject :Subject) : Task<String> {
 
         val data = hashMapOf(
             "subjectId" to subject.subjectId,
-            "userId" to person.getuserId(),
-            "type" to type
+            "userId" to person.getuserId()
         )
 
         return functions.getHttpsCallable("savePersonSubject")

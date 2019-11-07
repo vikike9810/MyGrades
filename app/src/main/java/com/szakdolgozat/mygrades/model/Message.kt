@@ -24,9 +24,17 @@ class Message {
 
     constructor(id :Int, message: String, sender: Person, date: Calendar){
         this.Id=id
+        setNum(id)
         this.message=message
         this.sender=sender
         this.sendDate=date.clone() as Calendar
+    }
+
+    private fun setNum(id: Int){
+        if(num<=id){
+            num=id
+            num++
+        }
     }
 
 

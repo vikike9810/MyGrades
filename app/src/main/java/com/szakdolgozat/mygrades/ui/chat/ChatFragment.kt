@@ -50,13 +50,9 @@ class ChatFragment: Fragment(), ChatView, TalkingRecyclerViewAdapter.TalkingClic
         return view
     }
 
+
     private fun onclickNewTalk(v: View) {
-
-
-    }
-
-    fun createTalking(personName: String){
-
+        mainActivity.ShowNewTalkingFragment()
     }
 
     private fun initRecyclerView(){

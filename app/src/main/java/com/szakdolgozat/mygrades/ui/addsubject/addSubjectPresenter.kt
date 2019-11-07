@@ -1,5 +1,6 @@
 package com.szakdolgozat.mygrades.ui.addsubject
 
+import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.model.Diary
 import com.szakdolgozat.mygrades.model.Subject
 import com.szakdolgozat.mygrades.model.User
@@ -7,6 +8,18 @@ import com.szakdolgozat.mygrades.model.User
 class addSubjectPresenter(var view: addSubjectView) {
 
     var subjectsToShow = ArrayList<Subject>()
+
+    fun takeSubject(subject: Subject){
+        User.person?.Subjects?.add(subject)
+        removeSubject(subject)
+        saveTakesSubject(subject)
+    }
+
+    fun saveTakesSubject(subject:Subject){
+        if(User.person!=null) {
+            DatabaseHandler.savePersonsSubjects(User.person!!, subject, {subject -> view.subjectAdded(subject)},{message -> view.subjectAddedError(message )})
+        }
+    }
 
     fun getSubjects() :ArrayList<Subject> {
         subjectsToShow.addAll(Diary.subjects)

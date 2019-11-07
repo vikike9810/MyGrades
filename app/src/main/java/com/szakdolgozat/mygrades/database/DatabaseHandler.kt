@@ -23,10 +23,12 @@ object DatabaseHandler {
 
 
     fun getDataBase(context: Context){
-       db = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, "myGrades3.db"
-        ).build()
+        if(db==null) {
+            db = Room.databaseBuilder(
+                context,
+                AppDatabase::class.java, "myGrades3.db"
+            ).build()
+        }
     }
 
 
@@ -238,14 +240,14 @@ object DatabaseHandler {
     }
 
 
-    fun saveSubject(subject: Subject, succes: () -> Unit, error: (String) -> Unit){
+    fun saveSubject(subject: Subject, succes: (Subject) -> Unit, error: (String) -> Unit){
             FirebaseFunctionHelper.saveSubject(subject).addOnCompleteListener {
                 if(it.isSuccessful){
                     val lessons=DatabaseHelper.getLessonsBySubject(subject)
 
                     FirebaseFunctionHelper.saveLesson().addOnCompleteListener {
                             if(it.isSuccessful){
-                                succes()
+                                succes(subject)
                             }
                             else{
                                 error(it.exception?.message?:"Error in saving")
@@ -258,17 +260,14 @@ object DatabaseHandler {
             }
     }
 
-    fun savePersonsSubjects(persons : ArrayList<Person>, type: String){
-        for (person: Person in persons) {
-         person.Subjects.forEach{
-             FirebaseFunctionHelper.savePersonSubject(type, person, it).addOnCompleteListener {
+    fun savePersonsSubjects(person : Person, subject: Subject, succes: (Subject) -> Unit, error: (String) -> Unit){
+
+             FirebaseFunctionHelper.savePersonSubject(person, subject).addOnCompleteListener {
                  if(it.isSuccessful)
-                    println(it.result.toString())
+                   succes(subject)
                  else
-                     println(it.exception?.message.toString())
+                    error(it.exception?.message?: "Error in save")
              }
-         }
-        }
     }
 
     fun saveGrades(grade :Grade, succes: () -> Unit, error: (String) -> Unit){
@@ -283,10 +282,16 @@ object DatabaseHandler {
     }
 
 
-    fun saveTalkings(talkings: ArrayList<Talking>){
-     talkings.forEach {
-         FirebaseFunctionHelper.saveTalking(it)
-     }
+    fun saveTalkings(talking: Talking, succes: () -> Unit, error: (String) -> Unit){
+         FirebaseFunctionHelper.saveTalking(talking).addOnCompleteListener {
+             if(it.isSuccessful){
+                 succes()
+             }
+             else{
+                 error(it.exception?.message ?: "Error in save")
+             }
+         }
+
      }
 
 
