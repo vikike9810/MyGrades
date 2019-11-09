@@ -1,3 +1,4 @@
+/*
 package com.szakdolgozat.mygrades.ui.splash
 
 
@@ -26,6 +27,8 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.contrib.PickerActions
 import androidx.test.espresso.matcher.ViewMatchers.withClassName
 import androidx.test.espresso.matcher.ViewMatchers.withParent
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import com.szakdolgozat.mygrades.util.TestHelper
 
 
@@ -41,6 +44,8 @@ class B_AddSubjectTest {
 
     @Test
     fun addSubjectTest() {
+
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).waitForIdle()
 
         TestHelper.waitForUI(5)
 
@@ -198,3 +203,4 @@ class B_AddSubjectTest {
         }
     }
 }
+*/

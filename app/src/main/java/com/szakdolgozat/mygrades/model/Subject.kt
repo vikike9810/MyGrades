@@ -31,6 +31,9 @@ class Subject {
     @Ignore
     lateinit var Teacher: Teacher
 
+    @ColumnInfo(name="teacherName")
+    lateinit var TeacherName: String
+
     @ColumnInfo(name = "Description")
     var Description=""
 
@@ -43,6 +46,7 @@ class Subject {
         setNum(id)
         Name=name
         Teacher=teacher
+        TeacherName=teacher.getName()
         Lessons= ArrayList<WeekViewEvent>()
         Diary.subjects.add(this)
     }
@@ -50,6 +54,7 @@ class Subject {
     constructor(name:String, teacher: Teacher){
         Name=name
         Teacher=teacher
+        TeacherName=teacher.getName()
         Lessons= ArrayList<WeekViewEvent>()
         Diary.subjects.add(this)
     }
@@ -57,6 +62,7 @@ class Subject {
     constructor(name:String, teacher: Teacher, lessons: ArrayList<WeekViewEvent>){
         Name=name
         Teacher=teacher
+        TeacherName=teacher.getName()
         Lessons=ArrayList<WeekViewEvent>()
         Lessons?.addAll(lessons)
         Diary.subjects.add(this)
@@ -74,6 +80,13 @@ class Subject {
         val ret= "Sub$num"
         num++
         return ret
+    }
+
+    object SubjectComparator :Comparator<Subject>{
+        override fun compare(o1: Subject, o2: Subject): Int {
+            return o1.Name.compareTo(o2.Name)
+        }
+
     }
 
 }

@@ -33,7 +33,6 @@ object DatabaseHelper {
         if(name!=null && teacher!=null && subjectId!=null) {
             val newSubject = Subject(subjectId ,name, teacher)
             newSubject.Description=result["Description"]?:""
-            teacher.Subjects.add(newSubject)
             return newSubject
         }
         return null

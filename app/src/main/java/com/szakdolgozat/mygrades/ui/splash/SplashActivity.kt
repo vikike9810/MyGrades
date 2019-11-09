@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.idescout.sql.SqlScoutServer
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.ui.login.LoginActivity
 import com.szakdolgozat.mygrades.ui.main.MainActivity
@@ -16,6 +17,7 @@ class SplashActivity : AppCompatActivity(), SplashView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        SqlScoutServer.create(this, getPackageName())
         splashPresenter= SplashPresenter(this)
     }
 

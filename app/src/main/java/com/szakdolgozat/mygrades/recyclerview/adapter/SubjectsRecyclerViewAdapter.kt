@@ -11,6 +11,7 @@ import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.util.CurrentDate
 import com.szakdolgozat.mygrades.model.Subject
+import com.szakdolgozat.mygrades.model.User
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,7 +34,7 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
         holder.subject = subject
 
         holder.subName.text = subject.Name
-        holder.subTeacher.text = subject.Teacher?.getName()?:""
+        holder.subTeacher.text = subject.TeacherName
         holder.subId.text=subject.subjectId
         subject.Lessons?.let { holder.setDate(it) }
         if(subjectAddable){
@@ -54,7 +55,8 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
     fun addAll(newSubjects: ArrayList<Subject>) {
         val size = subjects.size
         subjects.addAll(newSubjects)
-        notifyItemRangeInserted(size, subjects.size)
+        subjects.sortWith(Subject.SubjectComparator)
+        notifyDataSetChanged()
     }
 
     fun deleteRow(position: Int) {
@@ -71,6 +73,7 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
     fun addNewItems(newSubjects: ArrayList<Subject>){
         subjects.clear()
         subjects.addAll(newSubjects)
+        subjects.sortWith(Subject.SubjectComparator)
         notifyDataSetChanged()
     }
 

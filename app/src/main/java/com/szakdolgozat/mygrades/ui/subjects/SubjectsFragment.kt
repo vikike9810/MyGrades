@@ -1,5 +1,6 @@
 package com.szakdolgozat.mygrades.ui.subjects
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,10 +39,18 @@ class SubjectsFragment: Fragment(), SubjectsView, SubjectsRecyclerViewAdapter.Su
         return view
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        add_subject_button.setOnClickListener{
-            onClickAddSubject(it)}
+
+        if(User.person!!.getuserId()!="offline") {
+            add_subject_button.setOnClickListener {
+                onClickAddSubject(it)
+            }
+        }
+        else{
+            add_subject_button.visibility=View.INVISIBLE
+        }
     }
 
     fun onClickAddSubject(v: View){

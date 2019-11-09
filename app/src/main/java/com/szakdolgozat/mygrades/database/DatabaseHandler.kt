@@ -26,8 +26,21 @@ object DatabaseHandler {
         if(db==null) {
             db = Room.databaseBuilder(
                 context,
-                AppDatabase::class.java, "myGrades3.db"
+                AppDatabase::class.java, "myGrades5.db"
             ).build()
+        }
+    }
+
+    fun getOfflineDatas(){
+        GlobalScope.launch {
+            getSubjectsFromLocal()
+            DatabaseReadDoneEvent.event("ok")
+        }
+    }
+
+    fun clearOfflineDatas(){
+        GlobalScope.launch {
+            clearLocalSubject()
         }
     }
 
@@ -85,31 +98,60 @@ object DatabaseHandler {
 
     }
 
-/*    fun getSubjectsToDiary() {
-            if(db!=null){
-                val readedSubject = db!!.subjectDao().getAll()
-                readedSubject.forEach {
-                    val lessons = db!!.LessonDao().getAllBySubject(it.subjectId)
-                        lessons.forEach { lesson:LessonSubjectJoin ->
-                            it.Lessons.add(DatabaseHelper.getEventFromLesson(it.Name,lesson))
-                        }
+fun clearLocalSubject(){
+    if(db!=null){
+        db!!.subjectDao().deleteAll()
+        db!!.LessonDao().deleteAll()
+    }
+
+}
+
+fun getSubjectsFromLocal() {
+
+        if (db != null) {
+            val readedSubject = db!!.subjectDao().getAll()
+            readedSubject.forEach {
+                val lessons = db!!.LessonDao().getAllBySubject(it.subjectId)
+                lessons.forEach { lesson: LessonSubjectJoin ->
+                    it.Lessons.add(DatabaseHelper.getEventFromLesson(it.Name, lesson))
                 }
-                 Diary.subjects.addAll(readedSubject)
             }
+            User.person!!.Subjects.addAll(readedSubject)
+        }
 
     }
 
-    fun writeSubjectsFromDiary(){
+    fun writeSubjectsToLocal(){
+        clearLocalSubject()
             if (db != null) {
-                for (subject: Subject in Diary.subjects) {
+                for (subject: Subject in User.person!!.Subjects) {
                     db!!.subjectDao().insertAll(subject)
-                   var lessons=DatabaseHelper.getLessonsBySubject(subject)
+                   val lessons=DatabaseHelper.getLessonsBySubject(subject)
                     lessons.forEach {
                         db!!.LessonDao().insertAll(it)
                     }
                 }
             }
-    }*/
+
+    }
+
+    fun saveNewSubjectToLocal(subject: Subject){
+
+            if (db != null) {
+                db!!.subjectDao().insertAll(subject)
+                val lessons = DatabaseHelper.getLessonsBySubject(subject)
+                lessons.forEach {
+                    db!!.LessonDao().insertAll(it)
+                }
+            }
+
+    }
+
+    fun saveUsersSubjectsToLocal(){
+        GlobalScope.launch {
+            writeSubjectsToLocal()
+        }
+    }
 
 
     fun getPersons(){
@@ -186,6 +228,7 @@ object DatabaseHandler {
             }
             println("PerSubject")
                 getGrades()
+                saveUsersSubjectsToLocal()
 
         }
     }
@@ -263,8 +306,12 @@ object DatabaseHandler {
     fun savePersonsSubjects(person : Person, subject: Subject, succes: (Subject) -> Unit, error: (String) -> Unit){
 
              FirebaseFunctionHelper.savePersonSubject(person, subject).addOnCompleteListener {
-                 if(it.isSuccessful)
-                   succes(subject)
+                 if(it.isSuccessful) {
+                     succes(subject)
+                     GlobalScope.launch {
+                         saveNewSubjectToLocal(subject)
+                     }
+                 }
                  else
                     error(it.exception?.message?: "Error in save")
              }

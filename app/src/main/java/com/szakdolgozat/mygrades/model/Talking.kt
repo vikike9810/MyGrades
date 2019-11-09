@@ -52,9 +52,20 @@ class Talking {
     }
 
     fun getLastMessageDate():String{
-        if(messages.size>0) {
-            return messages[messages.size - 1].getMessageTime()
+        return getLastMessage().getMessageTime()
+    }
+
+    fun getLastMessage(): Message{
+        messages.sortWith(Message.MessageComparator)
+        return messages.last()
+    }
+
+    object TalkingComparator: Comparator<Talking>{
+
+        override fun compare(o1: Talking, o2: Talking): Int {
+            return (Message.MessageComparator.compare(o2.getLastMessage(), o1.getLastMessage()))
         }
-        return ""
+
+
     }
 }

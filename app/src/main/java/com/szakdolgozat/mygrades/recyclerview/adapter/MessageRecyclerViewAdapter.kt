@@ -70,13 +70,20 @@ class MessageRecyclerViewAdapter : RecyclerView.Adapter<MessageRecyclerViewAdapt
         for(message: Message in newMessages){
             messages.add(0,message)
         }
+        sortingMessages()
         notifyDataSetChanged()
     }
 
     fun addMessage(message: Message) {
         messages.add(message)
+        sortingMessages()
         notifyDataSetChanged()
     }
+
+    fun sortingMessages(){
+        messages.sortWith(Message.MessageComparator)
+    }
+
 
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

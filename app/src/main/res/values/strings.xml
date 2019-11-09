@@ -30,6 +30,7 @@
     <string name="address">Address:</string>
     <string name="birthday">Birthday</string>
     <string name="name">Name</string>
+    <string name="offline_user">Offline User</string>
 
     <string-array name="array_less_type">
         <item>Occasional</item>

@@ -22,4 +22,7 @@ class TalkingPresenter(var view: TalkingView, var talking: Talking) {
             view.errorInSave("Error on save!")
         }
     }
+
+
+
 }

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.events.ImagePickedEvent.event
 import com.szakdolgozat.mygrades.model.Subject
 import com.szakdolgozat.mygrades.model.User
@@ -29,6 +30,7 @@ class MainPresenter(private var view: MainView) {
     fun UserLogOut(){
         LoginPresenter.auth.signOut()
         user?.LogOut()
+        DatabaseHandler.clearOfflineDatas()
         view.userLoggedOut()
     }
 

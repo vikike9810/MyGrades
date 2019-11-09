@@ -48,6 +48,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/B_AddSubjectTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/C_NewMessageTest.kt">
           <value>
             <set />
@@ -59,6 +64,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/CheckMessagesEndAnswerTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/D_CheckMessagesAndAnswerTest.kt">
           <value>
             <set />
           </value>
@@ -93,6 +103,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/F_Add_Check_Grade_Messaging_Test.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/G_EditProfileTest.kt">
           <value>
             <set />
@@ -103,12 +118,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/I_NewMessageTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/NewMessageTest.kt">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/RegisterAndLoginTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/SplashActivityTest.kt">
           <value>
             <set />
           </value>
@@ -124,6 +149,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/InternetConnectionChecker.kt">
           <value>
             <set />
           </value>
@@ -189,6 +219,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/firebase/FirebaseStorageProvider.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/internetconnection/InternetConnectionChecker.kt">
           <value>
             <set />
           </value>
@@ -724,6 +759,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/test/java/com/szakdolgozat/mygrades/sortingtests/SortingTests.kt">
           <value>
             <set />
           </value>

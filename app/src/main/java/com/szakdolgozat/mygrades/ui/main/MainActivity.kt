@@ -115,8 +115,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
          when (item.itemId) {
-            R.id.action_logout -> {presenter?.UserLogOut()
-             return true}
+                 R.id.action_logout -> {
+                     if(!(User.person?.getuserId().equals("offline"))){
+                        presenter?.UserLogOut()
+                             return true
+                     }
+                     else
+                             return  false
+                 }
             else -> super.onOptionsItemSelected(item)
         }
         return false
@@ -282,6 +288,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         onMonthChange(2019,10)
         mWeekView.notifyDatasetChanged()
     }
+
 
 
 }

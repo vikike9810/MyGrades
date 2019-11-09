@@ -1,50 +1,53 @@
+/*
 package com.szakdolgozat.mygrades.ui.splash
 
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import androidx.test.uiautomator.UiDevice
 import com.szakdolgozat.mygrades.R
-import com.szakdolgozat.mygrades.util.TestHelper
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
-import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class C_NewMessageTest {
+class SplashActivityTest {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(SplashActivity::class.java)
 
     @Test
-    fun newMessageTest() {
-
-        TestHelper.waitForUI(5)
-
+    fun splashActivityTest() {
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Open navigation drawer")
+                withContentDescription("Open navigation drawer"),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.toolbar),
+                        childAtPosition(
+                            withClassName(`is`("com.google.android.material.appbar.AppBarLayout")),
+                            0
+                        )
+                    ),
+                    1
+                ),
+                isDisplayed()
             )
         )
         appCompatImageButton.perform(click())
-
-        TestHelper.waitForUI(1)
 
         val navigationMenuItemView = onView(
             allOf(
@@ -63,16 +66,20 @@ class C_NewMessageTest {
         )
         navigationMenuItemView.perform(click())
 
-        TestHelper.waitForUI(2)
-
         val floatingActionButton = onView(
             allOf(
-                withId(R.id.add_new_talk)
+                withId(R.id.add_new_talk),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.main_fragment),
+                        1
+                    ),
+                    2
+                ),
+                isDisplayed()
             )
         )
         floatingActionButton.perform(click())
-
-        TestHelper.waitForUI(1)
 
         val cardView = onView(
             allOf(
@@ -84,14 +91,12 @@ class C_NewMessageTest {
                             1
                         )
                     ),
-                    1
+                    0
                 ),
                 isDisplayed()
             )
         )
         cardView.perform(click())
-
-        TestHelper.waitForUI(1)
 
         val cardView2 = onView(
             childAtPosition(
@@ -106,76 +111,6 @@ class C_NewMessageTest {
             )
         )
         cardView2.perform(scrollTo(), click())
-
-        TestHelper.waitForUI(1)
-
-        val appCompatEditText = onView(
-            allOf(
-                withId(R.id.talking_editText)
-            )
-        )
-        appCompatEditText.perform(replaceText("Hi! You can take my subject!"), closeSoftKeyboard())
-
-        TestHelper.waitForUI(1)
-
-        val appCompatImageView = onView(
-            allOf(
-                withId(R.id.send_button)
-            )
-        )
-        appCompatImageView.perform(click())
-
-
-        TestHelper.waitForUI(2)
-
-
-        val linearLayout = onView(
-            allOf(
-                withId(R.id.message_layout),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.messages_recycler),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        linearLayout.check(matches(isDisplayed()))
-
-
-        TestHelper.waitForUI(1)
-
-        val textView = onView(
-            allOf(
-                withId(R.id.message_text), withText("Hi! You can take my subject!"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.message_layout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Hi! You can take my subject!")))
-        TestHelper.waitForUI(1)
-
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).pressBack()
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).pressBack()
-
-
-        TestHelper.waitForUI(4)
-
-
-
-
-
     }
 
     private fun childAtPosition(
@@ -196,3 +131,4 @@ class C_NewMessageTest {
         }
     }
 }
+*/

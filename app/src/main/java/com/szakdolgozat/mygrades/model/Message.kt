@@ -41,4 +41,14 @@ class Message {
     fun getMessageTime(): String{
         return CurrentDate.getTimeStringFromCalendar(sendDate)
     }
+
+
+  object MessageComparator: Comparator<Message>{
+
+      override fun compare(o1: Message, o2: Message): Int {
+          return (o1.sendDate.compareTo(o2.sendDate))
+      }
+
+
+  }
 }

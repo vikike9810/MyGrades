@@ -65,6 +65,7 @@ class TalkingRecyclerViewAdapter: RecyclerView.Adapter<TalkingRecyclerViewAdapte
         fun addAll(newTalkings: ArrayList<Talking>) {
             val size = talkings.size
             talkings.addAll(newTalkings)
+            talkings.sortWith(Talking.TalkingComparator)
             notifyItemRangeInserted(size, talkings.size)
         }
 
@@ -84,6 +85,7 @@ class TalkingRecyclerViewAdapter: RecyclerView.Adapter<TalkingRecyclerViewAdapte
                 if(!(it.equals(User.person))) {
                     talkings.add(Talking(it))
                 }
+                talkings.sortWith(Talking.TalkingComparator)
             }
             notifyDataSetChanged()
         }
@@ -96,6 +98,7 @@ class TalkingRecyclerViewAdapter: RecyclerView.Adapter<TalkingRecyclerViewAdapte
         fun addNewItems(newTalkings: ArrayList<Talking>){
             talkings.clear()
             talkings.addAll(newTalkings)
+            talkings.sortWith(Talking.TalkingComparator)
             notifyDataSetChanged()
         }
 

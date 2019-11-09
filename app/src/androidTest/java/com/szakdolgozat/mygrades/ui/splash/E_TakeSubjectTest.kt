@@ -1,3 +1,4 @@
+/*
 package com.szakdolgozat.mygrades.ui.splash
 
 
@@ -14,8 +15,10 @@ import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import androidx.test.uiautomator.UiDevice
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.util.TestHelper
 import com.szakdolgozat.mygrades.util.TestHelper.clickOnViewChild
@@ -42,7 +45,16 @@ class E_TakeSubjectTest {
     fun takeSubjectTest() {
 
 
-        TestHelper.waitForUI(1)
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).waitForIdle()
+
+        TestHelper.waitForUI(4)
+
+        TestHelper.logOut()
+        TestHelper.waitForUI(2)
+
+        TestHelper.loginTest("pelda@grades.com", "123456")
+
+        TestHelper.waitForUI(4)
 
         val appCompatImageButton = onView(
             allOf(
@@ -222,3 +234,4 @@ class E_TakeSubjectTest {
         }
     }
 }
+*/

@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.events.DatabaseReadDoneEvent
+import com.szakdolgozat.mygrades.internetconnection.InternetConnectionChecker
 import com.szakdolgozat.mygrades.model.Person
 import com.szakdolgozat.mygrades.model.Student
 import com.szakdolgozat.mygrades.model.Teacher
@@ -29,14 +30,21 @@ class SplashPresenter(var view: SplashView) {
     }
 
     fun loadUser(){
-        auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        if(currentUser==null){
-            view.loginUser()
+        DatabaseHandler.getDataBase(view.getSplashActivity())
+        if(InternetConnectionChecker.internetIsAvailable(view.getSplashActivity() )) {
+            auth = FirebaseAuth.getInstance()
+            println("VAn net")
+            val currentUser = auth.currentUser
+            if (currentUser == null) {
+                view.loginUser()
+            } else {
+                User.setUser(currentUser)
+                getProfile()
+            }
         }
         else{
-            User.setUser(currentUser)
-            getProfile()
+            println("Nincs net")
+            getOfflineDatas()
         }
     }
 
@@ -69,8 +77,13 @@ class SplashPresenter(var view: SplashView) {
     }
 
     fun getDatasFromDatabase(userId:String){
-        //DatabaseHandler.getDataBase(view.getSplashActivity())
         DatabaseHandler.getDatas()
+    }
+
+    fun getOfflineDatas(){
+        User.type="Student"
+        User.person=Student("Offline User", "offline")
+        DatabaseHandler.getOfflineDatas()
     }
 
 

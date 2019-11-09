@@ -46,7 +46,7 @@ object TestHelper {
     }
 
     fun waitForUI(num: Long){
-        Thread.sleep((num*2000))
+        Thread.sleep((num*4000))
     }
 
     fun loginTest(email: String, passw:String){
