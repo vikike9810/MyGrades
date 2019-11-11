@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.alamkanak.weekview.WeekViewEvent
 import com.google.firebase.auth.FirebaseUser
+import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,12 +24,14 @@ object User{
     fun setUser(user: FirebaseUser){
         userId=user.uid
         email=user.email
+        FirebaseFunctionHelper.subscribe()
         loggedIn=true
     }
 
 
     fun LogOut(){
         loggedIn=false
+        FirebaseFunctionHelper.unSubscribe()
     }
 
     fun clearUser(){

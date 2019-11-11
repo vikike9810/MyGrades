@@ -249,6 +249,18 @@ try{
     var ref = db.ref("Grades").child(gradeId).child("subjectId").set(subjectId);
     var ref = db.ref("Grades").child(gradeId).child("comment").set(comment);
     var ref = db.ref("Grades").child(gradeId).child("date").set(date);
+
+    var message= {
+        data:{
+            subjectId: subjectId,
+            grade : grade,
+            gradeId : gradeId,
+            type: "Grade" 
+        },
+        topic: studentId
+    };
+    admin.messaging().send(message)
+
     return 'OK';
 }
 catch(e){
@@ -256,6 +268,26 @@ catch(e){
 }
 }
 );
+
+exports.getGrade= functions.https.onCall((data) => {
+    var id= data.id
+    var db = admin.database();
+
+    return db.ref('Grades').child(id).once('value').then((snap) => {
+    
+             var data= {
+                subjectId : snap.child("subjectId").val(),
+                studentId: snap.child("studentId").val(),
+                teacherId: snap.child("teacherId").val(),
+                gradeId: id,
+                grade: snap.child("grade").val(),
+                date: snap.child("date").val(),
+                comment: snap.child("comment").val()
+             }
+
+             return data;
+    });
+});
 
 exports.getGrades= functions.https.onCall((data) => {
 
@@ -318,13 +350,15 @@ exports.getTalkings= functions.https.onCall((data) => {
     });
 });
 
+
 exports.saveMessage= functions.https.onCall((data) =>{
 
     var sender = data.sender;
     var Id= data.Id;
-    var talkingId= data.talkingId
-    var date= data.date
-    var message = data.message
+    var talkingId= data.talkingId;
+    var date= data.date;
+    var message = data.message;
+    var targetId = data.targetId;
     var db = admin.database();
 
 try{
@@ -332,6 +366,18 @@ try{
     var ref = db.ref("Messages").child(Id).child("message").set(message);
     var ref = db.ref("Messages").child(Id).child("date").set(date);
     var ref = db.ref("Messages").child(Id).child("talkingId").set(talkingId);
+
+    var message= {
+        data:{
+            sender: sender,
+            message : message,
+            messageId : Id,
+            talkingId: talkingId, 
+            type: "Message" 
+        },
+        topic: targetId
+    };
+    admin.messaging().send(message)
     return 'OK';
 }
 catch(e){
@@ -357,6 +403,24 @@ exports.getMessages= functions.https.onCall((data) => {
             list.push(data);
         });
         return list;
+    });
+});
+
+exports.getMessage= functions.https.onCall((data) => {
+    var id= data.id
+    var db = admin.database();
+
+    return db.ref('Messages').child(id).once('value').then((snap) => {
+    
+             var data= {
+                messageId: id,
+                talkingId : snap.child("talkingId").val(),
+                message: snap.child("message").val(),
+                date: snap.child("date").val(),
+                senderId: snap.child("sender").val()
+             }
+
+             return data;
     });
 });
 

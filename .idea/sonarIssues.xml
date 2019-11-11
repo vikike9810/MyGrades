@@ -203,6 +203,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/events/GetGradeEvent.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/events/GetMessageEvent.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/events/GotMessageEvent.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/events/ImagePickedEvent.kt">
           <value>
             <set />
@@ -294,6 +309,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/User.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/notification/NotificationService.kt">
           <value>
             <set />
           </value>

@@ -2,6 +2,7 @@ package com.szakdolgozat.mygrades.firebase
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.messaging.FirebaseMessaging
 import com.szakdolgozat.mygrades.model.*
 import com.szakdolgozat.mygrades.util.CurrentDate
 import org.json.JSONArray
@@ -11,6 +12,7 @@ import kotlin.collections.HashMap
 object FirebaseFunctionHelper {
 
     private  var functions: FirebaseFunctions = FirebaseFunctions.getInstance()
+    private var messaging= FirebaseMessaging.getInstance()
 
 
     fun register(name: String, type: String, userid:String?) : Task<String> {
@@ -243,12 +245,17 @@ object FirebaseFunctionHelper {
     }
 
     fun saveMessage(talking: Talking, message: Message): Task<String> {
+        var target =talking.person1
+        if(User.userId.equals(talking.person1.getuserId())) {
+            target =talking.person2
+        }
 
         val data = hashMapOf(
             "sender" to message.sender.getuserId(),
             "talkingId" to talking.Id,
             "Id" to message.Id,
             "message" to message.message,
+            "targetId" to target.getuserId(),
             "date" to message.getMessageTime()
         )
 
@@ -272,6 +279,39 @@ object FirebaseFunctionHelper {
                 result
             }
 
+    }
+
+    fun getMessage(id: String):Task<HashMap<String, String>>{
+        val data= hashMapOf<String,String>(
+            "id" to id
+        )
+        return functions.getHttpsCallable("getMessage")
+            .call(data)
+            .continueWith{task ->
+                val result= task.result?.data as HashMap<String, String>
+                result
+            }
+    }
+
+    fun getGrade(id: String):Task<HashMap<String, String>>{
+        val data= hashMapOf<String,String>(
+            "id" to id
+        )
+        return functions.getHttpsCallable("getGrade")
+            .call(data)
+            .continueWith{task ->
+                val result= task.result?.data as HashMap<String, String>
+                result
+            }
+    }
+
+
+    fun subscribe(){
+        messaging.subscribeToTopic(User.userId)
+    }
+
+    fun unSubscribe(){
+        messaging.unsubscribeFromTopic(User.userId)
     }
 
 

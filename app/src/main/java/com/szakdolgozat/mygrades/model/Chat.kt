@@ -14,4 +14,13 @@ object Chat {
         }
         return  newTalkings
     }
+
+    fun getTalkingById(id: String): Talking?{
+            for (talking: Talking in talkings) {
+                if (talking.Id.toString().equals(id)) {
+                    return talking
+                }
+            }
+        return null
+    }
 }

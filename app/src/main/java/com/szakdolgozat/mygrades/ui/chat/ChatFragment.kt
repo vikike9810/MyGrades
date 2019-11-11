@@ -20,6 +20,7 @@ import android.app.AlertDialog
 import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.szakdolgozat.mygrades.events.GetMessageEvent
 import com.szakdolgozat.mygrades.model.Diary
 
 
@@ -61,6 +62,13 @@ class ChatFragment: Fragment(), ChatView, TalkingRecyclerViewAdapter.TalkingClic
         chatRecyclerViewAdapter.itemClickListener = this
         chatRecyclerViewAdapter.addNewItems(Chat.getTalkingsByUser())
         chatRecyclerView.adapter = chatRecyclerViewAdapter
+        GetMessageEvent.event+={
+            refereshRecyclerView(it)
+        }
+    }
+
+    private fun refereshRecyclerView(it: String) {
+        chatRecyclerViewAdapter.addNewItems(Chat.getTalkingsByUser())
     }
 
     override fun onItemClick(talking: Talking){

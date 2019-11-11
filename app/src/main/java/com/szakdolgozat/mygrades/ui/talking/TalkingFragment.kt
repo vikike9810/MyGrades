@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.events.GetMessageEvent
 import com.szakdolgozat.mygrades.model.Message
 import com.szakdolgozat.mygrades.model.Talking
 import com.szakdolgozat.mygrades.model.User
@@ -68,6 +69,13 @@ class TalkingFragment(var talking: Talking): Fragment(), TalkingView {
         messageRecyclerViewAdapter = MessageRecyclerViewAdapter()
         messageRecyclerViewAdapter.addNewItems(talking.messages)
         talkingRecyclerView.adapter = messageRecyclerViewAdapter
+        GetMessageEvent.event+={
+            refereshRecyclerView(it)
+        }
+    }
+
+    fun refereshRecyclerView(mess: String ){
+        messageRecyclerViewAdapter.addNewItems(talking.messages)
     }
 
     override fun messageAdded(message: Message?) {

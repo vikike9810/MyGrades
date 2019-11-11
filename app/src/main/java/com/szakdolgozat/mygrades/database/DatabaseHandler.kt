@@ -3,9 +3,12 @@ package com.szakdolgozat.mygrades.database
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.room.Room
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.events.DatabaseReadDoneEvent
+import com.szakdolgozat.mygrades.events.GetGradeEvent
+import com.szakdolgozat.mygrades.events.GetMessageEvent
 import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import com.szakdolgozat.mygrades.model.*
 import com.szakdolgozat.mygrades.ui.splash.SplashActivity
@@ -246,6 +249,18 @@ fun getSubjectsFromLocal() {
         }
     }
 
+    fun getGrade( id :String, builder: NotificationCompat.Builder,  succes:(NotificationCompat.Builder) -> Unit){
+        FirebaseFunctionHelper.getGrade(id).addOnCompleteListener {
+            if(it.isSuccessful){
+                if(it.result!=null) {
+                    DatabaseHelper.getGradeFromStringHash(it.result!!)
+                    GetGradeEvent.event("Grade")
+                    succes(builder)
+                }
+            }
+        }
+    }
+
     fun getTalkings(){
         FirebaseFunctionHelper.getTalkings().addOnCompleteListener {task ->
             if(task.isSuccessful){
@@ -265,6 +280,18 @@ fun getSubjectsFromLocal() {
                 }
             }
             DatabaseReadDoneEvent.event("ok")
+        }
+    }
+
+    fun getMessage( id :String, builder: NotificationCompat.Builder,  succes:(NotificationCompat.Builder) -> Unit){
+        FirebaseFunctionHelper.getMessage(id).addOnCompleteListener {
+            if(it.isSuccessful){
+                if(it.result!=null) {
+                    DatabaseHelper.getMessagesFromStringHash(it.result!!)
+                    GetMessageEvent.event("Message")
+                    succes(builder)
+                }
+            }
         }
     }
 

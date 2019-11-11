@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if(item.itemId!=selectedmenuItem) {
+
             when (item.itemId) {
                 R.id.nav_Profile -> {
                     navView.getMenu().getItem(0).isChecked = true
@@ -158,9 +158,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.nav_Grades -> {
                     navView.getMenu().getItem(3).isChecked = true
                     actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
-                    var gradeFragment = GradesFragment()
+                    val gradeFragment = GradesFragment()
                     actualFragment = gradeFragment
-                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, gradeFragment!!)
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, gradeFragment)
                         .addToBackStack("Grades").commit()
                     selectedmenuItem=R.id.nav_Grades
 
@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     selectedmenuItem=R.id.nav_Messages
                 }
             }
-        }
+
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }

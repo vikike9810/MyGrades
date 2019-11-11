@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.events.GetGradeEvent
 import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.recyclerview.adapter.GradesRecyclerViewAdapter
 import com.szakdolgozat.mygrades.ui.main.MainActivity
@@ -46,7 +47,14 @@ class GradesFragment:Fragment(),GradesView {
         }
         setViewByUserType(view)
         initFilters(view)
+        GetGradeEvent.event+={
+            getNewGrade(it)
+        }
         return view
+    }
+
+    private fun getNewGrade(it: String) {
+        onClickGoButton(null)
     }
 
     private fun setViewByUserType(view: View) {
@@ -85,11 +93,25 @@ class GradesFragment:Fragment(),GradesView {
 
     }
 
-    fun onClickGoButton(v :View){
+    fun onClickGoButton(v :View?){
+        var teacher=""
+        if(TeacherSpinner!=null) {
+             teacher = TeacherSpinner.selectedItem.toString()
+        }
+
+        var subject=""
+        if(SubjectSpinner!=null) {
+            subject = SubjectSpinner.selectedItem.toString()
+        }
+
+        var grade=""
+        if(Grade_spinner!=null) {
+            grade = Grade_spinner.selectedItem.toString()
+        }
         recyclerViewAdapter.addNewItems(
-            gradesPresenter.getFilteredGrades(SubjectSpinner.selectedItem.toString(),
-                TeacherSpinner.selectedItem.toString(),
-                Grade_spinner.selectedItem.toString(),
+            gradesPresenter.getFilteredGrades(subject,
+                teacher,
+                grade,
                 recyclerViewAdapter.grades))
     }
 

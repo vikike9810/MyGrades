@@ -81,6 +81,7 @@ object DatabaseHelper {
         }
     }
 
+
     fun getStudentFromStringHash(result: HashMap<String, String>){
         val name=result["name"]
         val id= result["personId"]
