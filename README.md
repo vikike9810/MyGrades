@@ -17,8 +17,18 @@ Az alkalmazás megvalósítja az oktatók és a diákok közötti kommunikáció
 A Firebase valósítja meg a az alkalmazáshoz tartozó szervert.
 
 
+A splash, bejelentkezés és a regisztráció képernyő:
 
-<img src="https://github.com/vikike9810/MyGrades/blob/master/login.PNG" width="500"/>
-<img src="https://github.com/vikike9810/MyGrades/blob/master/timetable.PNG" width="500"/>
-<img src="https://github.com/vikike9810/MyGrades/blob/master/Subjects.PNG" width="500"/>
-<img src="https://github.com/vikike9810/MyGrades/blob/master/talkings.PNG" width="500"/>
+<img src="https://github.com/vikike9810/MyGrades/blob/master/login.PNG" width="700" class="center"/>
+
+Órarend, menü és a profil képernyő:
+
+<img src="https://github.com/vikike9810/MyGrades/blob/master/timetable.PNG" width="700"/>
+
+Tárgyak listája, tárgy kiírás és a tárgyfelvétel képernyő:
+
+<img src="https://github.com/vikike9810/MyGrades/blob/master/Subjects.PNG" width="700"/>
+
+Beszélgetések, új beszélgetés és a beszélgetés képernyő:
+
+<img src="https://github.com/vikike9810/MyGrades/blob/master/talkings.PNG" width="700" class="center"/>
