@@ -33,6 +33,7 @@ import com.szakdolgozat.mygrades.ui.login.LoginActivity
 import com.szakdolgozat.mygrades.ui.newsubject.NewSubjectFragment
 import com.szakdolgozat.mygrades.ui.newtalking.NewTalkingFragment
 import com.szakdolgozat.mygrades.ui.profil.ProfileFragment
+import com.szakdolgozat.mygrades.ui.subjectdetails.SubjectDetailsFragment
 import com.szakdolgozat.mygrades.ui.talking.TalkingFragment
 import com.szakdolgozat.mygrades.util.ImageProvider
 import java.util.*
@@ -185,7 +186,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onEventClick(event: WeekViewEvent?, eventRect: RectF?) {
-        Toast.makeText(this,"Esemeny",Toast.LENGTH_SHORT).show()
+       val eventFragment=SubjectDetailsFragment(event?.name ?: "")
+        eventFragment.show(supportFragmentManager, "Details")
     }
 
     override fun onEventLongPress(event: WeekViewEvent?, eventRect: RectF?) {
@@ -196,6 +198,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mWeekView.goToHour( Calendar.getInstance()[Calendar.HOUR].toDouble() )
         return presenter!!.getEvents(newYear, newMonth)
     }
+
 
 
     override fun userLoggedOut() {

@@ -254,8 +254,6 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getMain_Activity(): MainActivity {
-        return mainActivity
-    }
+
 
 }

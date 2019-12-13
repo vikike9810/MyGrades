@@ -29,8 +29,7 @@
                       app:layout_constraintTop_toTopOf="@+id/grade_subject_icon"
                       app:layout_constraintBottom_toBottomOf="@+id/grade_subject_icon"
                       android:layout_margin="10dp"
-                      android:text="Subject"
-                      android:textSize="20dp"
+                      android:textSize="@dimen/mainSize"
                       android:textStyle="bold"/>
 
             <ImageView android:id="@+id/grade_teacher_icon"
@@ -48,8 +47,7 @@
                       app:layout_constraintTop_toTopOf="@+id/grade_teacher_icon"
                       app:layout_constraintBottom_toBottomOf="@+id/grade_teacher_icon"
                       android:layout_margin="10dp"
-                      android:text="Kiss Jóska"
-                      android:textSize="20dp"/>
+                      android:textSize="@dimen/mainSize"/>
 
 
             <ImageView android:id="@+id/grade_grade_icon"
@@ -68,8 +66,7 @@
                     app:layout_constraintTop_toTopOf="@+id/grade_grade_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/grade_grade_icon"
                     android:layout_margin="10dp"
-                    android:text="5"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/mainSize"
                     android:textStyle="bold"/>
 
             <ImageView android:id="@+id/grade_date_icon"
@@ -87,8 +84,7 @@
                       app:layout_constraintTop_toTopOf="@+id/grade_date_icon"
                       app:layout_constraintBottom_toBottomOf="@+id/grade_date_icon"
                       android:layout_margin="10dp"
-                      android:text="2019.10.31"
-                      android:textSize="20dp"/>
+                      android:textSize="@dimen/mainSize"/>
 
             <ImageView android:id="@+id/grade_line"
                        android:layout_width="match_parent"
@@ -114,7 +110,6 @@
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintTop_toBottomOf="@+id/grade_line"
                       android:layout_margin="10dp"
-                      android:text="Comment"
                       android:textStyle="italic"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

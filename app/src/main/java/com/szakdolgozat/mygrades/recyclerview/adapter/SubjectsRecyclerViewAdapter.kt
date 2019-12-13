@@ -132,14 +132,7 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
             lessons_card.visibility=View.VISIBLE
             day.visibility=View.VISIBLE
             date.visibility=View.VISIBLE
-            date.text=getTime(event)
-        }
-
-        fun getTime(event:WeekViewEvent): String{
-            return CurrentDate.formatTime(event.startTime[Calendar.HOUR_OF_DAY])+":"+
-                    CurrentDate.formatTime(event.startTime[Calendar.MINUTE])+ "-" +
-                    CurrentDate.formatTime(event.endTime[Calendar.HOUR_OF_DAY])+":"+
-                    CurrentDate.formatTime(event.endTime[Calendar.MINUTE])
+            date.text=CurrentDate.getEventDateString(event)
         }
 
 

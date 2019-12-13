@@ -12,7 +12,7 @@
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="New Subject"
+                  android:text="@string/new_subject"
                   android:gravity="center"
                   android:textStyle="bold"
                   android:textSize="20sp"
@@ -52,7 +52,7 @@
                             android:id="@+id/new_sub_Name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Subject name"/>
+                            android:hint="@string/subject_name"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,7 +79,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/new_sub_desc"
                             android:inputType="textMultiLine"
-                            android:hint="Description"
+                            android:hint="@string/description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -100,8 +100,8 @@
                         <TextView android:id="@+id/new_sub_text"
                                   android:layout_width="wrap_content"
                                   android:layout_height="wrap_content"
-                                  android:text="Lessons"
-                                  android:textSize="20dp"
+                                  android:text="@string/lessons"
+                                  android:textSize="@dimen/mainSize"
                                   android:layout_margin="10dp"
                                   android:textStyle="bold"/>
 
@@ -128,7 +128,7 @@
                                     android:id="@+id/begin_lesson"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Begin:"
+                                    android:text="@string/begin"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="3"
@@ -137,7 +137,7 @@
                             <TextView android:layout_width="0dp"
                                       android:layout_height="wrap_content"
                                       android:layout_weight="1"
-                                      android:text=" - "
+                                      android:text="@string/slip"
                                       android:textStyle="bold"
                                       android:layout_marginTop="10dp"
                                       android:textSize="20sp"
@@ -148,7 +148,7 @@
                                     android:id="@+id/end_lesson"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="End:"
+                                    android:text="@string/end"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="3"
@@ -173,7 +173,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="10dp"
                                         android:layout_weight="1"
-                                        android:text="First lesson:"
+                                        android:text="@string/first_lesson"
                                         android:tag="first"/>
 
 
@@ -184,7 +184,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="10dp"
                                         android:layout_weight="1"
-                                        android:text="Last lesson:"/>
+                                        android:text="@string/last_lesson"/>
 
 
                             </LinearLayout>
@@ -209,7 +209,7 @@
                                     <CheckBox android:id="@+id/new_less_monday"
                                               android:layout_width="wrap_content"
                                               android:layout_height="wrap_content"
-                                              android:text="Monday"
+                                              android:text="@string/monday"
                                               android:layout_weight="1"
                                               android:buttonTint="@color/primaryDarkColor"
                                               android:tag="Monday"/>
@@ -217,7 +217,7 @@
                                     <CheckBox android:id="@+id/new_less_tuesday"
                                               android:layout_width="wrap_content"
                                               android:layout_height="wrap_content"
-                                              android:text="Tuesday"
+                                              android:text="@string/tuesday"
                                               android:buttonTint="@color/primaryDarkColor"
                                               android:layout_weight="1"
                                               android:tag="Tuesday"/>
@@ -226,7 +226,7 @@
                                               android:layout_width="wrap_content"
                                               android:layout_height="wrap_content"
                                               android:buttonTint="@color/primaryDarkColor"
-                                              android:text="Wednesday"
+                                              android:text="@string/wednesday"
                                               android:layout_weight="1"
                                               android:tag="Wednesday"/>
 
@@ -234,7 +234,7 @@
                                               android:layout_width="wrap_content"
                                               android:layout_height="wrap_content"
                                               android:buttonTint="@color/primaryDarkColor"
-                                              android:text="Thursday"
+                                              android:text="@string/thursday"
                                               android:layout_weight="1"
                                               android:tag="Thursday"/>
 
@@ -242,7 +242,7 @@
                                               android:layout_width="wrap_content"
                                               android:layout_height="wrap_content"
                                               android:buttonTint="@color/primaryDarkColor"
-                                              android:text="Friday"
+                                              android:text="@string/friday"
                                               android:layout_weight="1"
                                               android:tag="Friday"/>
 
@@ -266,35 +266,35 @@
                                                 android:id="@+id/monday_from"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="from:"
+                                                android:text="@string/from"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/tuesday_from"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="from:"
+                                                android:text="@string/from"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/wednesday_from"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="from:"
+                                                android:text="@string/from"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/thursday_from"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="from:"
+                                                android:text="@string/from"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/friday_from"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="from:"
+                                                android:text="@string/from"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
 
@@ -312,35 +312,35 @@
                                                 android:id="@+id/monday_to"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="to:"
+                                                android:text="@string/to"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/tueday_to"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="to:"
+                                                android:text="@string/to"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/wednesday_to"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="to:"
+                                                android:text="@string/to"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/thursday_to"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="to:"
+                                                android:text="@string/to"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
                                         <TextView
                                                 android:id="@+id/friday_to"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="0dp"
-                                                android:text="to:"
+                                                android:text="@string/to"
                                                 android:visibility="invisible"
                                                 android:layout_weight="1"/>
 
@@ -363,7 +363,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/new_lesson_card"
                             app:layout_constraintTop_toBottomOf="@+id/new_lesson_card"
                             android:backgroundTint="@color/primaryLightColor"
-                            android:text="Save"
+                            android:text="@string/save"
                             android:textColor="@android:color/white"
                     />
 

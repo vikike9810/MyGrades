@@ -45,8 +45,8 @@ class NewTalkingFragment:Fragment(), NewTalkingView, TalkingRecyclerViewAdapter.
         personsRecyclerViewAdapter = TalkingRecyclerViewAdapter()
         personsRecyclerViewAdapter.itemClickListener = this
         personsRecyclerViewAdapter.talkingsClear()
-        personsRecyclerViewAdapter.addPeoples(Diary.teachers as ArrayList<Person>)
-        personsRecyclerViewAdapter.addPeoples(Diary.students as ArrayList<Person>)
+        personsRecyclerViewAdapter.addJustPeoples(Diary.teachers as ArrayList<Person>)
+        personsRecyclerViewAdapter.addJustPeoples(Diary.students as ArrayList<Person>)
         personsRecyclerView.adapter = personsRecyclerViewAdapter
     }
 

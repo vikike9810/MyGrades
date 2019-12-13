@@ -8,6 +8,4 @@ interface NewSubjectView {
 
     fun SubjectAdded()
 
-    fun getMain_Activity(): MainActivity
-
 }

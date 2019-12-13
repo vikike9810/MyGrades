@@ -11,7 +11,7 @@
               android:layout_height="wrap_content"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              android:text="Choose People!"
+              android:text="@string/choose_people"
               android:gravity="center"
               android:layout_margin="10dp"
               android:textSize="20sp"

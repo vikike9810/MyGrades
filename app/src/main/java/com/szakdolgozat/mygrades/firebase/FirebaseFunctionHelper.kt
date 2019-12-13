@@ -17,53 +17,38 @@ object FirebaseFunctionHelper {
 
     fun register(name: String, type: String, userid:String?) : Task<String> {
         val data = hashMapOf(
-            "userid" to userid,
+            "userid" to userid!!,
             "name" to name,
             "type" to type
         )
 
-        return functions.getHttpsCallable("register")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("register", data)
 
-                val result = task.result?.data as String
-                result
-            }
     }
 
     fun saveprofil() : Task<String> {
-        val data = hashMapOf(
+        val data :HashMap<String, String> = hashMapOf(
             "userid" to User.userId,
-            "name" to User.Name,
-            "type" to User.type,
-            "birthday" to User.birthday,
-            "city" to User.address?.city,
-            "zip" to User.address?.zip,
-            "street" to User.address?.street,
-            "number" to User.address?.number
+            "name" to (User.Name?: ""),
+            "type" to (User.type?: ""),
+            "birthday" to (User.birthday?: ""),
+            "city" to (User.address.city?: ""),
+            "zip" to (User.address.zip?: ""),
+            "street" to (User.address.street?: ""),
+            "number" to (User.address.number?: "")
         )
 
-        return functions.getHttpsCallable("saveprofile")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("saveprofile", data)
 
-                val result = task.result?.data as String
-                result
-            }
     }
 
     fun getProfile(userid:String?) : Task<HashMap<String,String>>{
             val data = hashMapOf(
-                "userid" to userid
+                "userid" to userid!!
             )
 
-            return functions.getHttpsCallable("getProfile")
-                .call(data)
-                .continueWith { task ->
+        return  callfunction("getProfile", data)
 
-                    val result = task.result?.data as HashMap<String,String>
-                    result
-                }
     }
 
     fun getPersons(type:String): Task<ArrayList<HashMap<String, String>>>{
@@ -71,49 +56,28 @@ object FirebaseFunctionHelper {
             "type" to type
         )
 
-        return functions.getHttpsCallable("getPersons")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("getPersons", data)
 
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
     }
 
     fun getPersonsSubjects(): Task<ArrayList<HashMap<String, String>>>{
         val data = HashMap<String, String>()
 
-        return functions.getHttpsCallable("getPersonsSubjects")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("getPersonsSubjects", data)
 
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
     }
 
     fun getSubjects() : Task<ArrayList<HashMap<String, String>>> {
         val data = HashMap<String,String>()
 
-        return functions.getHttpsCallable("getSubjects")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("getSubjects", data)
 
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
     }
 
     fun getLesson() : Task<ArrayList<HashMap<String, String>>> {
         val data = HashMap<String,String>()
 
-        return functions.getHttpsCallable("getLesson")
-            .call(data)
-            .continueWith { task ->
-
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
+        return  callfunction("getLesson", data)
 
     }
 
@@ -126,13 +90,8 @@ object FirebaseFunctionHelper {
             "teacherId" to (subject.Teacher.getuserId()?:" ")
         )
 
-        return functions.getHttpsCallable("saveSubject")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("saveSubject", data)
 
-                val result = task.result?.data as String
-                result
-            }
     }
 
     fun saveLesson() : Task<String> {
@@ -152,8 +111,6 @@ object FirebaseFunctionHelper {
             "Lessons" to list
         )
 
-
-
         return functions.getHttpsCallable("saveLesson")
             .call(data)
             .continueWith { task ->
@@ -167,80 +124,52 @@ object FirebaseFunctionHelper {
 
         val data = hashMapOf(
             "subjectId" to subject.subjectId,
-            "userId" to person.getuserId()
+            "userId" to person.getuserId()!!
         )
+        return  callfunction("savePersonSubject", data)
 
-        return functions.getHttpsCallable("savePersonSubject")
-            .call(data)
-            .continueWith { task ->
-
-                val result = task.result?.data as String
-                result
-            }
     }
 
     fun saveGrade(grade: Grade) : Task<String> {
 
-        val data = hashMapOf(
+        val data:HashMap<String, String> = hashMapOf(
             "subjectId" to grade.subject.subjectId,
-            "studentId" to grade.student.getuserId(),
-            "teacherId" to grade.teacher.getuserId(),
-            "grade" to grade.grade,
+            "studentId" to grade.student.getuserId()!!,
+            "teacherId" to grade.teacher.getuserId()!!,
+            "grade" to grade.grade.toString(),
             "comment" to grade.comment,
             "date" to CurrentDate.getStringFromCalendar(grade.date),
-            "gradeId" to grade.Id
+            "gradeId" to grade.Id.toString()
         )
 
-        return functions.getHttpsCallable("saveGrade")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("saveGrade", data)
 
-                val result = task.result?.data as String
-                result
-            }
     }
 
     fun getGrade(): Task<ArrayList<HashMap<String, String>>> {
         val data = HashMap<String, String>()
 
-        return functions.getHttpsCallable("getGrades")
-            .call(data)
-            .continueWith { task ->
-
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
+        return  callfunction("getGrades", data)
 
     }
 
     fun saveTalking(talking: Talking): Task<String> {
 
-        val data = hashMapOf(
-             "userId2" to talking.person2.getuserId(),
-             "userId1" to talking.person1.getuserId(),
-             "Id" to talking.Id,
+        val data: HashMap<String,String> = hashMapOf(
+             "userId2" to talking.person2.getuserId()!!,
+             "userId1" to talking.person1.getuserId()!!,
+             "Id" to talking.Id.toString(),
              "lastMessage" to talking.getLastMessageDate()
         )
 
-        return functions.getHttpsCallable("saveTalking")
-            .call(data)
-            .continueWith { task ->
-
-                val result = task.result?.data as String
-                result
-            }
+        return  callfunction("saveTalking", data)
     }
 
     fun getTalkings() :Task<ArrayList<HashMap<String, String>>> {
         val data = HashMap<String, String>()
 
-        return functions.getHttpsCallable("getTalkings")
-            .call(data)
-            .continueWith { task ->
+        return  callfunction("getTalkings", data)
 
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
 
     }
 
@@ -250,34 +179,25 @@ object FirebaseFunctionHelper {
             target =talking.person2
         }
 
-        val data = hashMapOf(
-            "sender" to message.sender.getuserId(),
-            "talkingId" to talking.Id,
-            "Id" to message.Id,
+        val data: HashMap<String, String> = hashMapOf(
+            "sender" to (message.sender.getuserId()?: ""),
+            "talkingId" to talking.Id.toString(),
+            "Id" to message.Id.toString(),
             "message" to message.message,
-            "targetId" to target.getuserId(),
+            "targetId" to (target.getuserId() ?: ""),
             "date" to message.getMessageTime()
         )
 
-        return functions.getHttpsCallable("saveMessage")
-            .call(data)
-            .continueWith { task ->
+        println(target.getuserId())
 
-                val result = task.result?.data as String
-                result
-            }
+        return  callfunction("saveMessage", data)
+
     }
 
     fun getMessages() :Task<ArrayList<HashMap<String, String>>> {
         val data = HashMap<String, String>()
 
-        return functions.getHttpsCallable("getMessages")
-            .call(data)
-            .continueWith { task ->
-
-                val result = task.result?.data as ArrayList<HashMap<String,String>>
-                result
-            }
+        return  callfunction("getMessages", data)
 
     }
 
@@ -285,22 +205,21 @@ object FirebaseFunctionHelper {
         val data= hashMapOf<String,String>(
             "id" to id
         )
-        return functions.getHttpsCallable("getMessage")
-            .call(data)
-            .continueWith{task ->
-                val result= task.result?.data as HashMap<String, String>
-                result
-            }
+        return  callfunction("getMessage", data)
     }
 
     fun getGrade(id: String):Task<HashMap<String, String>>{
         val data= hashMapOf<String,String>(
             "id" to id
         )
-        return functions.getHttpsCallable("getGrade")
+        return  callfunction("getGrade", data)
+    }
+
+    fun <T> callfunction(name:String, data: HashMap<String,String>): Task<T>{
+        return functions.getHttpsCallable(name)
             .call(data)
             .continueWith{task ->
-                val result= task.result?.data as HashMap<String, String>
+                val result= task.result?.data as T
                 result
             }
     }

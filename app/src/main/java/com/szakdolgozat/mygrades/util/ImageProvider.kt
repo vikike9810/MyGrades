@@ -34,7 +34,7 @@ object ImageProvider{
             bitmap = BitmapTransformations.resizeBitmap(bitmap, newWidth, 100F)
             User.avatar=bitmap
             User.avatarPath=data?.data
-            ImagePickedEvent.event("")
+            ImagePickedEvent.event("OK")
         } catch (e: IOException) {
             e.printStackTrace()
         }

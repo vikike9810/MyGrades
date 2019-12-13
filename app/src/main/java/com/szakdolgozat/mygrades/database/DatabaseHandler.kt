@@ -34,9 +34,10 @@ object DatabaseHandler {
         }
     }
 
-    fun getOfflineDatas(){
-        GlobalScope.launch {
-            getSubjectsFromLocal()
+    suspend fun getOfflineDatas(){
+        coroutineScope {
+            val reader= async { getSubjectsFromLocal()}
+            reader.await()
             DatabaseReadDoneEvent.event("ok")
         }
     }
@@ -371,6 +372,7 @@ fun getSubjectsFromLocal() {
 
     fun saveMessages(talking: Talking, message: Message, succes: (Message) -> Unit, error: (String) -> Unit){
             FirebaseFunctionHelper.saveMessage(talking, message).addOnCompleteListener {
+                //println(it.result)
                 if(it.isSuccessful){
                     succes(message)
                 }

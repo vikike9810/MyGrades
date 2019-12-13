@@ -47,6 +47,10 @@ object User{
         person=null
     }
 
+    fun getSubjects():ArrayList<Subject>{
+        return person!!.Subjects
+    }
+
     fun getSubjectList():ArrayList<String> {
         var subjects = ArrayList<String>()
         subjects.add("")

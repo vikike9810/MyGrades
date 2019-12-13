@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.login.LoginActivity"
-        android:background="@drawable/logbook2">
+        android:background="@drawable/logbook">
 
     <TextView android:id="@+id/TextEmail"
             android:layout_width="wrap_content"
@@ -15,11 +15,11 @@
               app:layout_constraintStart_toStartOf="@id/Login_Email"
               app:layout_constraintBottom_toTopOf="@id/Login_Email"
               android:layout_marginBottom="10dp"
-              android:text="E-mail:"
+              android:text="@string/e_mail"
               android:textColor="@android:color/white"
               android:fontFamily="@font/almendra_display"
               android:textStyle="bold"
-              android:textSize="20dp"/>
+              android:textSize="@dimen/mainSize"/>
 
     <EditText
             android:id="@+id/Login_Email"
@@ -27,7 +27,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="100dp"
-            android:layout_marginStart="30dp"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:padding="5dip"
@@ -41,11 +40,11 @@
               app:layout_constraintStart_toStartOf="@id/Login_Passw"
               app:layout_constraintBottom_toTopOf="@id/Login_Passw"
               android:layout_marginBottom="10dp"
-              android:text="Password:"
+              android:text="@string/password"
               android:textColor="@android:color/white"
               android:fontFamily="@font/almendra_display"
               android:textStyle="bold"
-              android:textSize="20dp"/>
+              android:textSize="@dimen/mainSize"/>
 
     <EditText
             android:id="@+id/Login_Passw"
@@ -53,7 +52,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Login_Email"
             android:layout_marginTop="70dp"
-            android:layout_marginStart="30dp"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:padding="5dip"
@@ -74,8 +72,8 @@
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Create an account"
-              android:layout_marginLeft="15dp"
+              android:text="@string/create_an_account"
+              android:layout_marginStart="15dp"
               app:layout_constraintStart_toStartOf="@id/Login_Passw"
               app:layout_constraintTop_toTopOf="@id/Butt_Login"
               app:layout_constraintBottom_toBottomOf="@id/Butt_Login"
@@ -83,7 +81,7 @@
               android:fontFamily="@font/almendra_display"
               android:textStyle="bold"
               android:onClick="onClickSignUp"
-              android:textSize="15dp"/>
+              android:textSize="@dimen/mediumSize"/>
 
     <ProgressBar
             android:id="@+id/Login_progress"

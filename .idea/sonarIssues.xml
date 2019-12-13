@@ -38,6 +38,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/A_Register_Login_Add_Take_Subject_Test.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/androidTest/java/com/szakdolgozat/mygrades/ui/splash/AddGradeTest.kt">
           <value>
             <set />
@@ -283,6 +288,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/MyClass.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Person.kt">
           <value>
             <set />
@@ -309,6 +319,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/User.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/test.java">
           <value>
             <set />
           </value>
@@ -563,7 +578,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/subjectdetails/SubjectDetailsFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/subjects/SubjectsFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/subjects/SubjectsPresenter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/subjects/SubjectsView.kt">
           <value>
             <set />
           </value>
@@ -609,6 +639,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/green_progressbar.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/loginbg.xml">
           <value>
             <set />
           </value>
@@ -708,6 +743,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_subject_details.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_subjects.xml">
           <value>
             <set />
@@ -768,6 +808,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/values/splash_background.xml.xml">
           <value>
             <set />
@@ -779,6 +824,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/test/java/com/szakdolgozat/mygrades/ExampleUnitTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/test/java/com/szakdolgozat/mygrades/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/test/java/com/szakdolgozat/mygrades/TestClass.java">
           <value>
             <set />
           </value>

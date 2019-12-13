@@ -95,4 +95,11 @@ object CurrentDate {
     fun getMinfromString(time: String):Int{
         return Integer.parseInt(time.split(":")[1])
     }
+
+    fun getEventDateString(event:WeekViewEvent):String{
+        return formatTime(event.startTime[Calendar.HOUR_OF_DAY])+":"+
+                formatTime(event.startTime[Calendar.MINUTE])+ "-" +
+                formatTime(event.endTime[Calendar.HOUR_OF_DAY])+":"+
+                formatTime(event.endTime[Calendar.MINUTE])
+    }
 }

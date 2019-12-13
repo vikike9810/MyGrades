@@ -4,40 +4,41 @@ import com.szakdolgozat.mygrades.model.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
+import org.mockito.Mockito.`when`
+import org.mockito.junit.MockitoJUnitRunner
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+@RunWith(MockitoJUnitRunner::class)
 class SortingTests {
 
     @Mock
     lateinit var testPerson: Person
 
+    @Mock
+    lateinit var talking: Talking
 
-    @get:Rule
-    public var mocitoRule :MockitoRule =MockitoJUnit.rule()
 
     var listOfMessages=ArrayList<Message>()
 
     @Before
     fun setUp(){
+
         for(i : Int in 1..10){
             var date=Calendar.getInstance()
             date.set(2019,1,1, 10, i)
             listOfMessages.add(Message(i,"",testPerson, date.clone() as Calendar))
         }
+
+        `when`(talking.getTalkingMessages()).thenReturn(listOfMessages)
     }
 
     @Test
     fun messagesSortedInCorrectOrder(){
-
-        listOfMessages.sortWith(Message.MessageComparator)
-
+        talking.getTalkingMessages().sortWith(Message.MessageComparator)
         assert(checkMessagesOrder(listOfMessages))
-
     }
 
     fun checkMessagesOrder(list: ArrayList<Message>): Boolean {
@@ -52,11 +53,11 @@ class SortingTests {
 
 
     @Test
-    fun talkingsSortedInCorrectOrder(){
+    fun talkingsSortedInCorrectOrdertalkingsSortedInCorrectOrder(){
 
         var list=ArrayList<Talking>()
         for(i : Int in 1..10){
-            list.add(Talking(testPerson, testPerson,listOfMessages))
+            list.add(Talking(testPerson, testPerson,talking.getTalkingMessages()))
         }
         list.sortWith(Talking.TalkingComparator)
 
@@ -66,8 +67,8 @@ class SortingTests {
 
     fun checkTalkingsOrder(list: ArrayList<Talking>): Boolean {
         for (index: Int in 1 until list.size) {
-            if (list[index - 1].getLastMessage().sendDate
-                    .compareTo(list[index].getLastMessage().sendDate)
+            if (list[index - 1].getLastMessage()!!.sendDate
+                    .compareTo(list[index].getLastMessage()!!.sendDate)
                 <0) {
                 return false
             }

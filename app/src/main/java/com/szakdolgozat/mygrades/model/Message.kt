@@ -44,11 +44,12 @@ class Message {
 
 
   object MessageComparator: Comparator<Message>{
-
       override fun compare(o1: Message, o2: Message): Int {
-          return (o1.sendDate.compareTo(o2.sendDate))
+          if(o1.sendDate.timeInMillis>o2.sendDate.timeInMillis)
+            return 1
+          if(o1.sendDate.timeInMillis<o2.sendDate.timeInMillis)
+              return -1
+          return 0
       }
-
-
   }
 }

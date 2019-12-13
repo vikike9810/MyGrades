@@ -43,7 +43,6 @@
         <TextView android:id="@+id/talking_name"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Kiss pista"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toTopOf="@+id/talking_avatar_card"
                   android:layout_margin="10dp"
@@ -55,8 +54,7 @@
                   android:layout_height="wrap_content"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toBottomOf="@+id/talking_name"
-                  android:layout_margin="10dp"
-                  android:text="Last message date:"/>
+                  android:layout_margin="10dp"/>
 
         <TextView
                 android:id="@+id/talking_last_date"
@@ -64,7 +62,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/talking_last_date_label"
                 android:layout_margin="10dp"
-                android:text="2010.10.10"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

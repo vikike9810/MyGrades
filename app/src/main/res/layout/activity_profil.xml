@@ -31,7 +31,7 @@
                       android:layout_marginEnd="30dp"
                       android:layout_marginTop="10dp"
                       android:text="@string/name"
-                      android:textSize="20dp"
+                      android:textSize="@dimen/mainSize"
                       android:textStyle="bold"/>
 
             <EditText android:id="@+id/Profil_EditName"
@@ -42,7 +42,7 @@
                       app:layout_constraintBottom_toBottomOf="@id/Profil_Name"
                       app:layout_constraintStart_toStartOf="@id/Profil_Name"
                       android:text="@string/name"
-                      android:textSize="20dp"
+                      android:textSize="@dimen/mainSize"
                       android:textStyle="bold"
                       android:visibility="invisible"/>
 
@@ -54,7 +54,7 @@
                       android:layout_marginEnd="30dp"
                       android:layout_marginTop="10dp"
                       android:text="@string/birthday"
-                      android:textSize="15dp"
+                      android:textSize="@dimen/mediumSize"
             />
 
             <TextView android:id="@+id/Profil_Email"
@@ -64,7 +64,7 @@
                       app:layout_constraintEnd_toEndOf="parent"
                       android:layout_marginEnd="30dp"
                       android:layout_marginTop="10dp"
-                      android:textSize="15dp"/>
+                      android:textSize="@dimen/mediumSize"/>
 
             <EditText android:id="@+id/Profil_EditEmail"
                       android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                       app:layout_constraintEnd_toEndOf="@id/Profil_Email"
                       app:layout_constraintBottom_toBottomOf="@id/Profil_Email"
                       app:layout_constraintStart_toStartOf="@id/Profil_Email"
-                      android:textSize="15dp"
+                      android:textSize="@dimen/mediumSize"
                       android:visibility="invisible"
                       android:inputType="textEmailAddress"/>
 
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/city"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:layout_marginTop="10dp"/>
 
             <EditText
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/city"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:visibility="invisible"/>
 
             <TextView
@@ -162,7 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/zip"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:layout_marginTop="10dp"/>
 
             <EditText
@@ -174,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/zip"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:visibility="invisible"/>
 
             <TextView
@@ -184,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/street"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:layout_marginTop="10dp"/>
 
             <EditText
@@ -196,7 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/street"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:visibility="invisible"/>
 
 
@@ -207,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/number"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:layout_marginTop="10dp"/>
 
             <EditText
@@ -219,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/number"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/mediumSize"
                     android:visibility="invisible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

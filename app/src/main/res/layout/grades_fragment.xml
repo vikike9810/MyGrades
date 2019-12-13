@@ -36,7 +36,7 @@
             <TextView android:id="@+id/Filter_text"
                       android:layout_width="0dp"
                       android:layout_height="wrap_content"
-                      android:text="Filters"
+                      android:text="@string/filters"
                       android:textSize="20sp"
                       android:textStyle="bold"
                       android:textColor="@android:color/white"
@@ -59,7 +59,7 @@
 
                 <TextView android:layout_width="0dp"
                           android:layout_height="wrap_content"
-                          android:text="Subject"
+                          android:text="@string/subject"
                           android:textColor="@android:color/white"
                           android:layout_margin="10dp"
                           android:layout_weight="2"/>
@@ -99,7 +99,7 @@
                 <TextView android:id="@+id/grade_person_text"
                         android:layout_width="0dp"
                           android:layout_height="wrap_content"
-                          android:text="Teacher"
+                          android:text="@string/teacher"
                           android:textColor="@android:color/white"
                           android:layout_margin="10dp"
                           android:layout_weight="2"/>
@@ -140,7 +140,7 @@
 
                 <TextView android:layout_width="0dp"
                           android:layout_height="wrap_content"
-                          android:text="Grade"
+                          android:text="@string/grade"
                           android:textColor="@android:color/white"
                           android:layout_margin="10dp"
                           android:layout_weight="2"/>
@@ -177,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edittext"
-                    android:text="Go"
+                    android:text="@string/go"
                     android:textStyle="bold"
                     android:textColor="@color/primaryDarkColor"
                     android:layout_marginEnd="10dp"

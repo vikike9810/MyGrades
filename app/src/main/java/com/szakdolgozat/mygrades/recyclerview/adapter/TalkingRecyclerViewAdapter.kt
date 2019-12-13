@@ -90,6 +90,15 @@ class TalkingRecyclerViewAdapter: RecyclerView.Adapter<TalkingRecyclerViewAdapte
             notifyDataSetChanged()
         }
 
+    fun addJustPeoples(newTalkings: ArrayList<Person>){
+        newTalkings.forEach {
+            if(!(it.equals(User.person))) {
+                talkings.add(Talking(it))
+            }
+        }
+        notifyDataSetChanged()
+    }
+
         fun talkingsClear(){
             talkings.clear()
             notifyDataSetChanged()

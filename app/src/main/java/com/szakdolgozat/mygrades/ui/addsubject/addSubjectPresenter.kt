@@ -12,13 +12,16 @@ class addSubjectPresenter(var view: addSubjectView) {
     fun takeSubject(subject: Subject){
         User.person?.Subjects?.add(subject)
         removeSubject(subject)
-        saveTakesSubject(subject)
+        saveTakenSubject(subject)
     }
 
-    fun saveTakesSubject(subject:Subject){
+    fun saveTakenSubject(subject:Subject){
         if(User.person!=null) {
-            DatabaseHandler.savePersonsSubjects(User.person!!, subject, {subject -> view.subjectAdded(subject)},{message -> view.subjectAddedError(message )})
+            DatabaseHandler.savePersonsSubjects(User.person!!, subject, {subject -> subjectAdded(subject)},{message -> view.subjectAddedError(message )})
         }
+    }
+    fun subjectAdded(subject: Subject){
+        view.subjectAdded(subject)
     }
 
     fun getSubjects() :ArrayList<Subject> {

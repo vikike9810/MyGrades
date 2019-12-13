@@ -15,6 +15,8 @@ import com.szakdolgozat.mygrades.model.Student
 import com.szakdolgozat.mygrades.model.Teacher
 import com.szakdolgozat.mygrades.util.BitmapTransformations
 import com.szakdolgozat.mygrades.util.ImageProvider
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class SplashPresenter(var view: SplashView) {
@@ -80,10 +82,11 @@ class SplashPresenter(var view: SplashView) {
         DatabaseHandler.getDatas()
     }
 
-    fun getOfflineDatas(){
+      fun  getOfflineDatas(){
         User.type="Student"
         User.person=Student("Offline User", "offline")
-        DatabaseHandler.getOfflineDatas()
+        GlobalScope.launch {
+        DatabaseHandler.getOfflineDatas()}
     }
 
 

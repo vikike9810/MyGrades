@@ -61,10 +61,13 @@ class SubjectsFragment: Fragment(), SubjectsView, SubjectsRecyclerViewAdapter.Su
         subjectsRecyclerView.layoutManager= LinearLayoutManager(this.mainActivity)
         subjectRecyclerViewAdapter = SubjectsRecyclerViewAdapter()
         subjectRecyclerViewAdapter.itemClickListener = this
-        User.person?.Subjects?.let { subjectRecyclerViewAdapter.addAll(it) }
         subjectsRecyclerView.adapter = subjectRecyclerViewAdapter
+        subjectsPresenter.getUserSubject()
     }
 
+    override fun showSubject(subjects: ArrayList<Subject>) {
+        (subjectsRecyclerView.adapter as SubjectsRecyclerViewAdapter).addAll(subjects)
+    }
 
 
     override fun onItemClick(subject: com.szakdolgozat.mygrades.model.Subject) {

@@ -257,7 +257,7 @@ try{
             gradeId : gradeId,
             type: "Grade" 
         },
-        topic: studentId
+        topic: studentId.toString()
     };
     admin.messaging().send(message)
 
@@ -366,6 +366,7 @@ try{
     var ref = db.ref("Messages").child(Id).child("message").set(message);
     var ref = db.ref("Messages").child(Id).child("date").set(date);
     var ref = db.ref("Messages").child(Id).child("talkingId").set(talkingId);
+    var ref = db.ref("Messages").child(Id).child("targetId").set(targetId);
 
     var message= {
         data:{
@@ -375,7 +376,7 @@ try{
             talkingId: talkingId, 
             type: "Message" 
         },
-        topic: targetId
+        topic: targetId.toString()
     };
     admin.messaging().send(message)
     return 'OK';

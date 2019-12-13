@@ -13,7 +13,6 @@
         <TextView android:id="@+id/talking_name_label"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:textColor="@android:color/white"
-                  android:text="Kiss Pista"
                   android:textSize="20sp"
                   android:gravity="center"/>
 

@@ -279,6 +279,7 @@ class A_Register_Login_Add_Take_Subject_Test {
         )
         textInputEditText.perform(replaceText("new"), closeSoftKeyboard())
 
+
         TestHelper.waitForUI(1)
 
         val textInputEditText2 = onView(
