@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.signup.SignUpFragment"
+        android:background="@drawable/logbook2">
+
+    <View
+            android:id="@+id/Line1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+
+    <View
+            android:id="@+id/Line2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="100dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line3"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="140dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+
+    <View
+            android:id="@+id/Line4"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="180dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="220dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line6"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="260dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line7"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="300dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line8"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="340dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line9"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="380dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line10"
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/line_dist"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line11"
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="80dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+
+    <View
+            android:id="@+id/Line12"
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="120dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            android:id="@+id/Line13"
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="160dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View android:id="@+id/Line14"
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="200dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="240dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+    <View
+            app:layout_constraintTop_toBottomOf="@id/Line9"
+            android:layout_width="match_parent"
+            android:layout_marginTop="280dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:background="@color/primaryColor"/>
+
+
+    <TextView
+            android:id="@+id/SignUp_reg"
+            app:layout_constraintBottom_toTopOf="@id/Line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration"
+            android:fontFamily="@font/almendra_display"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primaryDarkColor"/>
+
+    <TextView
+            android:id="@+id/SignUp_Name"
+            app:layout_constraintBottom_toTopOf="@id/Line2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_"
+            android:fontFamily="@font/almendra_display"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primaryDarkColor"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/SignUp_EditName"
+            app:layout_constraintBottom_toTopOf="@id/Line3"
+            app:layout_constraintStart_toStartOf="@id/SignUp_Name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@null"
+            android:textColor="@color/primaryDarkColor"
+    />
+
+    <TextView
+            android:id="@+id/SignUp_Email"
+            app:layout_constraintBottom_toTopOf="@id/Line4"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_address"
+            android:fontFamily="@font/almendra_display"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primaryDarkColor"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/SignUp_EditEmail"
+            app:layout_constraintBottom_toTopOf="@id/Line5"
+            app:layout_constraintStart_toStartOf="@id/SignUp_Email"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@null"
+            android:textColor="@color/primaryDarkColor"
+    />
+
+
+    <TextView
+            android:id="@+id/SignUp_Passw"
+            app:layout_constraintBottom_toTopOf="@id/Line6"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_"
+            android:fontFamily="@font/almendra_display"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primaryDarkColor"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/SignUp_EditPassw"
+            app:layout_constraintBottom_toTopOf="@id/Line7"
+            app:layout_constraintStart_toStartOf="@id/SignUp_Name"
+            android:textSize="20sp"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:tag="passw"
+            android:textColor="@color/primaryDarkColor"
+    />
+
+
+    <RadioGroup
+            android:id="@+id/SignUp_Group"
+            app:layout_constraintTop_toBottomOf="@id/Line7"
+            app:layout_constraintStart_toStartOf="@id/Line7"
+            app:layout_constraintBottom_toTopOf="@id/Line9"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+        <RadioButton android:id="@+id/SignUp_Teach"
+                android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/teacher"
+                     android:fontFamily="@font/almendra_display"
+                     android:textStyle="bold"
+                     android:textSize="20sp"
+                     android:textColor="@color/primaryDarkColor"
+                     android:buttonTint="@color/primaryDarkColor"/>
+
+        <RadioButton android:id="@+id/SignUp_Stud"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/student"
+                     android:layout_marginTop="10dp"
+                     android:layout_gravity="bottom"
+                     android:fontFamily="@font/almendra_display"
+                     android:textStyle="bold"
+                     android:checked="true"
+                     android:textSize="20sp"
+                     android:textColor="@color/primaryDarkColor"
+                     android:buttonTint="@color/primaryDarkColor"/>
+
+    </RadioGroup>
+
+    <TextView android:id="@+id/SignUp_OK"
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintBottom_toTopOf="@id/Line11"
+              app:layout_constraintEnd_toEndOf="@id/Line10"
+              android:text="@string/ok"
+              android:layout_marginTop="15dp"
+              android:fontFamily="@font/almendra_display"
+              android:textStyle="bold"
+              android:layout_marginEnd="3dp"
+              android:textSize="20sp"
+              android:textColor="@color/primaryDarkColor"/>
+
+    <TextView android:id="@+id/SignUp_Cancel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintBottom_toTopOf="@id/Line12"
+              app:layout_constraintEnd_toEndOf="@id/Line10"
+              android:text="@string/cancel"
+              android:layout_marginTop="15dp"
+              android:fontFamily="@font/almendra_display"
+              android:layout_marginStart="3dp"
+              android:textStyle="bold"
+              android:textSize="20sp"
+              android:textColor="@color/primaryDarkColor"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,25 +1,42 @@
 package com.szakdolgozat.mygrades.ui.main
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.RectF
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
-import android.support.v4.widget.DrawerLayout
-import android.support.design.widget.NavigationView
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.alamkanak.weekview.WeekView
 import com.szakdolgozat.mygrades.model.User
 import com.alamkanak.weekview.WeekViewEvent
 import com.alamkanak.weekview.MonthLoader
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.model.Talking
+import com.szakdolgozat.mygrades.ui.addgrade.AddGradeFragment
+import com.szakdolgozat.mygrades.ui.addsubject.addSubjectFragment
+import com.szakdolgozat.mygrades.ui.chat.ChatFragment
+import com.szakdolgozat.mygrades.ui.grades.GradesFragment
+import com.szakdolgozat.mygrades.ui.subjects.SubjectsFragment
+import com.szakdolgozat.mygrades.ui.login.LoginActivity
+import com.szakdolgozat.mygrades.ui.newsubject.NewSubjectFragment
+import com.szakdolgozat.mygrades.ui.newtalking.NewTalkingFragment
+import com.szakdolgozat.mygrades.ui.profil.ProfileFragment
+import com.szakdolgozat.mygrades.ui.subjectdetails.SubjectDetailsFragment
+import com.szakdolgozat.mygrades.ui.talking.TalkingFragment
+import com.szakdolgozat.mygrades.util.ImageProvider
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView, MonthLoader.MonthChangeListener, WeekView.EventClickListener, WeekView.EventLongPressListener {
@@ -29,20 +46,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
     lateinit var navName: TextView
+    lateinit var navAvatar: ImageView
     lateinit var navEmail: TextView
     lateinit var navHeader: View
     lateinit var  mWeekView: WeekView
+    var subjectsFragment: SubjectsFragment?=null
+    var actualFragment: Fragment?=null
+    var selectedmenuItem: Int=R.id.nav_Timetable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_NoActionBar)
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
+        drawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
+        navView = findViewById(R.id.nav_view) as NavigationView
         navHeader= navView.getHeaderView(0)
+        navAvatar=navHeader.findViewById(R.id.imageView)
         navName=navHeader.findViewById(R.id.nav_Name)
         navEmail=navHeader.findViewById(R.id.nav_Email)
         initCalender()
@@ -55,16 +77,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        navView.getMenu().getItem(1).isChecked = true;
+        navView.getMenu().getItem(1).isChecked = true
 
         navView.setNavigationItemSelectedListener(this)
         presenter = MainPresenter(this)
         presenter?.getUser()
-        presenter?.newEvent(2019,9)
+        presenter?.newEvent()
     }
 
     fun initCalender(){
-        mWeekView= findViewById(R.id.weekView)
+        mWeekView= findViewById(R.id.weekView) as WeekView
         mWeekView.setOnEventClickListener(this);
         mWeekView.setMonthChangeListener(this);
         mWeekView.setEventLongPressListener(this);
@@ -73,7 +95,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
+        }
+        else if(actualFragment!=null){
+            navView.getMenu().getItem(1).isChecked = true
+            actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+            actualFragment = null
+            selectedmenuItem=R.id.nav_Timetable
+        }
+
+        else {
             super.onBackPressed()
         }
     }
@@ -85,40 +115,79 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
+         when (item.itemId) {
+                 R.id.action_logout -> {
+                     if(!(User.person?.getuserId().equals("offline"))){
+                        presenter?.UserLogOut()
+                             return true
+                     }
+                     else
+                             return  false
+                 }
             else -> super.onOptionsItemSelected(item)
         }
+        return false
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.nav_Profile -> {
 
-            }
-            R.id.nav_Timetable -> {
+            when (item.itemId) {
+                R.id.nav_Profile -> {
+                    navView.getMenu().getItem(0).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    val profileFragment = ProfileFragment()
+                    actualFragment = profileFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, profileFragment)
+                        .addToBackStack("Profile").commit()
+                    selectedmenuItem=R.id.nav_Profile
+                }
+                R.id.nav_Timetable -> {
+                    navView.getMenu().getItem(1).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    actualFragment = null
+                    selectedmenuItem=R.id.nav_Timetable
+                }
+                R.id.nav_Subjects -> {
+                    navView.getMenu().getItem(2).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    subjectsFragment = SubjectsFragment()
+                    actualFragment = subjectsFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, subjectsFragment!!)
+                        .addToBackStack("Subjects").commit()
+                    selectedmenuItem=R.id.nav_Subjects
+                }
+                R.id.nav_Grades -> {
+                    navView.getMenu().getItem(3).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    val gradeFragment = GradesFragment()
+                    actualFragment = gradeFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment, gradeFragment)
+                        .addToBackStack("Grades").commit()
+                    selectedmenuItem=R.id.nav_Grades
 
-            }
-            R.id.nav_Subjects -> {
+                }
+                R.id.nav_Settings -> {
+                    selectedmenuItem=R.id.nav_Settings
+                }
 
+                R.id.nav_Messages -> {
+                    navView.getMenu().getItem(4).isChecked = true
+                    actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+                    var chatFragment = ChatFragment()
+                    actualFragment =chatFragment
+                    supportFragmentManager.beginTransaction().add(R.id.main_fragment,chatFragment!!)
+                        .addToBackStack("Chat").commit()
+                    selectedmenuItem=R.id.nav_Messages
+                }
             }
-            R.id.nav_Grades -> {
 
-            }
-            R.id.nav_Settings -> {
-
-            }
-        }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
     override fun onEventClick(event: WeekViewEvent?, eventRect: RectF?) {
-        Toast.makeText(this,"Esemeny",Toast.LENGTH_SHORT).show()
+       val eventFragment=SubjectDetailsFragment(event?.name ?: "")
+        eventFragment.show(supportFragmentManager, "Details")
     }
 
     override fun onEventLongPress(event: WeekViewEvent?, eventRect: RectF?) {
@@ -126,12 +195,103 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onMonthChange(newYear: Int, newMonth: Int): List<WeekViewEvent> {
-        mWeekView.goToHour(7.0)
+        mWeekView.goToHour( Calendar.getInstance()[Calendar.HOUR].toDouble() )
         return presenter!!.getEvents(newYear, newMonth)
     }
 
-    override fun setUserOnDrawer(user: User) {
-        navName.text = user.Name
-        navEmail.text = user.email
+
+
+    override fun userLoggedOut() {
+       startActivity(Intent(this,LoginActivity::class.java))
     }
+
+    override fun setUserOnDrawer() {
+        if(User.loggedIn) {
+            navAvatar.setImageBitmap(User.avatar?: (BitmapFactory.decodeResource(resources, R.drawable.profil)))
+            navName.text = User.Name
+            navEmail.text = User.email
+        }
+    }
+
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+         if (resultCode == Activity.RESULT_OK && requestCode == ImageProvider.PICK_IMAGE) {
+             ImageProvider.imageSelected(data, this)
+         }
+     }
+
+    override fun showAddNewSubjectFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val addSubjectsFragment= addSubjectFragment()
+        actualFragment=addSubjectsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,addSubjectsFragment).addToBackStack("Add subject").commit()
+    }
+
+    override fun showCreateNewSubjectFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val newSubjectsFragment= NewSubjectFragment()
+        actualFragment=newSubjectsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,newSubjectsFragment).addToBackStack("create subject").commit()
+    }
+
+    fun showNewSubjectFragment(){
+        presenter?.addSubjectbyUserType()
+    }
+
+  fun showAddGradeFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val addGradeFragment= AddGradeFragment()
+        actualFragment=addGradeFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,addGradeFragment).addToBackStack("add grade").commit()
+    }
+
+    fun returnFromAddGradeFragment(){
+        navView.getMenu().getItem(3).isChecked = true
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        var gradeFragment=GradesFragment()
+        actualFragment=gradeFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, gradeFragment).addToBackStack("Grades").commit()
+    }
+
+    fun returnFromNewSubjectFragment(){
+        navView.getMenu().getItem(2).isChecked = true
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        subjectsFragment=SubjectsFragment()
+        actualFragment=subjectsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, subjectsFragment!!).addToBackStack("Subjects").commit()
+    }
+
+    fun showTalkingFragment(talking: Talking){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val talkingFragment= TalkingFragment(talking)
+        actualFragment=talkingFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,talkingFragment).addToBackStack("Talking").commit()
+    }
+
+    fun ShowNewTalkingFragment(){
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        var talkingsFragment=NewTalkingFragment()
+        actualFragment=talkingsFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment, talkingsFragment!!).addToBackStack("NewTalking").commit()
+    }
+
+    fun returnFromNewTalkingFragment(){
+        navView.getMenu().getItem(4).isChecked = true
+        actualFragment?.let { supportFragmentManager.beginTransaction().remove(it).commit() }
+        val chatFragment = ChatFragment()
+        actualFragment =chatFragment
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment,chatFragment!!)
+            .addToBackStack("Chat").commit()
+        selectedmenuItem=R.id.nav_Messages
+    }
+
+
+    fun refreshCalendar(){
+        presenter?.refreshEvent()
+        onMonthChange(2019,10)
+        mWeekView.notifyDatasetChanged()
+    }
+
+
+
 }

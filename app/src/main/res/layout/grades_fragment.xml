@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBackgroundYellow">
+
+<LinearLayout
+        android:id="@+id/grade_main_linlayout"
+        android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              android:layout_marginBottom="50dp">
+
+    <LinearLayout android:id="@+id/Filter_layout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@color/primaryDarkColor"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:weightSum="6">
+
+            <ImageView android:id="@+id/Filter_arrow"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="3"
+                       app:srcCompat="@drawable/down_white"/>
+
+
+            <TextView android:id="@+id/Filter_text"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:text="@string/filters"
+                      android:textSize="20sp"
+                      android:textStyle="bold"
+                      android:textColor="@android:color/white"
+                      android:layout_weight="3"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/Filters"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_margin="10dp"
+                      android:visibility="gone">
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:weightSum="5">
+
+                <TextView android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:text="@string/subject"
+                          android:textColor="@android:color/white"
+                          android:layout_margin="10dp"
+                          android:layout_weight="2"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="3">
+
+                    <Spinner android:id="@+id/Subject_spinner"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"
+                             app:layout_constraintStart_toStartOf="parent"
+                             app:layout_constraintEnd_toEndOf="parent"
+                             app:layout_constraintTop_toTopOf="parent"
+                             android:background="@drawable/rounded_edittext"/>
+
+                    <ImageView android:layout_width="20dp"
+                               android:layout_height="20dp"
+                               app:layout_constraintEnd_toEndOf="@+id/Subject_spinner"
+                               app:layout_constraintTop_toTopOf="parent"
+                               app:srcCompat="@drawable/down"
+                               android:layout_marginEnd="5dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:weightSum="5">
+
+                <TextView android:id="@+id/grade_person_text"
+                        android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:text="@string/teacher"
+                          android:textColor="@android:color/white"
+                          android:layout_margin="10dp"
+                          android:layout_weight="2"/>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="3">
+
+                    <Spinner android:id="@+id/Teacher_spinner"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"
+                             app:layout_constraintStart_toStartOf="parent"
+                             app:layout_constraintEnd_toEndOf="parent"
+                             app:layout_constraintTop_toTopOf="parent"
+                             android:background="@drawable/rounded_edittext"/>
+
+                    <ImageView android:layout_width="20dp"
+                               android:layout_height="20dp"
+                               app:layout_constraintEnd_toEndOf="@+id/Teacher_spinner"
+                               app:layout_constraintTop_toTopOf="parent"
+                               app:srcCompat="@drawable/down"
+                               android:layout_marginEnd="5dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:weightSum="5">
+
+                <TextView android:layout_width="0dp"
+                          android:layout_height="wrap_content"
+                          android:text="@string/grade"
+                          android:textColor="@android:color/white"
+                          android:layout_margin="10dp"
+                          android:layout_weight="2"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="3">
+
+                    <Spinner android:id="@+id/Grade_spinner"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             app:layout_constraintStart_toStartOf="parent"
+                             app:layout_constraintEnd_toEndOf="parent"
+                             app:layout_constraintTop_toTopOf="parent"
+                             android:entries="@array/array_grades"
+                             android:background="@drawable/rounded_edittext"/>
+
+                    <ImageView android:layout_width="20dp"
+                               android:layout_height="20dp"
+                               app:layout_constraintEnd_toEndOf="@+id/Grade_spinner"
+                               app:layout_constraintTop_toTopOf="parent"
+                               app:srcCompat="@drawable/down"
+                               android:layout_marginEnd="5dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <Button android:id="@+id/grade_go_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_edittext"
+                    android:text="@string/go"
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryDarkColor"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="end"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/grade_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </ScrollView>
+</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/grade_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="@color/primaryDarkColor"
+            android:src="@android:drawable/ic_input_add"
+            android:visibility="gone"
+            android:layout_margin="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
