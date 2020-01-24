@@ -6,30 +6,6 @@ object Diary {
     var students: ArrayList<Student> =ArrayList<Student>()
     var grades: ArrayList<Grade> =ArrayList<Grade>()
 
-    fun findTeacherbyPerson(person:Person?):Teacher?{
-        for(teacher: Teacher in teachers){
-            if(teacher.getuserId().equals(person?.getuserId())){
-                return teacher
-            }
-        }
-        return null
-    }
-
-    fun findStudentbyPerson(person:Person?):Student?{
-        for(student: Student in students){
-            if(student.getuserId().equals(person?.getuserId())){
-                return student
-            }
-        }
-        return null
-    }
-    fun getPersonList():ArrayList<String> {
-        var newperson = ArrayList<String>()
-        newperson.addAll(getTeacherList())
-        newperson.addAll(getStudentList())
-        return newperson
-    }
-
 
     fun getTeacherList():ArrayList<String> {
         var newteachers = ArrayList<String>()
@@ -49,14 +25,6 @@ object Diary {
         return newstudents
     }
 
-    fun getSubjectList():ArrayList<String> {
-        var newsubjects = ArrayList<String>()
-        newsubjects.add("")
-        for (subjects: Subject in subjects) {
-            newsubjects.add(subjects.Name)
-        }
-        return newsubjects
-    }
 
     fun getStudentListBySubjectName(name: String): ArrayList<String>{
         var newstudents = ArrayList<String>()
@@ -114,14 +82,6 @@ object Diary {
             }
         }
         return null
-    }
-
-    fun countLessons():Int{
-        var count=0
-        subjects.forEach {
-            count+=it.Lessons.size
-        }
-        return count
     }
 
 }

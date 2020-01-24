@@ -14,9 +14,8 @@ object InternetConnectionChecker {
         val conManager: ConnectivityManager= activity
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        val connection= (conManager.activeNetworkInfo!=null && conManager.activeNetworkInfo.isConnected)
-        println(connection.toString())
-        return connection
+        val hasConnection= (conManager.activeNetworkInfo!=null && conManager.activeNetworkInfo.isConnected)
+        return hasConnection
     }
 
     fun internetIsAvailable(activity: Activity): Boolean{

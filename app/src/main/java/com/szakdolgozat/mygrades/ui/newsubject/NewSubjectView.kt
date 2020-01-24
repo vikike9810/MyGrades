@@ -1,10 +1,8 @@
 package com.szakdolgozat.mygrades.ui.newsubject
 
-import com.szakdolgozat.mygrades.ui.main.MainActivity
+import com.szakdolgozat.mygrades.base.BaseView
 
-interface NewSubjectView {
-
-    fun makeToast(message: String)
+interface NewSubjectView: BaseView {
 
     fun SubjectAdded()
 

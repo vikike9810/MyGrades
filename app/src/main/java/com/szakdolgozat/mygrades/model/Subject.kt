@@ -64,7 +64,7 @@ class Subject {
         Teacher=teacher
         TeacherName=teacher.getName()
         Lessons=ArrayList<WeekViewEvent>()
-        Lessons?.addAll(lessons)
+        Lessons.addAll(lessons)
         Diary.subjects.add(this)
     }
 

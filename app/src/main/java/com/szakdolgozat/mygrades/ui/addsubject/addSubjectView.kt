@@ -1,10 +1,11 @@
 package com.szakdolgozat.mygrades.ui.addsubject
 
+import com.szakdolgozat.mygrades.base.BaseView
 import com.szakdolgozat.mygrades.model.Message
 import com.szakdolgozat.mygrades.model.Subject
 
 
-interface addSubjectView {
+interface addSubjectView: BaseView {
 
     fun subjectAdded(subject: Subject)
 

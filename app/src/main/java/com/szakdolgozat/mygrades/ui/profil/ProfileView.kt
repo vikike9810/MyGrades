@@ -1,11 +1,11 @@
 package com.szakdolgozat.mygrades.ui.profil
 
 import android.app.Activity
+import com.szakdolgozat.mygrades.base.BaseView
 
-interface ProfileView {
+interface ProfileView: BaseView {
 
     fun dataSaveOK()
-    fun dataSaveError(message : String)
     fun getFragmentActivity():Activity
     fun refreshAvatar()
 }

@@ -1,13 +1,13 @@
 package com.szakdolgozat.mygrades.ui.subjects
 
-import com.szakdolgozat.mygrades.model.Subject
+import com.szakdolgozat.mygrades.base.BasePresenter
 import com.szakdolgozat.mygrades.model.User
 
 
-class SubjectsPresenter(var view: SubjectsView) {
+class SubjectsPresenter(view: SubjectsView):BasePresenter<SubjectsView>(view) {
 
     fun getUserSubject(){
-        view.showSubject(User.getSubjects())
+        view?.showSubject(User.getSubjects())
     }
 
 

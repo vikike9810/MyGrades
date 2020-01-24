@@ -7,24 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.fragment.app.Fragment
-import com.google.android.material.textfield.TextInputEditText
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.base.BaseFragment
 import com.szakdolgozat.mygrades.model.LessonDate
 import com.szakdolgozat.mygrades.model.OnceLesson
 import com.szakdolgozat.mygrades.ui.main.MainActivity
-import com.szakdolgozat.mygrades.util.CurrentDate
+import com.szakdolgozat.mygrades.util.FormatDate
 import kotlinx.android.synthetic.main.create_new_subject_fragment.*
 
 
-class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelectedListener {
-    lateinit var newSubjectPresenter: NewSubjectPresenter
+class NewSubjectFragment: BaseFragment<NewSubjectPresenter, NewSubjectView>(), NewSubjectView, AdapterView.OnItemSelectedListener {
+
     lateinit var mainActivity: MainActivity
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        newSubjectPresenter= NewSubjectPresenter(this)
         mainActivity= activity as MainActivity
     }
 
@@ -33,49 +31,55 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.create_new_subject_fragment, container, false)
-        setOnclickListeners(view)
         return view
     }
 
-    fun setOnclickListeners(view: View){
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setOnclickListeners()
+    }
 
-        val save_button=view.findViewById<Button>(R.id.subject_save).setOnClickListener {
+    override fun createPresenter(): NewSubjectPresenter {
+        return NewSubjectPresenter(this)
+    }
+
+    fun setOnclickListeners(){
+
+        subject_save.setOnClickListener {
             saveOnclick(it)
         }
-        val lessonType=view.findViewById<Spinner>(R.id.lesson_type).setOnItemSelectedListener(this)
-        val CheckMonday=view.findViewById<CheckBox>(R.id.new_less_monday).setOnCheckedChangeListener { buttonView, isChecked ->
+        lesson_type.setOnItemSelectedListener(this)
+        new_less_monday.setOnCheckedChangeListener { buttonView, isChecked ->
             onClickCheck(buttonView,isChecked)
         }
-        var checkThursday=view.findViewById<CheckBox>(R.id.new_less_thursday).setOnCheckedChangeListener { buttonView, isChecked ->
+        new_less_thursday.setOnCheckedChangeListener { buttonView, isChecked ->
             onClickCheck(buttonView,isChecked)
         }
-        val CheckWednesday=view.findViewById<CheckBox>(R.id.new_less_wednesday).setOnCheckedChangeListener { buttonView, isChecked ->
+        new_less_wednesday.setOnCheckedChangeListener { buttonView, isChecked ->
             onClickCheck(buttonView,isChecked)
         }
-        val CheckTuesday=view.findViewById<CheckBox>(R.id.new_less_tuesday).setOnCheckedChangeListener { buttonView, isChecked ->
+        new_less_tuesday.setOnCheckedChangeListener { buttonView, isChecked ->
             onClickCheck(buttonView,isChecked)
         }
-        val CheckFriday=view.findViewById<CheckBox>(R.id.new_less_friday).setOnCheckedChangeListener { buttonView, isChecked ->
+        new_less_friday.setOnCheckedChangeListener { buttonView, isChecked ->
             onClickCheck(buttonView,isChecked)
         }
-        val onceBeginLesson=view.findViewById<TextView>(R.id.begin_lesson).setOnClickListener{
+        begin_lesson.setOnClickListener{
             selectDate(it)
         }
-        val onceEndLesson=view.findViewById<TextView>(R.id.end_lesson).setOnClickListener{
-            selectDate(it)
-        }
-
-        val weeklyFirstLesson=view.findViewById<TextView>(R.id.first_lesson).setOnClickListener{
-            selectDate(it)
-        }
-        val weeklyLastLesson=view.findViewById<TextView>(R.id.last_lesson).setOnClickListener{
+        end_lesson.setOnClickListener{
             selectDate(it)
         }
 
-         val lessonFrom= view.findViewById<LinearLayout>(R.id.less_from)
-        setOnclickToChildrens(lessonFrom)
-         val lessonTo=view.findViewById<LinearLayout>(R.id.less_to)
-        setOnclickToChildrens(lessonTo)
+        first_lesson.setOnClickListener{
+            selectDate(it)
+        }
+        last_lesson.setOnClickListener{
+            selectDate(it)
+        }
+
+        setOnclickToChildrens(less_from)
+        setOnclickToChildrens(less_to)
     }
 
     fun setOnclickToChildrens(layout: LinearLayout){
@@ -90,9 +94,8 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
         if(!((new_sub_Name.text?.isEmpty())?:true)) {
             if( !((new_sub_desc.text?.isEmpty())?:true)) {
                 if (getDates()) {
-                    new_sub_progress.visibility=View.VISIBLE
                     subject_save.isClickable=false
-                    newSubjectPresenter.newSubject(new_sub_Name.text.toString(), new_sub_desc.text.toString())
+                    presenter?.newSubject(new_sub_Name.text.toString(), new_sub_desc.text.toString())
                 }
             }
             else{
@@ -169,59 +172,59 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
             currentTextView.text="$year.$real_month.$dayOfMonth"
             if(v.tag!="first" && v.tag!="last") {
                 TimePickerDialog(mainActivity, TimePickerDialog.OnTimeSetListener() { view, hour, minutes ->
-                    var currentText =  currentTextView.text.toString()
+                    val currentText =  currentTextView.text.toString()
                     currentTextView.text = "$currentText $hour:$minutes"
-                }, CurrentDate.getHour(), CurrentDate.getMinute(), true).show()
+                }, FormatDate.getHour(), FormatDate.getMinute(), true).show()
             }
-        }, CurrentDate.getYear(), CurrentDate.getMonth()-1, CurrentDate.getDay()).show()
+        }, FormatDate.getYear(), FormatDate.getMonth()-1, FormatDate.getDay()).show()
     }
 
     fun selectTime(v:View){
         TimePickerDialog(mainActivity, TimePickerDialog.OnTimeSetListener(){ view,hour, minutes->
             (v as TextView).text="$hour:$minutes"
-        },CurrentDate.getHour(),CurrentDate.getMinute(),true).show()
+        },FormatDate.getHour(),FormatDate.getMinute(),true).show()
     }
 
     fun getDates(): Boolean{
 
-        newSubjectPresenter.type=lesson_type.selectedItem.toString()
+        presenter?.type=lesson_type.selectedItem.toString()
         if(lesson_type.selectedItemPosition==0){
-            var begin = begin_lesson.text.toString()
-            var end = end_lesson.text.toString()
+            val begin = begin_lesson.text.toString()
+            val end = end_lesson.text.toString()
 
             if(!(begin.equals("Begin:")) && !(end.equals("End:"))){
-                newSubjectPresenter.OnceLesson= OnceLesson(begin, end)}
+                presenter?.OnceLesson= OnceLesson(begin, end)}
 
             else{
-                makeToast( "Fields Begin and End are required!")
+                showMessage( "Fields Begin and End are required!")
                 return false
             }
         }
         else {
-            var first = first_lesson.text.toString()
-            var last = last_lesson.text.toString()
+            val first = first_lesson.text.toString()
+            val last = last_lesson.text.toString()
 
             if(!(first.equals("First lesson:")) && !(last.equals("Last lesson:"))) {
 
-                newSubjectPresenter.FirstLessonDate=first
-                newSubjectPresenter.LastLessonDate=last
+                presenter?.FirstLessonDate=first
+                presenter?.LastLessonDate=last
 
                 for (i: Int in 0..4) {
                     if ((Check_boxes.getChildAt(i) as CheckBox).isChecked) {
-                        var from = (less_from.getChildAt(i) as TextView).text.toString()
-                        var to = (less_to.getChildAt(i) as TextView).text.toString()
+                        val from = (less_from.getChildAt(i) as TextView).text.toString()
+                        val to = (less_to.getChildAt(i) as TextView).text.toString()
 
                         if (!(from.equals("from:")) && !(to.equals("to:"))) {
-                            newSubjectPresenter.LessonDates.add(LessonDate(i + 1, from, to))
+                            presenter?.LessonDates?.add(LessonDate(i + 1, from, to))
                         } else {
-                            makeToast( "Fields From and To are required!")
+                            showMessage( "Fields From and To are required!")
                             return false
                         }
                     }
                 }
             }
             else{
-                makeToast("Fields First and Lastlesson are required!")
+                showMessage("Fields First and Lastlesson are required!")
                 return false
             }
         }
@@ -229,11 +232,6 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
         return true
     }
 
-    override fun makeToast(message: String){
-        new_sub_progress.visibility=View.INVISIBLE
-        subject_save.isClickable=true
-        Toast.makeText(mainActivity,message , Toast.LENGTH_SHORT).show()
-    }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             when(position){
@@ -245,7 +243,6 @@ class NewSubjectFragment: Fragment(), NewSubjectView, AdapterView.OnItemSelected
     }
 
     override fun SubjectAdded() {
-        new_sub_progress.visibility=View.INVISIBLE
         mainActivity.refreshCalendar()
         mainActivity.returnFromNewSubjectFragment()
     }

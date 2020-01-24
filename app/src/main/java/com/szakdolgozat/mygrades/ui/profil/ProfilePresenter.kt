@@ -1,49 +1,54 @@
 package com.szakdolgozat.mygrades.ui.profil
 
+import com.szakdolgozat.mygrades.base.BasePresenter
 import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.events.ImagePickedEvent
-import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import com.szakdolgozat.mygrades.firebase.FirebaseStorageProvider
 import com.szakdolgozat.mygrades.util.ImageProvider
 
-class ProfilePresenter(var view: ProfileView) {
-    var imageChanged: Boolean=false
+class ProfilePresenter(view: ProfileView) : BasePresenter<ProfileView>(view) {
+
+    var imageChanged: Boolean = false
 
     private val imagePicked = { _: String ->
-        imageChanged=true
+        imageChanged = true
         view.refreshAvatar()
     }
 
-    init{
+    init {
         ImagePickedEvent.event += imagePicked
     }
 
 
+    fun saveProfile() {
+        view?.showLoading()
+        DatabaseHandler.saveProfil({ saveProfilSucces() }, { message -> saveProfilError(message) })
+    }
 
-
- fun SaveProfile() {
-   DatabaseHandler.saveProfil({saveProfilSucces()}, {message -> saveProfilError(message)})
-     }
-
-    fun saveProfilSucces(){
-        if(imageChanged) {
+    fun saveProfilSucces() {
+        if (imageChanged) {
             FirebaseStorageProvider.uploadImage(
-                {view.dataSaveOK() }, { message -> view.dataSaveError(message ?: "error_picture") }
+                { saveOk() }, { message -> view?.showMessage(message ?: "error_picture") }
             )
-            imageChanged=false
-        }
-        else{
-            view.dataSaveOK()
+            imageChanged = false
+        } else {
+            saveOk()
         }
     }
 
-    fun saveProfilError(message:String){
-        view.dataSaveError(message ?: "error_datas")
+    fun saveOk() {
+        view?.hideLoading()
+        view?.dataSaveOK()
+    }
+
+    fun saveProfilError(message: String) {
+        view?.hideLoading()
+        view?.showMessage(message)
     }
 
 
-    fun changeProfilePicture(){
-        ImageProvider.getImageFromGallery(view.getFragmentActivity())
+    fun changeProfilePicture() {
+        ImageProvider.getImageFromGallery(view!!.getFragmentActivity())
     }
 
 }

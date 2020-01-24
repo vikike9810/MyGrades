@@ -2,108 +2,78 @@ package com.szakdolgozat.mygrades.ui.profil
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
+
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.fragment.app.Fragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.szakdolgozat.mygrades.R
-import com.szakdolgozat.mygrades.util.CurrentDate
+import com.szakdolgozat.mygrades.base.BaseFragment
+import com.szakdolgozat.mygrades.util.FormatDate
 import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.ui.main.MainActivity
+import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment(), ProfileView {
+import android.view.inputmethod.InputMethodManager
 
-    var Profil_Name :TextView?=null
-    var Profil_EditName: EditText?=null
-    var Profil_EditBday: EditText?=null
-    var Profil_Bday: TextView?=null
-    var Profil_Email: TextView?=null
-    var Profil_EditEmail: EditText?=null
-    var Profil_city: TextView?=null
-    var Profil_Editcity: EditText?=null
-    var Profil_Zip: TextView?=null
-    var Profil_EditZip: EditText?=null
-    var Profil_Street: TextView?=null
-    var Profil_EditStreet: EditText?=null
-    var Profil_number: TextView?=null
-    var Profil_Editnumber: EditText?=null
-    var Profil_Avatar: ImageView?=null
-    var Profil_Avatar_Upload: ImageView?=null
 
-    lateinit var profilePresenter: ProfilePresenter
-    lateinit var mainActivity: MainActivity
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        profilePresenter= ProfilePresenter(this)
-        mainActivity= activity as MainActivity
-    }
+class ProfileFragment : BaseFragment<ProfilePresenter,ProfileView>(), ProfileView {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.activity_profil, container, false)
-        bindListeners(view)
-        loadProfile()
+        val view= inflater.inflate(R.layout.fragment_profile, container, false)
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        bindListeners()
+        loadProfile()
+    }
+
+    override fun createPresenter(): ProfilePresenter {
+        return ProfilePresenter(this)
     }
 
     override fun getFragmentActivity():Activity{
        return activity as Activity
     }
 
-    fun bindListeners(v: View){
-        Profil_Avatar=v?.findViewById<ImageView>(R.id.Profil_Avatar)
-        Profil_Avatar?.setOnClickListener{
+    fun bindListeners(){
+        Profil_Avatar.setOnClickListener{
             onClickAvatar(it)
         }
-
-        Profil_Avatar_Upload=v?.findViewById<ImageView>(R.id.Profil_Avatar_Upload)
-        Profil_Avatar_Upload?.setOnClickListener{
+        Profil_Avatar_Upload.setOnClickListener{
             onClickAvatar_Upload(it)
         }
 
-        Profil_Name=v?.findViewById<TextView>(R.id.Profil_Name)
-        Profil_EditName=v?.findViewById<EditText>(R.id.Profil_EditName)
-        Profil_Name?.setOnClickListener{
+        Profil_Name.setOnClickListener{
             onClickName(it)
         }
-        Profil_Bday=v?.findViewById<TextView>(R.id.Profil_Bday)
-        v?.findViewById<TextView>(R.id.Profil_Bday)?.setOnClickListener{
+        Profil_Bday.setOnClickListener{
             onClickBirthDay(it)
         }
-        Profil_Email=v?.findViewById<TextView>(R.id.Profil_Email)
-        Profil_EditEmail=v?.findViewById<EditText>(R.id.Profil_EditEmail)
-        v?.findViewById<TextView>(R.id.Profil_Email)?.setOnClickListener{
+
+        Profil_Email.setOnClickListener{
             onClickEmail(it)
         }
-        Profil_city=v?.findViewById<TextView>(R.id.Profil_city)
-        Profil_Editcity=v?.findViewById<EditText>(R.id.Profil_Editcity)
-        Profil_city?.setOnClickListener{
+        Profil_city.setOnClickListener{
             onClickcity(it)
         }
-        Profil_Street=v?.findViewById<TextView>(R.id.Profil_Street)
-        Profil_EditStreet=v?.findViewById<EditText>(R.id.Profil_EditStreet)
-        Profil_Street?.setOnClickListener{
+        Profil_Street.setOnClickListener{
             onClickStreet(it)
         }
-        Profil_Zip=v?.findViewById<TextView>(R.id.Profil_Zip)
-        Profil_EditZip=v?.findViewById<EditText>(R.id.Profil_EditZip)
-        Profil_Zip?.setOnClickListener{
+        Profil_Zip.setOnClickListener{
             onClickZip(it)
         }
-        Profil_number=v?.findViewById<TextView>(R.id.Profil_number)
-        Profil_Editnumber=v?.findViewById<EditText>(R.id.Profil_Editnumber)
-        Profil_number?.setOnClickListener{
+        Profil_number.setOnClickListener{
             onClicknumber(it)
         }
-        val floatingActionButton=v?.findViewById<FloatingActionButton>(R.id.floatingActionButton)
-        floatingActionButton?.setOnClickListener{
+        floatingActionButton.setOnClickListener{
             saveProfile(it)
         }
     }
@@ -119,7 +89,7 @@ class ProfileFragment : Fragment(), ProfileView {
     }
 
     fun onClickAvatar_Upload(v: View){
-        profilePresenter.changeProfilePicture()
+        presenter?.changeProfilePicture()
         setTextesDefault()
     }
 
@@ -127,6 +97,8 @@ class ProfileFragment : Fragment(), ProfileView {
         setTextesDefault()
         v.visibility=View.INVISIBLE
         Profil_EditName?.visibility=View.VISIBLE
+        Profil_EditName?.setSelection(Profil_EditName?.length()?:0)
+        showKeyBoard(Profil_EditName)
     }
 
     fun onClickEmail(v: View){
@@ -134,6 +106,7 @@ class ProfileFragment : Fragment(), ProfileView {
         v.visibility=View.INVISIBLE
         Profil_EditEmail?.visibility=View.VISIBLE
         Profil_EditEmail?.setSelection(Profil_EditEmail?.length()?:0)
+        showKeyBoard(Profil_EditEmail)
     }
 
     fun onClickcity(v: View){
@@ -141,6 +114,7 @@ class ProfileFragment : Fragment(), ProfileView {
         v.visibility=View.INVISIBLE
         Profil_Editcity?.visibility=View.VISIBLE
         Profil_Editcity?.setSelection(Profil_Editcity?.length()?:0)
+        showKeyBoard(Profil_Editcity)
     }
 
     fun onClickStreet(v: View){
@@ -148,6 +122,7 @@ class ProfileFragment : Fragment(), ProfileView {
         v.visibility=View.INVISIBLE
         Profil_EditStreet?.visibility=View.VISIBLE
         Profil_EditStreet?.setSelection(Profil_EditStreet?.length()?:0)
+        showKeyBoard(Profil_EditStreet)
     }
 
     fun onClickZip(v: View){
@@ -155,6 +130,7 @@ class ProfileFragment : Fragment(), ProfileView {
         v.visibility=View.INVISIBLE
         Profil_EditZip?.visibility=View.VISIBLE
         Profil_EditZip?.setSelection(Profil_EditZip?.length()?:0)
+        showKeyBoard(Profil_EditZip)
     }
 
     fun onClicknumber(v: View){
@@ -162,10 +138,12 @@ class ProfileFragment : Fragment(), ProfileView {
         v.visibility=View.INVISIBLE
         Profil_Editnumber?.visibility=View.VISIBLE
         Profil_Editnumber?.setSelection(Profil_Editnumber?.length()?:0)
+        showKeyBoard(Profil_Editnumber)
     }
 
 
     fun setTextesDefault(){
+
         Profil_Avatar_Upload?.visibility=View.INVISIBLE
 
         Profil_Name?.visibility=View.VISIBLE
@@ -194,23 +172,28 @@ class ProfileFragment : Fragment(), ProfileView {
         Profil_Editnumber?.visibility=View.INVISIBLE
     }
 
+    fun showKeyBoard(view: View){
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+
     fun onClickBirthDay(v :View){
         DatePickerDialog(
-            mainActivity,
+            containerActivity as Context,
             DatePickerDialog.OnDateSetListener(){view, year, month, dayOfMonth ->
                 val real_month=month+1
                 Profil_Bday?.text= "$year.$real_month.$dayOfMonth"
             },
-            CurrentDate.getYear(),
-            (CurrentDate.getMonth()-1),
-            CurrentDate.getDay()
+            FormatDate.getYear(),
+            (FormatDate.getMonth()-1),
+            FormatDate.getDay()
         ).show()
     }
 
     fun saveProfile(v: View){
         setTextesDefault()
         setProfile()
-        profilePresenter.SaveProfile()
+        presenter?.saveProfile()
     }
 
     override fun refreshAvatar() {
@@ -239,7 +222,6 @@ class ProfileFragment : Fragment(), ProfileView {
 
         if(User.birthday!=null){
             Profil_Bday?.text=User.birthday
-            Profil_EditBday?.setText(User.birthday)
         }
 
         if(User.address.city!=null){
@@ -252,6 +234,11 @@ class ProfileFragment : Fragment(), ProfileView {
             Profil_EditStreet?.setText(User.address.street)
         }
 
+        if(User.address.zip!=null){
+            Profil_Zip?.text=User.address.zip
+            Profil_EditZip?.setText(User.address.zip)
+        }
+
         if(User.address.number!=null){
             Profil_number?.text=User.address.number
             Profil_Editnumber?.setText(User.address.number)
@@ -262,12 +249,9 @@ class ProfileFragment : Fragment(), ProfileView {
     }
 
     override fun dataSaveOK(){
-        val parentActivity= activity as MainActivity
-        parentActivity.setUserOnDrawer()
-        Toast.makeText(mainActivity, "Saved",Toast.LENGTH_SHORT).show()
-    }
-    override fun  dataSaveError(message :String){
-        Toast.makeText(mainActivity, message,Toast.LENGTH_SHORT).show()
+        val parentActivity= activity as? MainActivity
+        parentActivity?.setUserOnDrawer()
+        showMessage(getString(R.string.datas_saved))
     }
 }
 

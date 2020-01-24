@@ -168,6 +168,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/base/BaseActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/base/BaseFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/base/BaseFragmentListener.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/base/BasePresenter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/base/BaseView.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/database/AppDatabase.kt">
           <value>
             <set />
@@ -228,6 +253,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/firebase/FirebaseAuthenticationHelper.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/firebase/FirebaseFunctionHelper.kt">
           <value>
             <set />
@@ -283,6 +313,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/LessonType.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/Message.kt">
           <value>
             <set />
@@ -319,6 +354,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/User.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/model/UserType.kt">
           <value>
             <set />
           </value>
@@ -404,6 +444,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addsubject/AddSubjectFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addsubject/AddSubjectPresenter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/ui/addsubject/addSubjectFragment.kt">
           <value>
             <set />
           </value>
@@ -628,6 +678,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/FomatDate.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/FormatDate.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/szakdolgozat/mygrades/util/ImageProvider.kt">
           <value>
             <set />
@@ -779,6 +839,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/new_lesson_row.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/progress_bar_screen.xml">
           <value>
             <set />
           </value>
