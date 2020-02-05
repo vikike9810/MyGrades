@@ -1,8 +1,9 @@
 package com.szakdolgozat.mygrades.ui.grades
 
+import com.szakdolgozat.mygrades.base.BasePresenter
 import com.szakdolgozat.mygrades.model.*
 
-class GradesPresenter(var view :GradesView) {
+class GradesPresenter(view :GradesView): BasePresenter<GradesView>(view) {
 
     fun getSubjectList():ArrayList<String> {
        return User.getSubjectList()
@@ -17,18 +18,18 @@ class GradesPresenter(var view :GradesView) {
     }
 
     fun getFilteredGrades(subject: String, teacher: String, grade: String, grades: MutableList<Grade>): ArrayList<Grade>{
-        var filteredGrades= ArrayList<Grade>()
+        val filteredGrades= ArrayList<Grade>()
         filteredGrades.clear()
         filteredGrades.addAll(getGradesByUser())
 
         if(!(subject.equals(""))){
-            var filteredBySubGrades=filteredListbySubject(subject, filteredGrades)
+            val filteredBySubGrades=filteredListbySubject(subject, filteredGrades)
             filteredGrades.clear()
             filteredGrades.addAll(filteredBySubGrades)
         }
         if(!(teacher.equals(""))){
             var filteredByTeacherGrades =ArrayList<Grade>()
-                if(User.type.equals("Teacher")) {
+                if(User.type.equals(UserType.Teacher)) {
                     filteredByTeacherGrades = filteredListbyStudent(teacher, filteredGrades)
                 }
                 else{
@@ -38,7 +39,7 @@ class GradesPresenter(var view :GradesView) {
             filteredGrades.addAll(filteredByTeacherGrades)
         }
         if(!(grade.equals(""))){
-            var filteredByGradeGrades=filteredListbyGrade(grade, filteredGrades)
+            val filteredByGradeGrades=filteredListbyGrade(grade, filteredGrades)
             filteredGrades.clear()
             filteredGrades.addAll(filteredByGradeGrades)
         }
@@ -47,7 +48,7 @@ class GradesPresenter(var view :GradesView) {
     }
 
     fun filteredListbySubject(subject: String,  grades: ArrayList<Grade>): ArrayList<Grade>{
-        var filteredBySubjectGrades= ArrayList<Grade>()
+        val filteredBySubjectGrades= ArrayList<Grade>()
         for(grade: Grade in grades){
             if(grade.subject.Name.equals(subject)){
                 filteredBySubjectGrades.add(grade)
@@ -57,7 +58,7 @@ class GradesPresenter(var view :GradesView) {
     }
 
     fun filteredListbyTeacher(teacher: String,  grades: ArrayList<Grade>): ArrayList<Grade>{
-        var filteredByTeacherGrades= ArrayList<Grade>()
+        val filteredByTeacherGrades= ArrayList<Grade>()
         for(grade: Grade in grades){
             if(grade.teacher.getName().equals(teacher)){
                 filteredByTeacherGrades.add(grade)
@@ -67,7 +68,7 @@ class GradesPresenter(var view :GradesView) {
     }
 
     fun filteredListbyStudent(student: String,  grades: ArrayList<Grade>): ArrayList<Grade>{
-        var filteredByStudentGrades= ArrayList<Grade>()
+        val filteredByStudentGrades= ArrayList<Grade>()
         for(grade: Grade in grades){
             if(grade.student.getName().equals(student)){
                 filteredByStudentGrades.add(grade)
@@ -77,7 +78,7 @@ class GradesPresenter(var view :GradesView) {
     }
 
     fun filteredListbyGrade(gradeNum: String,  grades: ArrayList<Grade>): ArrayList<Grade>{
-        var filteredByGradeGrades= ArrayList<Grade>()
+        val filteredByGradeGrades= ArrayList<Grade>()
         for(grade: Grade in grades){
             if(grade.grade.toString().equals(gradeNum)){
                 filteredByGradeGrades.add(grade)
@@ -87,9 +88,9 @@ class GradesPresenter(var view :GradesView) {
     }
 
     fun getGradesByUser(): ArrayList<Grade> {
-        var grades = ArrayList<Grade>()
+        val grades = ArrayList<Grade>()
         for (grade: Grade in Diary.grades) {
-            if (User.type.equals("Teacher")) {
+            if (User.type.equals(UserType.Teacher)) {
                 if (grade.teacher == User.person) {
                     grades.add(grade)
                 }

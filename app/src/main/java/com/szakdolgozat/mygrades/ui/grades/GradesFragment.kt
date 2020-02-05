@@ -1,138 +1,134 @@
 package com.szakdolgozat.mygrades.ui.grades
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.fragment.app.Fragment
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.base.BaseFragment
 import com.szakdolgozat.mygrades.events.GetGradeEvent
 import com.szakdolgozat.mygrades.model.User
+import com.szakdolgozat.mygrades.model.UserType
 import com.szakdolgozat.mygrades.recyclerview.adapter.GradesRecyclerViewAdapter
 import com.szakdolgozat.mygrades.ui.main.MainActivity
 import kotlinx.android.synthetic.main.grades_fragment.*
 
-class GradesFragment:Fragment(),GradesView {
+class GradesFragment : BaseFragment<GradesPresenter, GradesView>(), GradesView {
 
-    lateinit var gradesPresenter: GradesPresenter
     lateinit var mainActivity: MainActivity
-    lateinit var gradeRecyclerView: RecyclerView
     lateinit var recyclerViewAdapter: GradesRecyclerViewAdapter
-    lateinit var filterArrow: ImageView
-    lateinit var filterLayout: LinearLayout
-    var filterClosed=true
-    lateinit var SubjectSpinner: Spinner
-    lateinit var TeacherSpinner: Spinner
-    lateinit var  addButton : FloatingActionButton
+    var filterClosed = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gradesPresenter= GradesPresenter(this)
-        mainActivity= activity as MainActivity
-    }
+        mainActivity = activity as MainActivity
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view= inflater.inflate(R.layout.grades_fragment, container, false)
-        initRecyclerView(view)
-        filterArrow=view.findViewById(R.id.Filter_arrow)
-        filterLayout=view.findViewById(R.id.Filters)
-        filterArrow.setOnClickListener {
-            onClickArrow(it)
-        }
-        setViewByUserType(view)
-        initFilters(view)
-        GetGradeEvent.event+={
+        GetGradeEvent.event += {
             getNewGrade(it)
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.grades_fragment, container, false)
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        initRecyclerView()
+
+        Filter_arrow.setOnClickListener {
+            onClickArrow()
+        }
+
+        setViewByUserType()
+        initFilters()
+    }
+
+    override fun createPresenter(): GradesPresenter {
+        return GradesPresenter(this)
     }
 
     private fun getNewGrade(it: String) {
         onClickGoButton(null)
     }
 
-    private fun setViewByUserType(view: View) {
-        if(User.type.equals("Teacher")) {
-            addButton = view.findViewById<FloatingActionButton>(R.id.grade_add)
-            addButton.visibility = View.VISIBLE
-            addButton.setOnClickListener {
+    private fun setViewByUserType() {
+        if (User.type.equals(UserType.Teacher)) {
+            grade_add.visibility = View.VISIBLE
+            grade_add.setOnClickListener {
                 mainActivity.showAddGradeFragment()
             }
 
-            val personText=view.findViewById<TextView>(R.id.grade_person_text)
-            personText.text="Student"
-            TeacherSpinner= view.findViewById<Spinner>(R.id.Teacher_spinner)
-            val teacheradapter : ArrayAdapter<String> = ArrayAdapter(activity,android.R.layout.simple_spinner_item, gradesPresenter.getStudentList())
-            TeacherSpinner.adapter=teacheradapter
+            grade_person_text.text = getString(R.string.student)
+            val teacheradapter: ArrayAdapter<String> =
+                ArrayAdapter(activity, android.R.layout.simple_spinner_item, presenter!!.getStudentList())
+            Teacher_spinner.adapter = teacheradapter
 
-        }
-
-        else{
-            TeacherSpinner= view.findViewById<Spinner>(R.id.Teacher_spinner)
-            var teacheradapter : ArrayAdapter<String> = ArrayAdapter(activity,android.R.layout.simple_spinner_item, gradesPresenter.getTeacherList())
-            TeacherSpinner.adapter=teacheradapter
+        } else {
+            val teacheradapter: ArrayAdapter<String> =
+                ArrayAdapter(activity, android.R.layout.simple_spinner_item, presenter!!.getTeacherList())
+            Teacher_spinner.adapter = teacheradapter
         }
     }
 
-    private fun initFilters(view: View) {
-        SubjectSpinner= view.findViewById<Spinner>(R.id.Subject_spinner)
-        var subjectadapter : ArrayAdapter<String> = ArrayAdapter(activity,android.R.layout.simple_spinner_item, gradesPresenter.getSubjectList())
-        SubjectSpinner.adapter=subjectadapter
+    private fun initFilters() {
+        val subjectadapter: ArrayAdapter<String> =
+            ArrayAdapter(activity, android.R.layout.simple_spinner_item, presenter!!.getSubjectList())
+        Subject_spinner.adapter = subjectadapter
 
 
-        var goButton = view.findViewById<Button>(R.id.grade_go_button)
-        goButton.setOnClickListener {
+        grade_go_button.setOnClickListener {
             onClickGoButton(it)
         }
 
     }
 
-    fun onClickGoButton(v :View?){
-        var teacher=""
-        if(TeacherSpinner!=null) {
-             teacher = TeacherSpinner.selectedItem.toString()
-        }
+    fun onClickGoButton(v: View?) {
+        var teacher = ""
+        teacher = Teacher_spinner.selectedItem.toString()
 
-        var subject=""
-        if(SubjectSpinner!=null) {
-            subject = SubjectSpinner.selectedItem.toString()
-        }
+        var subject = ""
+        subject = Subject_spinner.selectedItem.toString()
 
-        var grade=""
-        if(Grade_spinner!=null) {
+        var grade = ""
+        if (Grade_spinner != null) {
             grade = Grade_spinner.selectedItem.toString()
         }
         recyclerViewAdapter.addNewItems(
-            gradesPresenter.getFilteredGrades(subject,
+            presenter!!.getFilteredGrades(
+                subject,
                 teacher,
                 grade,
-                recyclerViewAdapter.grades))
+                recyclerViewAdapter.grades
+            )
+        )
     }
 
-    private fun onClickArrow(v: View?) {
-        if(filterClosed){
-            filterLayout.visibility=View.VISIBLE
-            filterArrow.setImageResource(R.drawable.up_white)
-            filterClosed=false
-        }
-        else{
-            filterLayout.visibility=View.GONE
-            filterArrow.setImageResource(R.drawable.down_white)
-            filterClosed=true
+    private fun onClickArrow() {
+        if (filterClosed) {
+            Filters.visibility = View.VISIBLE
+            Filter_arrow.setImageResource(R.drawable.up_white)
+            filterClosed = false
+        } else {
+            Filters.visibility = View.GONE
+            Filter_arrow.setImageResource(R.drawable.down_white)
+            filterClosed = true
         }
     }
 
-    private fun initRecyclerView(view: View) {
-        gradeRecyclerView= view.findViewById(R.id.grade_recycler)
-        gradeRecyclerView.layoutManager=LinearLayoutManager(activity)
+    private fun initRecyclerView() {
+        grade_recycler.layoutManager=LinearLayoutManager(activity)
         recyclerViewAdapter= GradesRecyclerViewAdapter()
-        gradeRecyclerView.adapter=recyclerViewAdapter
-        recyclerViewAdapter.addNewItems(gradesPresenter.getGradesByUser())
+        grade_recycler.adapter=recyclerViewAdapter
+        recyclerViewAdapter.addNewItems(presenter!!.getGradesByUser())
     }
 }

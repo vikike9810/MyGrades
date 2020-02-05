@@ -1,5 +1,7 @@
 package com.szakdolgozat.mygrades.ui.grades
 
-interface GradesView {
+import com.szakdolgozat.mygrades.base.BaseView
+
+interface GradesView: BaseView {
 
 }

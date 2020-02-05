@@ -1,15 +1,14 @@
 package com.szakdolgozat.mygrades.ui.newsubject
 
-import android.widget.Toast
 import com.alamkanak.weekview.WeekViewEvent
+import com.szakdolgozat.mygrades.base.BasePresenter
 import com.szakdolgozat.mygrades.database.DatabaseHandler
 import com.szakdolgozat.mygrades.model.*
-import com.szakdolgozat.mygrades.util.CurrentDate
-import java.lang.Exception
+import com.szakdolgozat.mygrades.util.FormatDate
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NewSubjectPresenter(var view: NewSubjectView) {
+class NewSubjectPresenter(view: NewSubjectView): BasePresenter<NewSubjectView>(view) {
 
     var LessonDates=ArrayList<LessonDate>()
     var OnceLesson:OnceLesson?= null
@@ -32,23 +31,23 @@ class NewSubjectPresenter(var view: NewSubjectView) {
 
         val lessons=ArrayList<WeekViewEvent>()
 
-        if(type.equals("Occasional")){
+        if(type == LessonType.Occasional.toString()){
             if(OnceLesson?.From!=null && OnceLesson?.To!=null)
                 lessons.add(WeekViewEvent(Subject.getLessonId(),name,
-                      CurrentDate.getCalenderFromString(OnceLesson!!.From!!) , CurrentDate.getCalenderFromString(OnceLesson!!.To!!)))
+                      FormatDate.getCalenderFromString(OnceLesson!!.From!!) , FormatDate.getCalenderFromString(OnceLesson!!.To!!)))
         }
-        else if(type.equals("Weekly")){
+        else if(type == LessonType.Weekly.toString()){
 
-            val firstLesson= CurrentDate.getCalederFromDateString(FirstLessonDate)
-            val lastLesson= CurrentDate.getCalederFromDateString(LastLessonDate)
+            val firstLesson= FormatDate.getCalederFromDateString(FirstLessonDate)
+            val lastLesson= FormatDate.getCalederFromDateString(LastLessonDate)
 
             lessons.addAll(getWeeklyLessons(1, firstLesson, lastLesson, LessonDates))
         }
 
-        else if(type.equals("Fortnightly")){
+        else if(type == LessonType.Fortnightly.toString()){
 
-            val firstLesson= CurrentDate.getCalederFromDateString(FirstLessonDate)
-            val lastLesson= CurrentDate.getCalederFromDateString(LastLessonDate)
+            val firstLesson= FormatDate.getCalederFromDateString(FirstLessonDate)
+            val lastLesson= FormatDate.getCalederFromDateString(LastLessonDate)
 
             lessons.addAll(getWeeklyLessons(2, firstLesson, lastLesson, LessonDates))
         }
@@ -65,7 +64,7 @@ class NewSubjectPresenter(var view: NewSubjectView) {
 
         for(lessondate: LessonDate in LessonDates) {
 
-            var currentEvent = CurrentDate.getNextDayEvent(firstLesson, lessondate, name, Subject.getLessonId())
+            var currentEvent = FormatDate.getNextDayEvent(firstLesson, lessondate, name, Subject.getLessonId())
 
 
             while (currentEvent.startTime.timeInMillis < lastLesson.timeInMillis) {
@@ -82,15 +81,22 @@ class NewSubjectPresenter(var view: NewSubjectView) {
     }
 
     fun saveSubject(subject: Subject){
+        view?.showLoading()
         DatabaseHandler.saveSubject(subject,{subject -> subjectSaved(subject)},{message-> error(message)})
     }
 
     fun subjectSaved(subject:Subject){
-        DatabaseHandler.savePersonsSubjects(User.person!!,subject,{view.SubjectAdded()},{message-> error(message)})
+        DatabaseHandler.savePersonsSubjects(User.person!!,subject,{saveDone()},{message-> error(message)})
+    }
+
+    fun saveDone(){
+        view?.hideLoading()
+        view?.SubjectAdded()
     }
 
     fun error(message: String){
-        view.makeToast(message)
+        view?.hideLoading()
+        view?.showMessage(message)
     }
 
 }

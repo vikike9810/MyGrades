@@ -9,11 +9,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.R
-import com.szakdolgozat.mygrades.util.CurrentDate
 import com.szakdolgozat.mygrades.model.Subject
-import com.szakdolgozat.mygrades.model.User
+import com.szakdolgozat.mygrades.util.FormatDate
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAdapter.ViewHolder>() {
@@ -42,12 +40,6 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
         }
     }
 
-    fun addItem(subject: Subject) {
-        val size = subjects.size
-        subjects.add(subject)
-        notifyItemInserted(size)
-    }
-
     fun changeAddSubject(addable: Boolean){
         subjectAddable=addable
     }
@@ -57,11 +49,6 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
         subjects.addAll(newSubjects)
         subjects.sortWith(Subject.SubjectComparator)
         notifyDataSetChanged()
-    }
-
-    fun deleteRow(position: Int) {
-        subjects.removeAt(position)
-        notifyItemRemoved(position)
     }
 
     fun removeItem(subject: Subject){
@@ -132,7 +119,7 @@ class SubjectsRecyclerViewAdapter : RecyclerView.Adapter<SubjectsRecyclerViewAda
             lessons_card.visibility=View.VISIBLE
             day.visibility=View.VISIBLE
             date.visibility=View.VISIBLE
-            date.text=CurrentDate.getEventDateString(event)
+            date.text=FormatDate.getEventDateString(event)
         }
 
 

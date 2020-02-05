@@ -1,9 +1,6 @@
 package com.szakdolgozat.mymessages.recyclerview.adapter
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.graphics.Color
-import android.text.Layout
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.model.Message
 import com.szakdolgozat.mygrades.model.User
-import java.util.*
-import kotlin.collections.ArrayList
-
-
-
 
 
 class MessageRecyclerViewAdapter : RecyclerView.Adapter<MessageRecyclerViewAdapter.ViewHolder>() {

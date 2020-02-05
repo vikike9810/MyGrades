@@ -3,16 +3,14 @@ package com.szakdolgozat.mygrades.recyclerview.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.szakdolgozat.mygrades.R
 import com.szakdolgozat.mygrades.model.Grade
 import com.szakdolgozat.mygrades.model.User
+import com.szakdolgozat.mygrades.model.UserType
 import java.util.*
-
-import kotlin.collections.ArrayList
 
 class GradesRecyclerViewAdapter: RecyclerView.Adapter<GradesRecyclerViewAdapter.ViewHolder>() {
 
@@ -31,7 +29,7 @@ class GradesRecyclerViewAdapter: RecyclerView.Adapter<GradesRecyclerViewAdapter.
         holder.textGrade.text=grade.grade.toString()
         holder.textDate.text=grade.date[Calendar.YEAR].toString()+"."+(grade.date[Calendar.MONTH]+1).toString()+"."+grade.date[Calendar.DATE].toString()
         holder.textComment.text=grade.comment
-        if(User.type.equals("Student")){
+        if(User.type.equals(UserType.Student)){
             holder.textTeacher.text=grade.teacher.getName()
         }
         else{
@@ -46,7 +44,7 @@ class GradesRecyclerViewAdapter: RecyclerView.Adapter<GradesRecyclerViewAdapter.
     }
 
     fun addAll(grades: ArrayList<Grade>){
-        var size=grades.size
+        val size=grades.size
         grades.addAll(grades)
         notifyItemRangeInserted(size, grades.size)
     }
@@ -56,12 +54,6 @@ class GradesRecyclerViewAdapter: RecyclerView.Adapter<GradesRecyclerViewAdapter.
         grades.addAll(newGrades)
         notifyDataSetChanged()
     }
-
-    fun addGrade(grade: Grade){
-        grades.add(grade)
-        notifyDataSetChanged()
-    }
-
 
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

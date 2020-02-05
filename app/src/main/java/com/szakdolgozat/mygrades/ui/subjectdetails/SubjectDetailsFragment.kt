@@ -1,6 +1,5 @@
 package com.szakdolgozat.mygrades.ui.subjectdetails
 
-import android.R.attr.dialogTheme
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +11,9 @@ import com.szakdolgozat.mygrades.model.Subject
 import kotlinx.android.synthetic.main.fragment_subject_details.*
 import android.view.Gravity
 import android.view.WindowManager
-import android.R.attr.x
-import android.view.Display
-import android.graphics.Point
 import android.widget.TextView
 import com.alamkanak.weekview.WeekViewEvent
-import com.szakdolgozat.mygrades.util.CurrentDate
+import com.szakdolgozat.mygrades.util.FormatDate
 import java.util.*
 
 
@@ -69,7 +65,7 @@ class SubjectDetailsFragment(var subjectName: String): DialogFragment(){
         frag_Sub_cardview.visibility=View.VISIBLE
         day.visibility=View.VISIBLE
         date.visibility=View.VISIBLE
-        date.text=CurrentDate.getEventDateString(event)
+        date.text=FormatDate.getEventDateString(event)
     }
 
 

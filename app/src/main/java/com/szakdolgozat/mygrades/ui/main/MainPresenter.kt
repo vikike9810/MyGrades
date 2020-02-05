@@ -1,41 +1,36 @@
 package com.szakdolgozat.mygrades.ui.main
 
-import android.app.Activity
-import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import com.alamkanak.weekview.WeekViewEvent
-import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.base.BasePresenter
 import com.szakdolgozat.mygrades.database.DatabaseHandler
-import com.szakdolgozat.mygrades.events.ImagePickedEvent.event
+import com.szakdolgozat.mygrades.firebase.FirebaseAuthenticationHelper
 import com.szakdolgozat.mygrades.model.Subject
 import com.szakdolgozat.mygrades.model.User
-import com.szakdolgozat.mygrades.ui.login.LoginActivity
+import com.szakdolgozat.mygrades.model.UserType
 import com.szakdolgozat.mygrades.ui.login.LoginPresenter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainPresenter(private var view: MainView) {
+class MainPresenter(view: MainView): BasePresenter<MainView>(view) {
 
     var user : User? = null
     var events = ArrayList<WeekViewEvent>()
 
     fun getUser(){
             user=User
-            view.setUserOnDrawer()
+            view?.setUserOnDrawer()
     }
 
     fun UserLogOut(){
-        LoginPresenter.auth.signOut()
+        FirebaseAuthenticationHelper.logOut()
         user?.LogOut()
         DatabaseHandler.clearOfflineDatas()
-        view.userLoggedOut()
+        view?.userLoggedOut()
     }
 
     fun getEvents(newYear: Int, newMonth: Int): List<WeekViewEvent> {
-        var tempEvents = ArrayList<WeekViewEvent>()
+        val tempEvents = ArrayList<WeekViewEvent>()
         for(event in events){
             if(event.startTime[Calendar.MONTH]==newMonth){
                 tempEvents.add(event)
@@ -48,8 +43,8 @@ class MainPresenter(private var view: MainView) {
         if(User.person?.Subjects != null) {
             for (subject: Subject in User.person?.Subjects!!) {
                 if(subject.Lessons != null) {
-                    for (event: WeekViewEvent in subject.Lessons!!) {
-                        event.setColor(Color.parseColor("#1b5e20"))
+                    for (event: WeekViewEvent in subject.Lessons) {
+                        event.color = Color.parseColor("#1b5e20")
                         events.add(event)
                     }
                 }
@@ -58,11 +53,11 @@ class MainPresenter(private var view: MainView) {
     }
 
     fun addSubjectbyUserType(){
-        if(User.type.equals("Student")){
-            view.showAddNewSubjectFragment()
+        if(User.type.equals(UserType.Student)){
+            view?.showAddNewSubjectFragment()
         }
         else{
-            view.showCreateNewSubjectFragment()
+            view?.showCreateNewSubjectFragment()
         }
     }
 

@@ -2,12 +2,9 @@ package com.szakdolgozat.mygrades.util
 
 import android.app.Activity
 import android.content.Intent
-import androidx.core.app.ActivityCompat.startActivityForResult
-import android.provider.MediaStore
 import android.graphics.Bitmap
-import android.R.attr.data
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.szakdolgozat.mygrades.events.ImagePickedEvent
 import com.szakdolgozat.mygrades.model.User
 import java.io.File

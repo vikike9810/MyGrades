@@ -8,7 +8,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_main"
         tools:context=".ui.main.MainActivity"
-        android:id="@+id/main_fragment"
         android:background="@android:color/white">
 
     <com.alamkanak.weekview.WeekView
@@ -28,5 +27,14 @@
             app:dayBackgroundColor="@android:color/white"
             app:todayBackgroundColor="@color/primaryBackgroundYellow"
             app:headerColumnBackground="#ffffffff"/>
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:id="@+id/main_fragment"/>
+
+    <include android:id="@+id/progress_bar_screen"
+             layout="@layout/progress_bar_screen"
+             android:visibility="gone"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

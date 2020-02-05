@@ -1,7 +1,5 @@
 package com.szakdolgozat.mygrades.recyclerview.adapter
 
-import android.content.res.Resources
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +14,6 @@ import com.szakdolgozat.mygrades.model.Talking
 import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.util.ImageProvider
 import java.io.File
-import java.util.*
-import kotlin.collections.ArrayList
 
 class TalkingRecyclerViewAdapter: RecyclerView.Adapter<TalkingRecyclerViewAdapter.ViewHolder>() {
 
@@ -55,39 +51,12 @@ class TalkingRecyclerViewAdapter: RecyclerView.Adapter<TalkingRecyclerViewAdapte
 
         }
 
-        fun addItem(talking: Talking) {
-            val size = talkings.size
-            talkings.add(talking)
-            notifyItemInserted(size)
-        }
-
 
         fun addAll(newTalkings: ArrayList<Talking>) {
             val size = talkings.size
             talkings.addAll(newTalkings)
             talkings.sortWith(Talking.TalkingComparator)
             notifyItemRangeInserted(size, talkings.size)
-        }
-
-        fun deleteRow(position: Int) {
-            talkings.removeAt(position)
-            notifyItemRemoved(position)
-        }
-
-        fun removeItem(talking: Talking){
-            val pos= talkings.indexOf(talking)
-            talkings.remove(talking)
-            notifyItemRemoved(pos)
-        }
-
-        fun addPeoples(newTalkings: ArrayList<Person>){
-            newTalkings.forEach {
-                if(!(it.equals(User.person))) {
-                    talkings.add(Talking(it))
-                }
-                talkings.sortWith(Talking.TalkingComparator)
-            }
-            notifyDataSetChanged()
         }
 
     fun addJustPeoples(newTalkings: ArrayList<Person>){

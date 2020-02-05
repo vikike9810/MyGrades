@@ -1,15 +1,14 @@
 package com.szakdolgozat.mygrades.ui.addgrade
 
+import com.szakdolgozat.mygrades.base.BasePresenter
 import com.szakdolgozat.mygrades.database.DatabaseHandler
-import com.szakdolgozat.mygrades.firebase.FirebaseFunctionHelper
 import com.szakdolgozat.mygrades.model.Diary
 import com.szakdolgozat.mygrades.model.Grade
 import com.szakdolgozat.mygrades.model.Teacher
 import com.szakdolgozat.mygrades.model.User
 import java.util.*
-import kotlin.collections.ArrayList
 
-class AddGradePresenter(var view: AddGradeView) {
+class AddGradePresenter(view: AddGradeView) : BasePresenter<AddGradeView>(view) {
 
     fun  getSubjectList(): ArrayList<String>{
             return User.getSubjectList()
@@ -24,10 +23,10 @@ class AddGradePresenter(var view: AddGradeView) {
         val subject= Diary.getSubjectByName(subject)
         if(student!=null && subject!=null) {
             val grade=Grade(Integer.parseInt(grade), subject, student, Calendar.getInstance().clone() as Calendar, User.person as Teacher, comment)
-            DatabaseHandler.saveGrades(grade,{view.gradeAdded()},{message -> view.errorInSave(message)})
+            DatabaseHandler.saveGrades(grade,{view?.gradeAdded()},{message -> view?.errorInSave(message)})
         }
         else{
-            view.errorInSave("Error in Save")
+            view?.errorInSave("Error in Save")
         }
     }
 

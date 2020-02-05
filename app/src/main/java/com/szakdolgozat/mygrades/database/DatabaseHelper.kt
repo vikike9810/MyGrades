@@ -2,7 +2,7 @@ package com.szakdolgozat.mygrades.database
 
 import com.alamkanak.weekview.WeekViewEvent
 import com.szakdolgozat.mygrades.model.*
-import com.szakdolgozat.mygrades.util.CurrentDate
+import com.szakdolgozat.mygrades.util.FormatDate
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -10,10 +10,10 @@ import kotlin.collections.HashMap
 object DatabaseHelper {
 
     fun getLessonsBySubject(subject :Subject): ArrayList<LessonSubjectJoin>{
-        var lessons =ArrayList<LessonSubjectJoin>()
+        val lessons =ArrayList<LessonSubjectJoin>()
 
-        subject.Lessons?.forEach {
-            var lessonSubjectJoin=LessonSubjectJoin(subject.subjectId?: "",CurrentDate.getTimeStringFromCalendar(it.startTime), CurrentDate.getTimeStringFromCalendar(it.endTime))
+        subject.Lessons.forEach {
+            val lessonSubjectJoin=LessonSubjectJoin(subject.subjectId,FormatDate.getTimeStringFromCalendar(it.startTime), FormatDate.getTimeStringFromCalendar(it.endTime))
             lessons.add(lessonSubjectJoin)
         }
         return lessons
@@ -21,7 +21,7 @@ object DatabaseHelper {
 
     fun getEventFromLesson(name:String, lessonSubjectJoin: LessonSubjectJoin): WeekViewEvent{
         val time=Calendar.getInstance().clone() as Calendar
-        val event=WeekViewEvent(time.timeInMillis,name,CurrentDate.getCalenderFromString(lessonSubjectJoin.lessonBegin),CurrentDate.getCalenderFromString(lessonSubjectJoin.lessonEnd))
+        val event=WeekViewEvent(time.timeInMillis,name,FormatDate.getCalenderFromString(lessonSubjectJoin.lessonBegin),FormatDate.getCalenderFromString(lessonSubjectJoin.lessonEnd))
         return event
     }
 
@@ -70,7 +70,7 @@ object DatabaseHelper {
         val messageId = Integer.parseInt(result["messageId"]?:"-1")
         val talkingId = Integer.parseInt(result["talkingId"]?:"-1")
         val message= result["message"]
-        val date= CurrentDate.getCalenderFromString(result["date"]?:"")
+        val date= FormatDate.getCalenderFromString(result["date"]?:"")
         val sender=  Diary.getStudentById(result["senderId"]?:"") ?: Diary.getTeacherById(result["senderId"]?:"")
         if(messageId!=-1 && talkingId!=-1 && message !=null && sender!=null){
            Chat.talkings.forEach {
@@ -126,7 +126,7 @@ object DatabaseHelper {
                     Integer.parseInt(grade),
                     subject,
                     student,
-                    CurrentDate.getCalederFromDateString(date),
+                    FormatDate.getCalederFromDateString(date),
                     teacher,
                     (comment ?: "")
                 )

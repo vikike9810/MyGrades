@@ -5,20 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.szakdolgozat.mygrades.R
+import com.szakdolgozat.mygrades.base.BaseFragment
 import com.szakdolgozat.mygrades.model.Subject
-import com.szakdolgozat.mygrades.model.User
 import com.szakdolgozat.mygrades.recyclerview.adapter.SubjectsRecyclerViewAdapter
 import com.szakdolgozat.mygrades.ui.main.MainActivity
 import kotlinx.android.synthetic.main.add_new_subject_fragment.*
 
-class addSubjectFragment: Fragment(), addSubjectView, SubjectsRecyclerViewAdapter.SubjectClickListener {
+class addSubjectFragment: BaseFragment<AddSubjectPresenter, addSubjectView>(), addSubjectView, SubjectsRecyclerViewAdapter.SubjectClickListener {
 
-    lateinit var addSubjectPresenter: addSubjectPresenter
     lateinit var mainActivity: MainActivity
     lateinit var add_subject_recycler: RecyclerView
     lateinit var add_subject_Adapter : SubjectsRecyclerViewAdapter
@@ -26,7 +23,6 @@ class addSubjectFragment: Fragment(), addSubjectView, SubjectsRecyclerViewAdapte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addSubjectPresenter= addSubjectPresenter(this)
         mainActivity= activity as MainActivity
     }
 
@@ -43,28 +39,32 @@ class addSubjectFragment: Fragment(), addSubjectView, SubjectsRecyclerViewAdapte
         return view
     }
 
+    override fun createPresenter(): AddSubjectPresenter {
+        return AddSubjectPresenter(this)
+    }
+
     private fun initRecyclerView(){
         add_subject_recycler.layoutManager= LinearLayoutManager(this.mainActivity)
         add_subject_Adapter = SubjectsRecyclerViewAdapter()
         add_subject_Adapter.itemClickListener = this
-        add_subject_Adapter.addAll(addSubjectPresenter.getSubjects())
+        add_subject_Adapter.addAll(presenter!!.getSubjects())
         add_subject_recycler.adapter = add_subject_Adapter
         add_subject_Adapter.changeAddSubject(true)
     }
 
     fun onClickSearch(v: View){
-        add_sub_progress.visibility=View.VISIBLE
-        addSubjectPresenter.getSubjectFromSearch(new_sub_search.text.toString())
+        showLoading()
+        presenter?.getSubjectFromSearch(new_sub_search.text.toString())
     }
 
     override fun refreshSubjects(subjects: ArrayList<Subject>) {
-        add_sub_progress.visibility=View.INVISIBLE
+        hideLoading()
         add_subject_Adapter.addNewItems(subjects)
     }
 
 
     override fun onItemClick(subject: Subject) {
-       Toast.makeText(activity,subject.Name, Toast.LENGTH_SHORT).show()
+       showMessage(subject.Name)
     }
 
     override fun onItemLongClick(position: Int, view: View): Boolean {
@@ -72,22 +72,19 @@ class addSubjectFragment: Fragment(), addSubjectView, SubjectsRecyclerViewAdapte
     }
 
     override fun subjectAdded(subject: Subject) {
-        add_sub_progress.visibility=View.INVISIBLE
+        hideLoading()
         add_subject_Adapter.removeItem(subject)
         mainActivity.refreshCalendar()
     }
 
     override fun subjectAddedError(message: String) {
-        add_sub_progress.visibility=View.INVISIBLE
-        Toast.makeText(activity,message,Toast.LENGTH_LONG).show()
+        hideLoading()
+        showMessage(message)
     }
 
     override fun onItemTaked(subject: Subject) {
-        add_sub_progress.visibility=View.VISIBLE
-        addSubjectPresenter.takeSubject(subject)
+        presenter?.takeSubject(subject)
+        showLoading()
     }
-
-
-
 
 }

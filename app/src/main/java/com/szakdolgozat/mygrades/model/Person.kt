@@ -12,21 +12,8 @@ abstract class Person(name: String, id: String) {
         return this.Name?: ""
     }
 
-    fun getuserId(): String? {
+    fun getuserId(): String {
         return this.UserId
     }
 
-    fun setName(newName: String){
-        this.Name=newName
-    }
-
-    fun setUserId(uId: String){
-        this.UserId=uId
-    }
-
-    fun clearPerson(){
-        Name=""
-        UserId=""
-        Subjects.clear()
-    }
 }
